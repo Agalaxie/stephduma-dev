@@ -14,6 +14,9 @@ import '../styles/global.css';
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://stephduma.dev" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
 
@@ -47,59 +50,89 @@ import '../styles/global.css';
     </div>
   </nav>
 
-  <!-- HERO — light bg, dark text, serif font -->
-  <section class="relative min-h-screen flex flex-col px-6 md:px-12 bg-[#F7F7F5] text-[#1A1A1A] overflow-hidden">
-    <!-- Wireframe globe SVG -->
-    <div class="absolute right-[-2%] top-[10%] w-[420px] h-[420px] opacity-[0.12] pointer-events-none select-none hidden md:block">
-      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="200" cy="200" r="180" stroke="#1A1A1A" stroke-width="0.8"/>
-        <ellipse cx="200" cy="200" rx="90" ry="180" stroke="#1A1A1A" stroke-width="0.8"/>
-        <ellipse cx="200" cy="200" rx="150" ry="180" stroke="#1A1A1A" stroke-width="0.8"/>
-        <ellipse cx="200" cy="200" rx="180" ry="70" stroke="#1A1A1A" stroke-width="0.8"/>
-        <ellipse cx="200" cy="200" rx="180" ry="130" stroke="#1A1A1A" stroke-width="0.8"/>
-        <line x1="20" y1="200" x2="380" y2="200" stroke="#1A1A1A" stroke-width="0.8"/>
-        <line x1="200" y1="20" x2="200" y2="380" stroke="#1A1A1A" stroke-width="0.8"/>
+  <!-- HERO -->
+  <section class="relative min-h-screen flex flex-col px-6 md:px-16 text-[#1A1A1A] overflow-hidden" style="background: radial-gradient(ellipse 80% 80% at 40% 50%, #f0f0ee 0%, #e8e8e6 100%);">
+
+    <!-- Geodesic sphere -->
+    <div class="absolute right-[-60px] md:right-[-40px] top-[50%] translate-y-[-50%] pointer-events-none select-none" style="width:520px; height:520px; opacity:0.22;">
+      <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" width="520" height="520">
+        <!-- Outer circle -->
+        <circle cx="250" cy="250" r="220" stroke="#555" stroke-width="0.7"/>
+        <!-- Latitude lines -->
+        <ellipse cx="250" cy="250" rx="220" ry="60" stroke="#555" stroke-width="0.6"/>
+        <ellipse cx="250" cy="250" rx="220" ry="115" stroke="#555" stroke-width="0.6"/>
+        <ellipse cx="250" cy="250" rx="220" ry="175" stroke="#555" stroke-width="0.6"/>
+        <!-- Longitude lines -->
+        <ellipse cx="250" cy="250" rx="60" ry="220" stroke="#555" stroke-width="0.6"/>
+        <ellipse cx="250" cy="250" rx="115" ry="220" stroke="#555" stroke-width="0.6"/>
+        <ellipse cx="250" cy="250" rx="175" ry="220" stroke="#555" stroke-width="0.6"/>
+        <!-- Diagonal geodesic lines -->
+        <ellipse cx="250" cy="250" rx="220" ry="220" stroke="#555" stroke-width="0.4" transform="rotate(30 250 250)"/>
+        <ellipse cx="250" cy="250" rx="155" ry="220" stroke="#555" stroke-width="0.4" transform="rotate(45 250 250)"/>
+        <ellipse cx="250" cy="250" rx="220" ry="155" stroke="#555" stroke-width="0.4" transform="rotate(60 250 250)"/>
+        <ellipse cx="250" cy="250" rx="100" ry="220" stroke="#555" stroke-width="0.4" transform="rotate(30 250 250)"/>
+        <ellipse cx="250" cy="250" rx="220" ry="100" stroke="#555" stroke-width="0.4" transform="rotate(60 250 250)"/>
+        <!-- Triangle facets approximation -->
+        <line x1="250" y1="30" x2="470" y2="250" stroke="#555" stroke-width="0.5"/>
+        <line x1="250" y1="30" x2="30" y2="250" stroke="#555" stroke-width="0.5"/>
+        <line x1="30" y1="250" x2="250" y2="470" stroke="#555" stroke-width="0.5"/>
+        <line x1="470" y1="250" x2="250" y2="470" stroke="#555" stroke-width="0.5"/>
+        <line x1="140" y1="80" x2="360" y2="80" stroke="#555" stroke-width="0.5"/>
+        <line x1="60" y1="160" x2="440" y2="160" stroke="#555" stroke-width="0.5"/>
+        <line x1="60" y1="340" x2="440" y2="340" stroke="#555" stroke-width="0.5"/>
+        <line x1="140" y1="420" x2="360" y2="420" stroke="#555" stroke-width="0.5"/>
+        <line x1="140" y1="80" x2="60" y2="160" stroke="#555" stroke-width="0.5"/>
+        <line x1="360" y1="80" x2="440" y2="160" stroke="#555" stroke-width="0.5"/>
+        <line x1="60" y1="160" x2="30" y2="250" stroke="#555" stroke-width="0.5"/>
+        <line x1="440" y1="160" x2="470" y2="250" stroke="#555" stroke-width="0.5"/>
+        <line x1="140" y1="420" x2="60" y2="340" stroke="#555" stroke-width="0.5"/>
+        <line x1="360" y1="420" x2="440" y2="340" stroke="#555" stroke-width="0.5"/>
       </svg>
     </div>
+
     <div class="max-w-6xl mx-auto w-full relative z-10 flex-1 flex flex-col justify-center pt-24 pb-8">
       <div id="hero-content">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 text-xs text-[#6B6B6B] mb-10" id="badge">
+        <div class="inline-flex items-center gap-2 mb-10" id="badge">
           <span class="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse"></span>
-          <span class="uppercase tracking-widest font-medium" style="font-size:11px; letter-spacing:3px;">DISPONIBLE POUR PROJETS</span>
+          <span class="text-[#6B6B6B] font-medium" style="font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase;">DISPONIBLE POUR PROJETS</span>
         </div>
-        <div class="flex flex-wrap items-end gap-x-8 gap-y-0">
-          <h1 class="hero-title leading-[0.9] tracking-[-3px] text-[#1A1A1A]" style="font-family:'DM Serif Display',serif; font-size:clamp(5rem,13vw,10rem); font-weight:400;">
+        <div class="relative">
+          <h1 class="hero-title text-[#1A1A1A] leading-[0.88]" style="font-family:'Cormorant Garamond',serif; font-size:clamp(5rem,12vw,9.5rem); font-weight:300; letter-spacing:-2px;">
             <span class="block">Développeur</span>
-            <span class="block">Frontend</span>
+            <span class="inline">Frontend</span>
           </h1>
-          <p class="text-base text-[#6B6B6B] max-w-[200px] leading-relaxed mb-4 self-end" id="hero-sub">
+          <p class="hidden md:block text-sm text-[#6B6B6B] leading-relaxed" id="hero-sub" style="font-family:'DM Sans',sans-serif; max-width:180px; position:absolute; bottom:0.2em; left:calc(clamp(5rem,12vw,9.5rem) * 5.2);">
             Créateur d'expériences web qui font la différence
           </p>
         </div>
+        <p class="md:hidden text-sm text-[#6B6B6B] leading-relaxed mt-6" style="font-family:'DM Sans',sans-serif; max-width:260px;">
+          Créateur d'expériences web qui font la différence
+        </p>
       </div>
     </div>
+
     <!-- Info bar at bottom of hero -->
-    <div class="border-t border-[#E5E5E5] mt-auto">
-      <div class="max-w-6xl mx-auto w-full flex flex-wrap items-center justify-between py-6 px-6 md:px-0 gap-6" id="hero-stats">
-        <div class="flex flex-wrap items-center gap-8 md:gap-12">
+    <div class="border-t border-[#D8D8D8]">
+      <div class="max-w-6xl mx-auto w-full flex flex-wrap items-center justify-between py-5 gap-6" id="hero-stats">
+        <div class="flex flex-wrap items-center gap-8 md:gap-14">
           <div>
-            <div class="text-[10px] uppercase tracking-widest text-[#A0A0A0] mb-1">Basé à</div>
-            <div class="text-sm text-[#1A1A1A] font-medium">Perpignan, FR</div>
+            <div class="mb-1" style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#A0A0A0;">BASÉ À</div>
+            <div style="font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; color:#1A1A1A;">Perpignan, FR</div>
           </div>
-          <div class="w-px h-8 bg-[#E5E5E5]"></div>
+          <div class="w-px h-8 bg-[#D8D8D8]"></div>
           <div>
-            <div class="text-[10px] uppercase tracking-widest text-[#A0A0A0] mb-1">Expérience</div>
-            <div class="text-sm text-[#1A1A1A] font-medium">10+ Ans</div>
+            <div class="mb-1" style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#A0A0A0;">EXPÉRIENCE</div>
+            <div style="font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; color:#1A1A1A;">10+ Ans</div>
           </div>
-          <div class="w-px h-8 bg-[#E5E5E5]"></div>
+          <div class="w-px h-8 bg-[#D8D8D8]"></div>
           <div>
-            <div class="text-[10px] uppercase tracking-widest text-[#A0A0A0] mb-1">Projets</div>
-            <div class="text-sm text-[#1A1A1A] font-medium">57 Projets</div>
+            <div class="mb-1" style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#A0A0A0;">PROJETS</div>
+            <div style="font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; color:#1A1A1A;">57+</div>
           </div>
         </div>
-        <div class="flex items-center gap-2 text-[#A0A0A0] text-sm">
+        <div class="flex items-center gap-2 text-sm" style="font-family:'DM Sans',sans-serif; color:#A0A0A0;">
           Scroll to explore
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
         </div>
       </div>
     </div>
