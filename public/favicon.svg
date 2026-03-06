@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="20" fill="#0a0a0a"/>
-  <text y=".9em" font-size="70" x="8" font-family="Georgia, serif" fill="white" font-weight="bold">SD</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#1A1A1A"/>
+  <text x="256" y="330" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="260" font-weight="800" fill="#FFFFFF" letter-spacing="-15">SD</text>
 </svg>
