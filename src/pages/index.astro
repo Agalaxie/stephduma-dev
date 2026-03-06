@@ -30,7 +30,7 @@ import '../styles/global.css';
         <a href="#experience" class="hover:text-[#1A1A1A] transition-colors">Expérience</a>
         <a href="#portfolio" class="hover:text-[#1A1A1A] transition-colors">Portfolio</a>
       </div>
-      <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-5 py-2 border border-[#1A1A1A] rounded-full text-sm text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white transition-all duration-300">
+      <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-5 py-2 bg-[#1A1A1A] rounded-full text-sm text-white hover:bg-[#333] transition-all duration-300">
         Me contacter
       </a>
       <button id="menu-btn" class="md:hidden p-2 text-[#6B6B6B] hover:text-[#1A1A1A]">
@@ -205,12 +205,14 @@ import '../styles/global.css';
             dark: false
           },
         ].map(service => (
-          <div class={`reveal p-8 md:p-10 rounded-2xl transition-all duration-300 group cursor-default relative ${service.dark ? 'bg-[#232323] text-white' : 'border border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#ccc]'}`}>
-            <div class={`absolute top-8 right-8 w-10 h-10 rounded-full border flex items-center justify-center ${service.dark ? 'border-white/20' : 'border-[#E5E5E5]'}`}>
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class={service.dark ? 'text-white/60' : 'text-[#6B6B6B]'}><path d="M7 17L17 7M7 7h10v10"/></svg>
+          <div class={`reveal rounded-2xl transition-all duration-300 group cursor-default flex flex-col justify-between min-h-[240px] p-8 md:p-10 ${service.dark ? 'bg-[#141414] text-white' : 'border border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#ccc]'}`}>
+            <div class="flex items-start justify-between">
+              <h3 class="text-xl font-bold">{service.title}</h3>
+              <div class={`w-10 h-10 rounded-full border flex items-center justify-center flex-shrink-0 ${service.dark ? 'bg-white/10 border-white/20' : 'border-[#E5E5E5]'}`}>
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class={service.dark ? 'text-white/70' : 'text-[#6B6B6B]'}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
             </div>
-            <h3 class="text-xl font-bold mb-3 pr-12">{service.title}</h3>
-            <p class={`text-sm leading-relaxed ${service.dark ? 'text-gray-400' : 'text-[#6B6B6B]'}`}>{service.desc}</p>
+            <p class={`text-sm leading-relaxed mt-6 ${service.dark ? 'text-gray-400' : 'text-[#6B6B6B]'}`}>{service.desc}</p>
           </div>
         ))}
       </div>
