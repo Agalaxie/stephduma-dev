@@ -291,20 +291,51 @@ import '../styles/global.css';
     </div>
   </section>
 
-  <!-- TESTIMONIAL — #F7F7F7 bg -->
-  <section class="py-24 px-6 md:px-12 bg-[#F7F7F7]">
+  <!-- TESTIMONIALS — #F7F7F7 bg -->
+  <section class="py-24 px-6 md:px-12 bg-[#F7F7F7] overflow-hidden">
     <div class="max-w-4xl mx-auto">
-      <div class="reveal text-center">
-        <div class="text-6xl text-[#ccc] mb-6 serif-italic">"</div>
-        <blockquote class="text-2xl md:text-3xl font-normal leading-relaxed text-[#1A1A1A] mb-8">
-          Stéphane a transformé notre site en quelques semaines. Résultat au-delà de nos attentes.
-        </blockquote>
-        <div class="flex items-center justify-center gap-4">
-          <div class="w-10 h-10 rounded-full bg-[#E5E5E5] flex items-center justify-center text-sm font-bold text-[#1A1A1A]">JM</div>
-          <div class="text-left">
-            <div class="text-sm font-medium text-[#1A1A1A]">Jean-Marc</div>
-            <div class="text-xs text-[#6B6B6B]">Dirigeant, PME</div>
+      <div class="reveal text-center mb-12">
+        <span class="section-label">Témoignages</span>
+      </div>
+      <div class="relative">
+        <div id="testimonial-slider" class="reveal">
+          {[
+            { quote: "Si je pouvais mettre dix étoiles je l'aurais fait. Rapide, ultra efficace et très clair dans les explications. Merci Stéphane d'avoir sauvé mon site :)", name: "Henriette", company: "BUTORANGWE" },
+            { quote: "Nous sommes ravis de notre collaboration avec Stéphane qui a parfaitement compris nos attentes et nous a livré un site d'excellente qualité. Nous le remercions pour sa disponibilité, sa patience et son professionnalisme.", name: "Paul", company: "ID-CLICK MEDIA" },
+            { quote: "Stéphane trouve toujours les meilleures solutions. C'est un bonheur de travailler avec lui.", name: "François", company: "CINQ MARS" },
+            { quote: "Un grand merci Stéphane pour votre réactivité et pour votre très grand professionnalisme ! Je recommande à 100% !", name: "Adam", company: "Your Dream School" },
+            { quote: "Stéphane a été très réactif et très professionnel dans la mise en place de notre site multilingue. Je recommande.", name: "Boris", company: "The Masherbrum Company" },
+            { quote: "Excellent travail, vous pouvez faire appel à Stéphane les yeux fermés.", name: "Maxime", company: "Ever Invest" },
+          ].map((t, i) => (
+            <div class={`testimonial-slide ${i === 0 ? '' : 'hidden'}`} data-index={i}>
+              <div class="text-center">
+                <div class="text-6xl text-[#ccc] mb-6 serif-italic">"</div>
+                <blockquote class="text-xl md:text-2xl font-normal leading-relaxed text-[#1A1A1A] mb-8 max-w-3xl mx-auto">
+                  {t.quote}
+                </blockquote>
+                <div class="flex items-center justify-center gap-4">
+                  <div class="w-10 h-10 rounded-full bg-[#E5E5E5] flex items-center justify-center text-sm font-bold text-[#1A1A1A]">{t.name.charAt(0)}</div>
+                  <div class="text-left">
+                    <div class="text-sm font-medium text-[#1A1A1A]">{t.name}</div>
+                    <div class="text-xs text-[#6B6B6B]">{t.company}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="flex items-center justify-center gap-3 mt-10">
+          <button id="prev-testimonial" class="w-10 h-10 rounded-full border border-[#E5E5E5] flex items-center justify-center hover:bg-[#1A1A1A] hover:border-[#1A1A1A] hover:text-white transition-all duration-300 text-[#1A1A1A]" aria-label="Précédent">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <div id="testimonial-dots" class="flex gap-2">
+            {[0,1,2,3,4,5].map(i => (
+              <button class={`testimonial-dot w-2 h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-[#1A1A1A] w-6' : 'bg-[#ccc]'}`} data-index={i} aria-label={`Témoignage ${i+1}`}></button>
+            ))}
           </div>
+          <button id="next-testimonial" class="w-10 h-10 rounded-full border border-[#E5E5E5] flex items-center justify-center hover:bg-[#1A1A1A] hover:border-[#1A1A1A] hover:text-white transition-all duration-300 text-[#1A1A1A]" aria-label="Suivant">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -510,4 +541,37 @@ import '../styles/global.css';
       animate();
     });
   }
+
+  // Testimonial slider
+  const slides = document.querySelectorAll('.testimonial-slide');
+  const dots = document.querySelectorAll('.testimonial-dot');
+  let currentSlide = 0;
+  const totalSlides = slides.length;
+
+  function showSlide(index: number) {
+    slides.forEach((s, i) => {
+      (s as HTMLElement).classList.toggle('hidden', i !== index);
+    });
+    dots.forEach((d, i) => {
+      (d as HTMLElement).classList.toggle('bg-[#1A1A1A]', i === index);
+      (d as HTMLElement).classList.toggle('w-6', i === index);
+      (d as HTMLElement).classList.toggle('bg-[#ccc]', i !== index);
+    });
+    currentSlide = index;
+  }
+
+  document.getElementById('next-testimonial')?.addEventListener('click', () => {
+    showSlide((currentSlide + 1) % totalSlides);
+  });
+  document.getElementById('prev-testimonial')?.addEventListener('click', () => {
+    showSlide((currentSlide - 1 + totalSlides) % totalSlides);
+  });
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      showSlide(Number((dot as HTMLElement).dataset.index));
+    });
+  });
+
+  // Auto-advance every 6s
+  setInterval(() => showSlide((currentSlide + 1) % totalSlides), 6000);
 </script>
