@@ -1,7 +1,7 @@
 # Design Specification — stephduma.dev
 
 ## ⚠️ CRITICAL: The site is MOSTLY LIGHT/WHITE — not dark!
-Only the hero and CTA sections are dark (#141414). Everything else is white (#FFFFFF).
+Only the CTA and footer sections are dark (#141414). Hero is light with subtle gradient. Everything else is white (#FFFFFF).
 
 ## Color Palette
 - Main background: #FFFFFF
