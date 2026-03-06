@@ -53,57 +53,25 @@ import '../styles/global.css';
   <!-- HERO -->
   <section class="relative min-h-screen flex flex-col px-6 md:px-16 text-[#1A1A1A] overflow-hidden" style="background: radial-gradient(ellipse 80% 80% at 40% 50%, #f0f0ee 0%, #e8e8e6 100%);">
 
-    <!-- Geodesic sphere -->
-    <div class="absolute right-[5%] md:right-[8%] top-[50%] translate-y-[-50%] pointer-events-none select-none" style="width:520px; height:520px; opacity:0.18;">
-      <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" width="520" height="520">
-        <!-- Outer circle -->
-        <circle cx="250" cy="250" r="220" stroke="#555" stroke-width="0.7"/>
-        <!-- Latitude lines -->
-        <ellipse cx="250" cy="250" rx="220" ry="60" stroke="#555" stroke-width="0.6"/>
-        <ellipse cx="250" cy="250" rx="220" ry="115" stroke="#555" stroke-width="0.6"/>
-        <ellipse cx="250" cy="250" rx="220" ry="175" stroke="#555" stroke-width="0.6"/>
-        <!-- Longitude lines -->
-        <ellipse cx="250" cy="250" rx="60" ry="220" stroke="#555" stroke-width="0.6"/>
-        <ellipse cx="250" cy="250" rx="115" ry="220" stroke="#555" stroke-width="0.6"/>
-        <ellipse cx="250" cy="250" rx="175" ry="220" stroke="#555" stroke-width="0.6"/>
-        <!-- Diagonal geodesic lines -->
-        <ellipse cx="250" cy="250" rx="220" ry="220" stroke="#555" stroke-width="0.4" transform="rotate(30 250 250)"/>
-        <ellipse cx="250" cy="250" rx="155" ry="220" stroke="#555" stroke-width="0.4" transform="rotate(45 250 250)"/>
-        <ellipse cx="250" cy="250" rx="220" ry="155" stroke="#555" stroke-width="0.4" transform="rotate(60 250 250)"/>
-        <ellipse cx="250" cy="250" rx="100" ry="220" stroke="#555" stroke-width="0.4" transform="rotate(30 250 250)"/>
-        <ellipse cx="250" cy="250" rx="220" ry="100" stroke="#555" stroke-width="0.4" transform="rotate(60 250 250)"/>
-        <!-- Triangle facets approximation -->
-        <line x1="250" y1="30" x2="470" y2="250" stroke="#555" stroke-width="0.5"/>
-        <line x1="250" y1="30" x2="30" y2="250" stroke="#555" stroke-width="0.5"/>
-        <line x1="30" y1="250" x2="250" y2="470" stroke="#555" stroke-width="0.5"/>
-        <line x1="470" y1="250" x2="250" y2="470" stroke="#555" stroke-width="0.5"/>
-        <line x1="140" y1="80" x2="360" y2="80" stroke="#555" stroke-width="0.5"/>
-        <line x1="60" y1="160" x2="440" y2="160" stroke="#555" stroke-width="0.5"/>
-        <line x1="60" y1="340" x2="440" y2="340" stroke="#555" stroke-width="0.5"/>
-        <line x1="140" y1="420" x2="360" y2="420" stroke="#555" stroke-width="0.5"/>
-        <line x1="140" y1="80" x2="60" y2="160" stroke="#555" stroke-width="0.5"/>
-        <line x1="360" y1="80" x2="440" y2="160" stroke="#555" stroke-width="0.5"/>
-        <line x1="60" y1="160" x2="30" y2="250" stroke="#555" stroke-width="0.5"/>
-        <line x1="440" y1="160" x2="470" y2="250" stroke="#555" stroke-width="0.5"/>
-        <line x1="140" y1="420" x2="60" y2="340" stroke="#555" stroke-width="0.5"/>
-        <line x1="360" y1="420" x2="440" y2="340" stroke="#555" stroke-width="0.5"/>
-      </svg>
-    </div>
+    <!-- 3D Wireframe Globe (Three.js) -->
+    <div id="globe-container" class="absolute top-[20%] right-[5%] w-[30vw] h-[30vw] max-w-[450px] max-h-[450px] z-0 pointer-events-none" style="opacity:0.28;"></div>
 
-    <div class="max-w-6xl mx-auto w-full relative z-10 flex-1 flex flex-col justify-center pt-24 pb-8">
+    <div class="max-w-6xl mx-auto w-full relative z-10 flex-1 flex flex-col justify-center pt-20 pb-8">
       <div id="hero-content">
         <div class="inline-flex items-center gap-2 mb-10" id="badge">
           <span class="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse"></span>
           <span class="text-[#6B6B6B] font-medium" style="font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase;">DISPONIBLE POUR PROJETS</span>
         </div>
-        <div class="relative">
+        <div>
           <h1 class="hero-title text-[#1A1A1A] leading-[0.88]" style="font-family:'Playfair Display',serif; font-size:clamp(5rem,12vw,9.5rem); font-weight:900; letter-spacing:-3px;">
             <span class="block">Développeur</span>
-            <span class="inline">Frontend</span>
+            <span class="inline-flex items-end gap-6">
+              <span>Frontend</span>
+              <span class="hidden md:inline-block text-sm text-[#6B6B6B] leading-relaxed font-normal pb-[0.15em]" id="hero-sub" style="font-family:'DM Sans',sans-serif; max-width:180px; font-size:14px; letter-spacing:0;">
+                Créateur d'expériences web qui font la différence
+              </span>
+            </span>
           </h1>
-          <p class="hidden md:block text-sm text-[#6B6B6B] leading-relaxed" id="hero-sub" style="font-family:'DM Sans',sans-serif; max-width:180px; position:absolute; bottom:0.2em; left:calc(clamp(5rem,12vw,9.5rem) * 5.2);">
-            Créateur d'expériences web qui font la différence
-          </p>
         </div>
         <p class="md:hidden text-sm text-[#6B6B6B] leading-relaxed mt-6" style="font-family:'DM Sans',sans-serif; max-width:260px;">
           Créateur d'expériences web qui font la différence
@@ -372,6 +340,10 @@ import '../styles/global.css';
     </div>
   </footer>
 
+  <!-- Custom cursor -->
+  <div id="cursor-ring" style="position:fixed; top:0; left:0; width:40px; height:40px; border:1px solid rgba(23,23,23,0.4); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease; mix-blend-mode:difference;"></div>
+  <div id="cursor-dot" style="position:fixed; top:0; left:0; width:6px; height:6px; background:rgb(23,23,23); border-radius:50%; pointer-events:none; z-index:10000; transform:translate(-50%,-50%); mix-blend-mode:difference;"></div>
+
 </body>
 </html>
 
@@ -401,7 +373,7 @@ import '../styles/global.css';
   // Hero entrance animation
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   tl.from('#badge', { y: 20, opacity: 0, duration: 0.6 })
-    .from('.hero-title span', { y: '100%', opacity: 0, duration: 0.8, stagger: 0.1 }, '-=0.2')
+    .from('.hero-title > span', { y: '100%', opacity: 0, duration: 0.8, stagger: 0.1 }, '-=0.2')
     .from('#hero-sub', { y: 30, opacity: 0, duration: 0.7 }, '-=0.4')
     .from('#hero-stats', { y: 20, opacity: 0, duration: 0.5 }, '-=0.3');
 
@@ -429,4 +401,109 @@ import '../styles/global.css';
   mobileMenu?.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => mobileMenu?.classList.add('hidden'));
   });
+
+  // Custom cursor
+  const cursorRing = document.getElementById('cursor-ring');
+  const cursorDot = document.getElementById('cursor-dot');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  if (window.matchMedia('(pointer: fine)').matches && cursorRing && cursorDot) {
+    document.body.style.cursor = 'none';
+    document.querySelectorAll('a, button').forEach(el => {
+      (el as HTMLElement).style.cursor = 'none';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top = mouseY + 'px';
+    });
+
+    const animateCursor = () => {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      cursorRing.style.left = ringX + 'px';
+      cursorRing.style.top = ringY + 'px';
+      requestAnimationFrame(animateCursor);
+    };
+    animateCursor();
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursorRing.style.width = '55px';
+        cursorRing.style.height = '55px';
+        cursorRing.style.opacity = '0.5';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursorRing.style.width = '40px';
+        cursorRing.style.height = '40px';
+        cursorRing.style.opacity = '1';
+      });
+    });
+  } else {
+    cursorRing?.remove();
+    cursorDot?.remove();
+  }
+
+  // Three.js wireframe globe
+  import * as THREE from 'three';
+
+  const globeContainer = document.getElementById('globe-container');
+  if (globeContainer) {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+    camera.position.z = 4;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(450, 450);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    globeContainer.appendChild(renderer.domElement);
+
+    const material = new THREE.MeshBasicMaterial({
+      color: 0x555555,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.6,
+    });
+
+    // Main sphere
+    const geometry = new THREE.IcosahedronGeometry(1.5, 4);
+    const sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+
+    // Second sphere rotated for more geodesic lines
+    const material2 = new THREE.MeshBasicMaterial({
+      color: 0x888888,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.25,
+    });
+    const geometry2 = new THREE.IcosahedronGeometry(1.52, 2);
+    const sphere2 = new THREE.Mesh(geometry2, material2);
+    sphere2.rotation.x = Math.PI / 4;
+    sphere2.rotation.z = Math.PI / 6;
+    scene.add(sphere2);
+
+    let targetRotX = 0;
+    let targetRotY = 0;
+
+    const heroSection = globeContainer.closest('section');
+    heroSection?.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      targetRotY = ((e.clientX - rect.left) / rect.width - 0.5) * 1.5;
+      targetRotX = ((e.clientY - rect.top) / rect.height - 0.5) * -1;
+    });
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+      sphere.rotation.y += (targetRotY - sphere.rotation.y) * 0.02 + 0.002;
+      sphere.rotation.x += (targetRotX - sphere.rotation.x) * 0.02;
+      sphere2.rotation.y += (targetRotY - sphere2.rotation.y) * 0.015 + 0.001;
+      sphere2.rotation.x += (targetRotX - sphere2.rotation.x) * 0.015;
+      renderer.render(scene, camera);
+    };
+    animate();
+  }
 </script>
