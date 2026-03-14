@@ -11,5 +11,8 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  integrations: [sitemap()]
+  integrations: [sitemap()],
+  redirects: {
+    '/sitemap.xml': '/sitemap-index.xml'
+  }
 });
