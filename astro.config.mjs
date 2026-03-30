@@ -11,7 +11,11 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  integrations: [sitemap()],
+  integrations: [sitemap({
+    changefreq: 'monthly',
+    lastmod: new Date(),
+    priority: 0.7,
+  })],
   redirects: {
     '/sitemap.xml': '/sitemap-index.xml'
   }
