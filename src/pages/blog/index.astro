@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const articles = [
+  {
+    title: 'Pourquoi migrer de WooCommerce vers Next.js en 2026',
+    slug: 'migration-woocommerce-nextjs',
+    excerpt: 'WooCommerce ralentit votre business ? Decouvrez pourquoi de plus en plus d\'e-commercants migrent vers Next.js — et comment reussir la transition sans perdre votre SEO.',
+    date: '2 avril 2026',
+    readTime: '12 min',
+    tags: ['WooCommerce', 'Next.js', 'E-commerce', 'Migration'],
+  },
+];
+---
+
+<Layout
+  title="Blog — Stephane Duma, Developpeur Freelance React & Next.js"
+  description="Articles techniques et retours d'experience sur React, Next.js, WordPress, performance web et developpement freelance. Par Stephane Duma, developpeur a Perpignan."
+  canonical="https://stephduma.dev/blog"
+  keywords="blog developpeur web, articles react nextjs, tutoriels wordpress, performance web, developpement freelance"
+>
+
+  <!-- HERO -->
+  <section class="pt-32 pb-16 px-6 md:px-12 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <div class="reveal">
+        <span class="section-label mb-8 inline-block">Blog</span>
+      </div>
+      <h1 class="reveal text-[#1A1A1A] leading-[0.92] mb-6" style="font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,5rem); font-weight:900; letter-spacing:-2px;">
+        Articles & Retours d'experience
+      </h1>
+      <p class="reveal text-[#6B6B6B] text-lg leading-relaxed max-w-2xl">
+        Reflexions techniques, comparatifs et guides pratiques pour vous aider a faire les bons choix pour votre projet web.
+      </p>
+    </div>
+  </section>
+
+  <!-- ARTICLES LIST -->
+  <section class="pb-24 px-6 md:px-12 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <div class="border-t border-[#E5E5E5]">
+        {articles.map(article => (
+          <a href={`/blog/${article.slug}`} class="reveal group block py-10 border-b border-[#E5E5E5] hover:pl-2 transition-all duration-300">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+              <div class="flex-1">
+                <div class="flex flex-wrap items-center gap-3 mb-4">
+                  <span class="text-xs text-[#A0A0A0]">{article.date}</span>
+                  <span class="text-xs text-[#A0A0A0]">&middot;</span>
+                  <span class="text-xs text-[#A0A0A0]">{article.readTime} de lecture</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-3 group-hover:text-[#333] transition-colors" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+                  {article.title}
+                </h2>
+                <p class="text-[#6B6B6B] text-base leading-relaxed mb-4 max-w-2xl">
+                  {article.excerpt}
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  {article.tags.map(tag => (
+                    <span class="text-[10px] text-[#6B6B6B] px-2.5 py-1 rounded-full border border-[#E5E5E5] bg-[#F7F7F7]">{tag}</span>
+                  ))}
+                </div>
+              </div>
+              <div class="flex-shrink-0 self-center">
+                <div class="w-10 h-10 rounded-full border border-[#E5E5E5] flex items-center justify-center group-hover:bg-[#1A1A1A] group-hover:border-[#1A1A1A] transition-all duration-300">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="text-[#6B6B6B] group-hover:text-white transition-colors"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>
