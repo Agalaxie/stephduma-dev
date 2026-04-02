@@ -1,0 +1,342 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Integration API & Services — Supabase, Stripe, IA | Stephane Duma"
+  description="Integration d'APIs et services tiers : Supabase, Stripe, CRMs, outils IA. Je connecte vos systemes pour automatiser et fluidifier vos processus. Freelance a Perpignan."
+  canonical="https://stephduma.dev/integration-api"
+  keywords="integration api freelance, developpeur supabase, integration stripe france, automatisation api, connexion crm api, integration ia"
+>
+
+  <!-- HERO -->
+  <section class="relative min-h-screen flex items-center px-6 md:px-12 overflow-hidden pt-24 bg-[#141414]">
+
+    <!-- Connection lines SVG background -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <svg class="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+      <!-- Glowing nodes -->
+      <div class="absolute top-[20%] left-[15%] w-3 h-3 rounded-full bg-[#22C55E]/20 node-pulse"></div>
+      <div class="absolute top-[40%] right-[20%] w-2 h-2 rounded-full bg-[#22C55E]/15 node-pulse" style="animation-delay: 1s;"></div>
+      <div class="absolute bottom-[30%] left-[40%] w-2.5 h-2.5 rounded-full bg-[#22C55E]/10 node-pulse" style="animation-delay: 2s;"></div>
+      <div class="absolute top-[60%] right-[35%] w-2 h-2 rounded-full bg-white/10 node-pulse" style="animation-delay: 0.5s;"></div>
+      <div class="absolute bottom-[20%] right-[10%] w-3 h-3 rounded-full bg-white/5 node-pulse" style="animation-delay: 1.5s;"></div>
+    </div>
+
+    <!-- Gradient orb -->
+    <div class="absolute top-[10%] right-[10%] w-[400px] h-[400px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(34,197,94,0.06) 0%, transparent 70%);"></div>
+
+    <div class="max-w-6xl mx-auto w-full relative z-10">
+      <div class="max-w-4xl">
+        <!-- Breadcrumb -->
+        <div class="reveal flex items-center gap-2 text-xs text-gray-600 mb-8" style="font-family:'DM Sans',sans-serif; letter-spacing:1px;">
+          <a href="/" class="hover:text-white transition-colors">Accueil</a>
+          <span>/</span>
+          <a href="/#services" class="hover:text-white transition-colors">Services</a>
+          <span>/</span>
+          <span class="text-gray-400">Integrations & APIs</span>
+        </div>
+
+        <div class="reveal">
+          <span class="section-label--dark mb-8 inline-block" style="display:inline-flex; border:1px solid #333; border-radius:100px; padding:6px 16px; font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:#22C55E;">Integrations</span>
+        </div>
+
+        <h1 class="reveal text-white leading-[0.92] mb-8" style="font-family:'Playfair Display',serif; font-size:clamp(2.8rem,8vw,7rem); font-weight:900; letter-spacing:-2px;">
+          Vos systemes,<br/>
+          <span class="relative inline-block">
+            connectes
+            <span class="absolute -bottom-2 left-0 w-full h-[3px] rounded-full" style="background: linear-gradient(90deg, #22C55E, transparent);"></span>
+          </span>
+        </h1>
+
+        <p class="reveal text-gray-400 text-lg md:text-xl leading-relaxed max-w-2xl mb-12">
+          Je connecte vos outils entre eux : base de donnees, paiements, CRM, IA, emails. Des integrations robustes qui automatisent vos processus et font gagner du temps.
+        </p>
+
+        <div class="reveal flex flex-wrap items-center gap-4">
+          <a href="/#contact" class="inline-flex items-center gap-3 px-7 py-3.5 bg-white text-[#141414] rounded-full text-sm font-medium hover:bg-gray-200 transition-all duration-300 hover:gap-5 group">
+            Parlons de vos besoins
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-hover:rotate-45 transition-transform duration-300"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+          <a href="#services" class="inline-flex items-center gap-2 px-7 py-3.5 border border-[#333] rounded-full text-sm text-gray-400 hover:border-white hover:text-white transition-all duration-300">
+            Voir les integrations
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="reveal mt-20 pt-8 border-t border-[#333]">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <div class="serif-italic text-4xl md:text-5xl text-white">50+</div>
+            <div class="text-sm text-gray-500 mt-2">APIs integrees</div>
+          </div>
+          <div>
+            <div class="serif-italic text-4xl md:text-5xl text-white">99.9%</div>
+            <div class="text-sm text-gray-500 mt-2">Uptime garanti</div>
+          </div>
+          <div>
+            <div class="serif-italic text-4xl md:text-5xl text-white">&lt;200ms</div>
+            <div class="text-sm text-gray-500 mt-2">Temps de reponse</div>
+          </div>
+          <div>
+            <div class="serif-italic text-4xl md:text-5xl text-white">0</div>
+            <div class="text-sm text-gray-500 mt-2">Donnees perdues</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS GRID -->
+  <section id="services" class="py-24 px-6 md:px-12 bg-white border-t border-[#E5E5E5]">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal mb-16">
+        <span class="section-label mb-6 inline-block">Services</span>
+        <h2 class="text-4xl md:text-[3.75rem] font-normal tracking-[-1px] text-[#1A1A1A]" style="line-height:1.1;">
+          Ce que j'integre
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        {[
+          {
+            title: 'Base de donnees & Auth',
+            desc: 'Supabase, Firebase, PostgreSQL. Authentification, roles utilisateurs, RLS, realtime subscriptions.',
+            icon: 'supabase',
+            tags: ['Supabase', 'PostgreSQL', 'Auth', 'RLS']
+          },
+          {
+            title: 'Paiements & Facturation',
+            desc: 'Stripe Checkout, abonnements, webhooks, facturation automatique. Conforme PCI-DSS, pret pour la production.',
+            icon: 'stripe',
+            tags: ['Stripe', 'Webhooks', 'Checkout', 'Invoicing']
+          },
+          {
+            title: 'Intelligence Artificielle',
+            desc: 'OpenAI, Claude, Vercel AI SDK. Chatbots, generation de contenu, analyse de donnees, assistants intelligents.',
+            icon: 'openai',
+            tags: ['OpenAI', 'Claude', 'AI SDK', 'RAG']
+          },
+          {
+            title: 'Emails transactionnels',
+            desc: 'Resend, SendGrid, Mailgun. Templates responsive, sequences automatisees, suivi delivrabilite.',
+            icon: 'resend',
+            tags: ['Resend', 'SMTP', 'Templates', 'Sequences']
+          },
+          {
+            title: 'CRM & Outils metier',
+            desc: 'HubSpot, Notion API, Airtable, Google Sheets. Synchronisation bidirectionnelle et workflows automatises.',
+            icon: 'hubspot',
+            tags: ['HubSpot', 'Notion', 'Airtable', 'Zapier']
+          },
+          {
+            title: 'Analytics & Monitoring',
+            desc: 'Vercel Analytics, PostHog, Sentry. Tracking evenements, dashboards, alertes temps reel, error tracking.',
+            icon: 'sentry',
+            tags: ['PostHog', 'Sentry', 'Analytics', 'Logs']
+          },
+        ].map(service => (
+          <div class="reveal group rounded-2xl border border-[#E5E5E5] hover:border-[#ccc] hover:shadow-lg transition-all duration-500 p-8 bg-white relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-24 h-24 pointer-events-none" style="background: radial-gradient(circle at top right, rgba(34,197,94,0.03), transparent 70%);"></div>
+            <img
+              src={`https://cdn.simpleicons.org/${service.icon}/1A1A1A`}
+              alt=""
+              width="24"
+              height="24"
+              class="mb-5 opacity-40 group-hover:opacity-70 transition-opacity duration-300"
+              loading="lazy"
+              decoding="async"
+            />
+            <h3 class="text-lg font-bold text-[#1A1A1A] mb-3">{service.title}</h3>
+            <p class="text-sm text-[#6B6B6B] leading-relaxed mb-6">{service.desc}</p>
+            <div class="flex flex-wrap gap-1.5">
+              {service.tags.map(tag => (
+                <span class="text-[10px] text-[#6B6B6B] px-2.5 py-1 rounded-full border border-[#E5E5E5] bg-[#F7F7F7]">{tag}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="py-24 px-6 md:px-12 bg-[#F7F7F7]">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal mb-16">
+        <span class="section-label mb-6 inline-block">Processus</span>
+        <h2 class="text-4xl md:text-[3.75rem] font-normal tracking-[-1px] text-[#1A1A1A]" style="line-height:1.1;">
+          Comment je procede
+        </h2>
+      </div>
+
+      <div class="space-y-0">
+        {[
+          {
+            num: '01',
+            title: 'Audit de l\'existant',
+            desc: 'J\'analyse vos outils actuels, vos flux de donnees et vos points de friction. On identifie ensemble ce qui peut etre automatise et connecte.'
+          },
+          {
+            num: '02',
+            title: 'Architecture & Specifications',
+            desc: 'Je dessine le schema d\'integration : quelles APIs, quels webhooks, quels formats de donnees. Documentation technique complete avant le premier appel API.'
+          },
+          {
+            num: '03',
+            title: 'Developpement & Tests',
+            desc: 'Implementation avec gestion d\'erreurs robuste, retry logic, et monitoring. Chaque integration est testee en conditions reelles avant mise en production.'
+          },
+          {
+            num: '04',
+            title: 'Deploiement & Documentation',
+            desc: 'Mise en production progressive, documentation des endpoints et des flux. Votre equipe technique est autonome pour maintenir et etendre les integrations.'
+          },
+        ].map(step => (
+          <div class="reveal flex flex-col sm:flex-row sm:items-start py-12 border-b border-[#E5E5E5] last:border-0 gap-6 sm:gap-12">
+            <div class="flex items-start gap-6 flex-1">
+              <span class="serif-italic text-5xl md:text-6xl text-[#1A1A1A]/10 flex-shrink-0 leading-none">{step.num}</span>
+              <div>
+                <h3 class="text-xl font-bold text-[#1A1A1A] mb-2">{step.title}</h3>
+                <p class="text-[#6B6B6B] text-sm leading-relaxed max-w-lg">{step.desc}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="py-24 px-6 md:px-12 bg-[#141414]">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal mb-16">
+        <span class="section-label--dark mb-6 inline-block" style="display:inline-flex; border:1px solid #333; border-radius:100px; padding:6px 16px; font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase;">Exemples</span>
+        <h2 class="text-4xl md:text-[3.75rem] font-normal tracking-[-1px] text-white" style="line-height:1.1;">
+          Cas concrets
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        {[
+          {
+            title: 'SaaS avec paiements',
+            desc: 'Inscription utilisateur via Supabase Auth, plans d\'abonnement Stripe, webhooks pour synchroniser les acces, emails de bienvenue avec Resend.',
+            flow: 'Supabase → Stripe → Resend → Dashboard'
+          },
+          {
+            title: 'E-commerce augmente',
+            desc: 'Catalogue WooCommerce synchronise avec un front Next.js, paiements Stripe, notifications Slack, rapports automatiques.',
+            flow: 'WooCommerce → Next.js → Stripe → Slack'
+          },
+          {
+            title: 'CRM automatise',
+            desc: 'Formulaire de contact qui cree un lead dans HubSpot, envoie une notification Slack, et declenche un email de suivi automatique.',
+            flow: 'Formulaire → HubSpot → Slack → Email'
+          },
+          {
+            title: 'Assistant IA custom',
+            desc: 'Chatbot entraine sur vos donnees, connecte a votre base de connaissances, avec historique de conversations et analytics.',
+            flow: 'Supabase → Claude API → Embeddings → UI'
+          },
+        ].map(useCase => (
+          <div class="reveal rounded-2xl bg-[#1E1E1E] border border-[#333] hover:border-[#555] transition-all duration-300 p-8">
+            <h3 class="text-xl font-bold text-white mb-3">{useCase.title}</h3>
+            <p class="text-sm text-gray-400 leading-relaxed mb-6">{useCase.desc}</p>
+            <div class="flex items-center gap-2 text-[11px] text-[#22C55E]/60 font-mono">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#22C55E]/40"></span>
+              {useCase.flow}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 px-6 md:px-12 bg-[#F7F7F7]">
+    <div class="max-w-3xl mx-auto">
+      <div class="reveal mb-16 text-center">
+        <span class="section-label mb-6 inline-block">FAQ</span>
+        <h2 class="text-4xl md:text-[3.75rem] font-normal tracking-[-1px] text-[#1A1A1A]" style="line-height:1.1;">
+          Questions frequentes
+        </h2>
+      </div>
+
+      <div class="space-y-3">
+        {[
+          {
+            q: 'Pouvez-vous integrer une API qui n\'est pas dans votre liste ?',
+            a: 'Oui. Si l\'API dispose d\'une documentation, je peux l\'integrer. J\'ai travaille avec des APIs tres variees : bancaires, logistiques, gouvernementales, IoT. Chaque projet est une occasion d\'explorer de nouveaux services.'
+          },
+          {
+            q: 'Comment gerez-vous les erreurs et les pannes d\'API ?',
+            a: 'Chaque integration inclut : retry automatique avec backoff exponentiel, circuit breakers, logging detaille, et alertes en cas d\'echec. Les donnees ne sont jamais perdues grace a des queues de messages et des idempotency keys.'
+          },
+          {
+            q: 'Est-ce que mes donnees sont securisees ?',
+            a: 'Absolument. Toutes les communications passent par HTTPS, les cles API sont stockees dans des variables d\'environnement securisees, et je respecte les principes du moindre privilege. Aucune donnee sensible n\'est loguee.'
+          },
+          {
+            q: 'Combien coute une integration type ?',
+            a: 'Une integration simple (ex: Stripe Checkout) : 500-1 500 EUR. Une integration complexe (ex: sync bidirectionnelle CRM) : 2 000-5 000 EUR. Un systeme d\'integrations complet : sur devis. Je propose toujours un forfait fixe apres analyse.'
+          },
+        ].map(faq => (
+          <details class="reveal group rounded-2xl border border-[#E5E5E5] bg-white overflow-hidden">
+            <summary class="flex items-center justify-between p-6 cursor-pointer text-[#1A1A1A] font-medium hover:bg-[#FAFAFA] transition-colors">
+              <span class="pr-4">{faq.q}</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="flex-shrink-0 transition-transform duration-300 group-open:rotate-45"><path d="M12 5v14M5 12h14"/></svg>
+            </summary>
+            <div class="px-6 pb-6 text-sm text-[#6B6B6B] leading-relaxed border-t border-[#E5E5E5] pt-4">
+              {faq.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Integration API & Services",
+    "description": "Integration d'APIs et services tiers : Supabase, Stripe, CRMs, outils IA. Connexion et automatisation de vos systemes.",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Stephane Duma — Developpeur Freelance",
+      "url": "https://stephduma.dev",
+      "address": { "@type": "PostalAddress", "addressLocality": "Perpignan", "addressCountry": "FR" }
+    },
+    "areaServed": { "@type": "Country", "name": "France" },
+    "serviceType": "Integration API"
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Pouvez-vous integrer une API qui n'est pas dans votre liste ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. Si l'API dispose d'une documentation, je peux l'integrer. J'ai travaille avec des APIs tres variees." } },
+      { "@type": "Question", "name": "Comment gerez-vous les erreurs et les pannes d'API ?", "acceptedAnswer": { "@type": "Answer", "text": "Retry automatique, circuit breakers, logging detaille, alertes, queues de messages et idempotency keys." } },
+      { "@type": "Question", "name": "Est-ce que mes donnees sont securisees ?", "acceptedAnswer": { "@type": "Answer", "text": "HTTPS, variables d'environnement securisees, principe du moindre privilege, aucune donnee sensible loguee." } },
+      { "@type": "Question", "name": "Combien coute une integration type ?", "acceptedAnswer": { "@type": "Answer", "text": "Integration simple : 500-1500 EUR. Integration complexe : 2000-5000 EUR. Systeme complet : sur devis." } }
+    ]
+  })} />
+
+</Layout>
+
+<style>
+  @keyframes node-pulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.5); }
+  }
+  .node-pulse { animation: node-pulse 3s ease-in-out infinite; }
+</style>

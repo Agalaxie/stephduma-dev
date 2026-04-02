@@ -1,0 +1,382 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Audit Performance Web & Accessibilite — Stephane Duma, Perpignan"
+  description="Audit Core Web Vitals, optimisation performances et accessibilite RGAA. Ameliorez votre score Lighthouse, votre SEO et l'experience de vos utilisateurs. Freelance a Perpignan."
+  canonical="https://stephduma.dev/audit-performance-accessibilite"
+  keywords="audit performance web, audit accessibilite rgaa, core web vitals optimisation, audit lighthouse, optimisation vitesse site, accessibilite web perpignan"
+>
+
+  <!-- HERO -->
+  <section class="relative min-h-screen flex items-center px-6 md:px-12 overflow-hidden pt-24" style="background: radial-gradient(ellipse 80% 60% at 50% 40%, #f0f0ee 0%, #eaeae8 60%, #e5e5e3 100%);">
+
+    <!-- Score circles decorative -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <!-- Large score ring -->
+      <div class="absolute top-[12%] right-[8%] w-[200px] h-[200px] md:w-[320px] md:h-[320px]">
+        <svg viewBox="0 0 120 120" class="w-full h-full score-ring-animate">
+          <circle cx="60" cy="60" r="54" fill="none" stroke="#E5E5E5" stroke-width="2"/>
+          <circle cx="60" cy="60" r="54" fill="none" stroke="#22C55E" stroke-width="3" stroke-dasharray="339.3" stroke-dashoffset="33.9" stroke-linecap="round" transform="rotate(-90 60 60)" class="score-fill"/>
+        </svg>
+        <div class="absolute inset-0 flex flex-col items-center justify-center">
+          <span class="serif-italic text-5xl md:text-7xl text-[#1A1A1A]/10">98</span>
+        </div>
+      </div>
+      <!-- Smaller secondary ring -->
+      <div class="absolute bottom-[25%] left-[8%] w-[100px] h-[100px] md:w-[160px] md:h-[160px] opacity-40">
+        <svg viewBox="0 0 120 120" class="w-full h-full">
+          <circle cx="60" cy="60" r="54" fill="none" stroke="#E5E5E5" stroke-width="2"/>
+          <circle cx="60" cy="60" r="54" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="339.3" stroke-dashoffset="67.9" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto w-full relative z-10">
+      <div class="max-w-4xl">
+        <!-- Breadcrumb -->
+        <div class="reveal flex items-center gap-2 text-xs text-[#A0A0A0] mb-8" style="font-family:'DM Sans',sans-serif; letter-spacing:1px;">
+          <a href="/" class="hover:text-[#1A1A1A] transition-colors">Accueil</a>
+          <span>/</span>
+          <a href="/#services" class="hover:text-[#1A1A1A] transition-colors">Services</a>
+          <span>/</span>
+          <span class="text-[#1A1A1A]">Performance & Accessibilite</span>
+        </div>
+
+        <div class="reveal">
+          <span class="section-label mb-8 inline-block">Performance & A11y</span>
+        </div>
+
+        <h1 class="reveal text-[#1A1A1A] leading-[0.92] mb-8" style="font-family:'Playfair Display',serif; font-size:clamp(2.8rem,8vw,7rem); font-weight:900; letter-spacing:-2px;">
+          Des sites rapides,<br/>
+          <span class="relative inline-block">
+            pour tous
+            <span class="absolute -bottom-2 left-0 w-full h-[3px] bg-[#22C55E]/30 rounded-full"></span>
+          </span>
+        </h1>
+
+        <p class="reveal text-[#6B6B6B] text-lg md:text-xl leading-relaxed max-w-2xl mb-12">
+          J'audite et j'optimise vos Core Web Vitals, votre accessibilite RGAA et votre SEO technique. Chaque milliseconde gagnee = plus de conversions.
+        </p>
+
+        <div class="reveal flex flex-wrap items-center gap-4">
+          <a href="/#contact" class="inline-flex items-center gap-3 px-7 py-3.5 bg-[#1A1A1A] text-white rounded-full text-sm font-medium hover:bg-[#333] transition-all duration-300 hover:gap-5 group">
+            Demander un audit gratuit
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-hover:rotate-45 transition-transform duration-300"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+          <a href="#metriques" class="inline-flex items-center gap-2 px-7 py-3.5 border border-[#E5E5E5] rounded-full text-sm text-[#6B6B6B] hover:border-[#1A1A1A] hover:text-[#1A1A1A] transition-all duration-300">
+            Voir les metriques
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="reveal mt-20 pt-8 border-t border-[#D8D8D8]">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <div class="serif-italic text-4xl md:text-5xl text-[#1A1A1A]">50+</div>
+            <div class="text-sm text-[#6B6B6B] mt-2">Audits realises</div>
+          </div>
+          <div>
+            <div class="serif-italic text-4xl md:text-5xl text-[#22C55E]">+40%</div>
+            <div class="text-sm text-[#6B6B6B] mt-2">Score moyen gagne</div>
+          </div>
+          <div>
+            <div class="serif-italic text-4xl md:text-5xl text-[#1A1A1A]">-60%</div>
+            <div class="text-sm text-[#6B6B6B] mt-2">Temps chargement</div>
+          </div>
+          <div>
+            <div class="serif-italic text-4xl md:text-5xl text-[#1A1A1A]">RGAA</div>
+            <div class="text-sm text-[#6B6B6B] mt-2">Conformite niveau AA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE WEB VITALS -->
+  <section id="metriques" class="py-24 px-6 md:px-12 bg-white border-t border-[#E5E5E5]">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal mb-16">
+        <span class="section-label mb-6 inline-block">Core Web Vitals</span>
+        <h2 class="text-4xl md:text-[3.75rem] font-normal tracking-[-1px] text-[#1A1A1A]" style="line-height:1.1;">
+          Les metriques qui comptent
+        </h2>
+        <p class="text-[#6B6B6B] mt-4 max-w-2xl leading-relaxed">
+          Google utilise ces metriques pour classer votre site. Un mauvais score = moins de visibilite, moins de trafic, moins de clients.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        {[
+          {
+            metric: 'LCP',
+            name: 'Largest Contentful Paint',
+            desc: 'Temps de chargement du plus grand element visible. Doit etre inferieur a 2.5 secondes.',
+            good: '< 2.5s',
+            bad: '> 4.0s',
+            icon: '&#9201;'
+          },
+          {
+            metric: 'INP',
+            name: 'Interaction to Next Paint',
+            desc: 'Reactivite de la page aux interactions utilisateur. Doit etre inferieur a 200 millisecondes.',
+            good: '< 200ms',
+            bad: '> 500ms',
+            icon: '&#9889;'
+          },
+          {
+            metric: 'CLS',
+            name: 'Cumulative Layout Shift',
+            desc: 'Stabilite visuelle de la page pendant le chargement. Doit etre inferieur a 0.1.',
+            good: '< 0.1',
+            bad: '> 0.25',
+            icon: '&#9632;'
+          },
+        ].map(cwv => (
+          <div class="reveal rounded-2xl border border-[#E5E5E5] hover:border-[#ccc] hover:shadow-lg transition-all duration-500 p-8 bg-white">
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-2xl font-bold text-[#1A1A1A]" style="font-family:'Playfair Display',serif;">{cwv.metric}</span>
+              <span class="text-lg" set:html={cwv.icon} />
+            </div>
+            <h3 class="text-sm font-bold text-[#1A1A1A] mb-2">{cwv.name}</h3>
+            <p class="text-sm text-[#6B6B6B] leading-relaxed mb-6">{cwv.desc}</p>
+            <div class="flex items-center gap-4 text-xs">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-[#22C55E]"></span>
+                <span class="text-[#6B6B6B]">Bon : {cwv.good}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-[#DC2626]"></span>
+                <span class="text-[#6B6B6B]">Mauvais : {cwv.bad}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT I AUDIT -->
+  <section class="py-24 px-6 md:px-12 bg-[#F7F7F7]">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal mb-16">
+        <span class="section-label mb-6 inline-block">Audit complet</span>
+        <h2 class="text-4xl md:text-[3.75rem] font-normal tracking-[-1px] text-[#1A1A1A]" style="line-height:1.1;">
+          Ce que j'analyse
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        {[
+          {
+            title: 'Performance',
+            items: ['Core Web Vitals (LCP, INP, CLS)', 'Optimisation images (WebP, AVIF, lazy loading)', 'Minification CSS/JS et tree-shaking', 'Cache strategy et CDN', 'Critical rendering path', 'Bundle analysis et code splitting'],
+            dark: false
+          },
+          {
+            title: 'SEO technique',
+            items: ['Balisage semantique (H1-H6, schema.org)', 'Meta tags et Open Graph', 'Sitemap XML et robots.txt', 'Canonical URLs et redirections', 'Mobile-first indexing', 'Structured data (FAQ, Service, etc.)'],
+            dark: false
+          },
+          {
+            title: 'Accessibilite RGAA',
+            items: ['Navigation au clavier', 'Contrastes couleurs (ratio WCAG AA)', 'Textes alternatifs et ARIA labels', 'Hierarchie des titres', 'Formulaires accessibles', 'Lecteur d\'ecran compatible'],
+            dark: true
+          },
+          {
+            title: 'Securite',
+            items: ['Headers HTTP (CSP, HSTS, X-Frame)', 'Certificat SSL/TLS', 'Protection XSS et CSRF', 'Dependances vulnerables', 'Content Security Policy', 'Rate limiting et sanitization'],
+            dark: false
+          },
+        ].map(section => (
+          <div class={`reveal rounded-2xl transition-all duration-300 p-8 md:p-10 ${section.dark ? 'bg-[#141414] text-white' : 'border border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#ccc] hover:shadow-lg'}`}>
+            <h3 class="text-xl font-bold mb-6">{section.title}</h3>
+            <ul class="space-y-3">
+              {section.items.map(item => (
+                <li class="flex items-start gap-3 text-sm">
+                  <span class={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${section.dark ? 'bg-[#22C55E]' : 'bg-[#1A1A1A]'}`}></span>
+                  <span class={section.dark ? 'text-gray-400' : 'text-[#6B6B6B]'}>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DELIVERABLES -->
+  <section class="py-24 px-6 md:px-12 bg-[#141414]">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal mb-16">
+        <span class="section-label--dark mb-6 inline-block" style="display:inline-flex; border:1px solid #333; border-radius:100px; padding:6px 16px; font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase;">Livrables</span>
+        <h2 class="text-4xl md:text-[3.75rem] font-normal tracking-[-1px] text-white" style="line-height:1.1;">
+          Ce que vous recevez
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        {[
+          {
+            title: 'Rapport d\'audit detaille',
+            desc: 'Document PDF complet avec captures, scores, problemes identifies et priorites d\'action. Comprehensible par les non-techniques.',
+            num: '01'
+          },
+          {
+            title: 'Plan d\'action priorise',
+            desc: 'Liste d\'optimisations classees par impact et complexite. Quick wins d\'abord, puis optimisations profondes. Chiffrage inclus.',
+            num: '02'
+          },
+          {
+            title: 'Implementation & suivi',
+            desc: 'Je peux implementer les corrections moi-meme. Rapport avant/apres avec mesures objectives. Gain mesurable et verifiable.',
+            num: '03'
+          },
+        ].map(deliverable => (
+          <div class="reveal rounded-2xl bg-[#1E1E1E] border border-[#333] hover:border-[#555] transition-all duration-300 p-8">
+            <span class="serif-italic text-4xl text-white/10 block mb-4">{deliverable.num}</span>
+            <h3 class="text-xl font-bold text-white mb-3">{deliverable.title}</h3>
+            <p class="text-sm text-gray-400 leading-relaxed">{deliverable.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="py-24 px-6 md:px-12 bg-white border-t border-[#E5E5E5]">
+    <div class="max-w-4xl mx-auto">
+      <div class="reveal text-center mb-16">
+        <span class="section-label mb-6 inline-block">Tarifs</span>
+        <h2 class="text-4xl md:text-[3.75rem] font-normal tracking-[-1px] text-[#1A1A1A]" style="line-height:1.1;">
+          Formules d'audit
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="reveal rounded-2xl border border-[#E5E5E5] p-8 text-center hover:shadow-lg transition-all duration-300">
+          <div class="text-xs text-[#A0A0A0] uppercase tracking-wider mb-4">Audit Flash</div>
+          <div class="serif-italic text-5xl text-[#1A1A1A] mb-2">490</div>
+          <div class="text-sm text-[#6B6B6B] mb-6">euros</div>
+          <ul class="text-sm text-[#6B6B6B] space-y-2 text-left">
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-[#1A1A1A] mt-2 flex-shrink-0"></span>Analyse Lighthouse</li>
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-[#1A1A1A] mt-2 flex-shrink-0"></span>Core Web Vitals</li>
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-[#1A1A1A] mt-2 flex-shrink-0"></span>Top 10 recommandations</li>
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-[#1A1A1A] mt-2 flex-shrink-0"></span>Livraison sous 48h</li>
+          </ul>
+        </div>
+
+        <div class="reveal rounded-2xl bg-[#141414] p-8 text-center hover:shadow-lg transition-all duration-300 relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+            <span class="text-[10px] font-medium px-3 py-1 rounded-full bg-[#1A1A1A] text-white border border-[#333] uppercase tracking-wider">Recommande</span>
+          </div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider mb-4">Audit complet</div>
+          <div class="serif-italic text-5xl text-white mb-2">990</div>
+          <div class="text-sm text-gray-400 mb-6">euros</div>
+          <ul class="text-sm text-gray-400 space-y-2 text-left">
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-white mt-2 flex-shrink-0"></span>Audit Flash inclus</li>
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-white mt-2 flex-shrink-0"></span>Accessibilite RGAA</li>
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-white mt-2 flex-shrink-0"></span>SEO technique</li>
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-white mt-2 flex-shrink-0"></span>Securite & headers</li>
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-white mt-2 flex-shrink-0"></span>Plan d'action priorise</li>
+          </ul>
+        </div>
+
+        <div class="reveal rounded-2xl border border-[#E5E5E5] p-8 text-center hover:shadow-lg transition-all duration-300">
+          <div class="text-xs text-[#A0A0A0] uppercase tracking-wider mb-4">Audit + Correction</div>
+          <div class="serif-italic text-5xl text-[#1A1A1A] mb-2">2-5k</div>
+          <div class="text-sm text-[#6B6B6B] mb-6">euros</div>
+          <ul class="text-sm text-[#6B6B6B] space-y-2 text-left">
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-[#1A1A1A] mt-2 flex-shrink-0"></span>Audit complet inclus</li>
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-[#1A1A1A] mt-2 flex-shrink-0"></span>Implementation des fixes</li>
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-[#1A1A1A] mt-2 flex-shrink-0"></span>Rapport avant/apres</li>
+            <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-[#1A1A1A] mt-2 flex-shrink-0"></span>Suivi 30 jours</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 px-6 md:px-12 bg-[#F7F7F7]">
+    <div class="max-w-3xl mx-auto">
+      <div class="reveal mb-16 text-center">
+        <span class="section-label mb-6 inline-block">FAQ</span>
+        <h2 class="text-4xl md:text-[3.75rem] font-normal tracking-[-1px] text-[#1A1A1A]" style="line-height:1.1;">
+          Questions frequentes
+        </h2>
+      </div>
+
+      <div class="space-y-3">
+        {[
+          {
+            q: 'Pourquoi mon site est-il lent alors qu\'il a l\'air simple ?',
+            a: 'La lenteur vient rarement du design visible. Images non optimisees, polices web, scripts tiers (analytics, chats, pubs), CSS inutilise, serveur mal configure... Un audit identifie les vrais coupables et propose des solutions concretes.'
+          },
+          {
+            q: 'L\'accessibilite est-elle obligatoire ?',
+            a: 'En France, la loi impose la conformite RGAA pour les sites publics et les entreprises de plus de 250M EUR de CA. Au-dela de l\'obligation legale, un site accessible touche plus de monde et ameliore l\'experience pour tous les utilisateurs.'
+          },
+          {
+            q: 'Combien de temps pour voir les resultats ?',
+            a: 'Les optimisations techniques sont visibles immediatement (score Lighthouse). L\'impact SEO se mesure en 2-4 semaines. L\'amelioration du taux de conversion se constate generalement sous 1 mois avec des donnees significatives.'
+          },
+          {
+            q: 'Travaillez-vous avec des sites non-WordPress et non-React ?',
+            a: 'Oui. L\'audit de performance et d\'accessibilite est independant de la technologie. Je travaille avec tout type de site : Shopify, Webflow, sites statiques, applications Vue.js, Angular, etc.'
+          },
+        ].map(faq => (
+          <details class="reveal group rounded-2xl border border-[#E5E5E5] bg-white overflow-hidden">
+            <summary class="flex items-center justify-between p-6 cursor-pointer text-[#1A1A1A] font-medium hover:bg-[#FAFAFA] transition-colors">
+              <span class="pr-4">{faq.q}</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="flex-shrink-0 transition-transform duration-300 group-open:rotate-45"><path d="M12 5v14M5 12h14"/></svg>
+            </summary>
+            <div class="px-6 pb-6 text-sm text-[#6B6B6B] leading-relaxed border-t border-[#E5E5E5] pt-4">
+              {faq.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Audit Performance Web & Accessibilite",
+    "description": "Audit Core Web Vitals, optimisation performances et accessibilite RGAA. Ameliorez votre score Lighthouse et votre SEO.",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Stephane Duma — Developpeur Freelance",
+      "url": "https://stephduma.dev",
+      "address": { "@type": "PostalAddress", "addressLocality": "Perpignan", "addressCountry": "FR" }
+    },
+    "areaServed": { "@type": "Country", "name": "France" },
+    "serviceType": "Audit web"
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Pourquoi mon site est-il lent alors qu'il a l'air simple ?", "acceptedAnswer": { "@type": "Answer", "text": "Images non optimisees, polices web, scripts tiers, CSS inutilise, serveur mal configure. Un audit identifie les vrais coupables." } },
+      { "@type": "Question", "name": "L'accessibilite est-elle obligatoire ?", "acceptedAnswer": { "@type": "Answer", "text": "En France, la loi impose la conformite RGAA pour les sites publics et les grandes entreprises. Un site accessible touche plus de monde." } },
+      { "@type": "Question", "name": "Combien de temps pour voir les resultats ?", "acceptedAnswer": { "@type": "Answer", "text": "Optimisations techniques : immediatement. Impact SEO : 2-4 semaines. Taux de conversion : environ 1 mois." } },
+      { "@type": "Question", "name": "Travaillez-vous avec des sites non-WordPress et non-React ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. L'audit est independant de la technologie : Shopify, Webflow, Vue.js, Angular, sites statiques, etc." } }
+    ]
+  })} />
+
+</Layout>
+
+<style>
+  @keyframes score-fill-animate {
+    from { stroke-dashoffset: 339.3; }
+    to { stroke-dashoffset: 33.9; }
+  }
+  .score-fill {
+    animation: score-fill-animate 2s ease-out forwards;
+  }
+</style>

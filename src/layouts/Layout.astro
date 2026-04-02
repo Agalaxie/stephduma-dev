@@ -1,0 +1,213 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  keywords?: string;
+}
+
+const { title, description, canonical, ogImage = 'https://stephduma.dev/og-image.png', keywords = '' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {keywords && <meta name="keywords" content={keywords} />}
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="Stephane Duma — Developpeur Freelance" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="geo.region" content="FR-66" />
+  <meta name="geo.placename" content="Perpignan" />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preload" href="/fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/playfair-900.woff2" as="font" type="font/woff2" crossorigin />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-5 px-6 md:px-12 bg-white">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <a href="/" class="flex items-center" aria-label="Stephane Duma — Accueil">
+        <span class="inline-flex items-center justify-center w-[38px] h-[38px] rounded-[10px] bg-[#1A1A1A]" style="font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:#fff; letter-spacing:-0.5px;">SD</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm text-[#6B6B6B]">
+        <a href="/#about" class="hover:text-[#1A1A1A] transition-colors">A propos</a>
+        <a href="/#services" class="hover:text-[#1A1A1A] transition-colors">Services</a>
+        <a href="/#experience" class="hover:text-[#1A1A1A] transition-colors">Experience</a>
+        <a href="/#portfolio" class="hover:text-[#1A1A1A] transition-colors">Portfolio</a>
+      </div>
+      <a href="/#contact" class="hidden md:inline-flex items-center gap-2 px-5 py-2 bg-[#1A1A1A] rounded-full text-sm hover:bg-[#333] transition-all duration-300" style="color:#FFFFFF;">
+        Me contacter
+      </a>
+      <button id="menu-btn" class="md:hidden p-2 text-[#6B6B6B] hover:text-[#1A1A1A]" aria-label="Ouvrir le menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-[#E5E5E5] pt-4">
+      <div class="flex flex-col gap-4 text-sm">
+        <a href="/#about" class="text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors">A propos</a>
+        <a href="/#services" class="text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors">Services</a>
+        <a href="/#experience" class="text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors">Experience</a>
+        <a href="/#portfolio" class="text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors">Portfolio</a>
+        <a href="/#contact" class="text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <slot />
+  </main>
+
+  <!-- CTA -->
+  <section id="contact" class="py-32 px-6 md:px-12 bg-[#141414]">
+    <div class="max-w-4xl mx-auto">
+      <div class="reveal text-center">
+        <span class="section-label--dark mb-8 inline-block" style="display:inline-flex; border:1px solid #333; border-radius:100px; padding:6px 16px; font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase;">Contact</span>
+        <h2 class="text-5xl md:text-[6rem] font-normal mb-8 leading-none tracking-[-2px] text-white" style="font-family:'Playfair Display',serif; font-weight:700;">
+          Travaillons<br/>ensemble
+        </h2>
+        <p class="text-gray-400 mb-10 max-w-md mx-auto">
+          Un projet en tete ? Parlons-en. Je reponds sous 24h.
+        </p>
+        <a
+          href="mailto:me@stephduma.dev"
+          class="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#141414] font-medium rounded-full hover:bg-gray-200 transition-all duration-300 hover:gap-5 group"
+        >
+          me@stephduma.dev
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-hover:rotate-45 transition-transform duration-300"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 px-6 md:px-12 bg-[#141414] border-t border-[#333]">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="text-sm" style="color:#9CA3AF;">
+        Stephane Duma &copy; 2026 &middot; Tous droits reserves
+      </div>
+      <div class="flex items-center gap-6 text-sm" style="color:#9CA3AF;">
+        <a href="https://github.com/Agalaxie" target="_blank" rel="noopener" class="hover:text-white transition-colors">GitHub</a>
+        <a href="https://www.malt.fr/profile/stephanedumas" target="_blank" rel="noopener" class="hover:text-white transition-colors">Malt</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" class="hover:text-white transition-colors">LinkedIn</a>
+        <a href="/mentions-legales" class="hover:text-white transition-colors">Mentions legales</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Custom cursor -->
+  <div id="cursor-ring" style="position:fixed; top:0; left:0; width:40px; height:40px; border:1.5px solid rgba(23,23,23,0.5); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;"></div>
+  <div id="cursor-dot" style="position:fixed; top:0; left:0; width:8px; height:8px; background:rgba(23,23,23,0.5); border-radius:50%; pointer-events:none; z-index:10000; transform:translate(-50%,-50%);"></div>
+
+</body>
+</html>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  ScrollTrigger.create({
+    start: 'top -80',
+    onUpdate: (self) => {
+      if (self.progress > 0) {
+        navbar?.classList.add('shadow-sm', 'py-3');
+        navbar?.classList.remove('py-5');
+      } else {
+        navbar?.classList.remove('shadow-sm', 'py-3');
+        navbar?.classList.add('py-5');
+      }
+    }
+  });
+
+  // Scroll reveal
+  gsap.utils.toArray('.reveal').forEach((el: any) => {
+    gsap.from(el, {
+      y: 40,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 85%',
+        once: true,
+      }
+    });
+  });
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu?.classList.add('hidden'));
+  });
+
+  // Custom cursor
+  const cursorRing = document.getElementById('cursor-ring');
+  const cursorDot = document.getElementById('cursor-dot');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  if (window.matchMedia('(pointer: fine)').matches && cursorRing && cursorDot) {
+    document.body.style.cursor = 'none';
+    document.querySelectorAll('a, button').forEach(el => {
+      (el as HTMLElement).style.cursor = 'none';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top = mouseY + 'px';
+    });
+
+    const animateCursor = () => {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      cursorRing.style.left = ringX + 'px';
+      cursorRing.style.top = ringY + 'px';
+      requestAnimationFrame(animateCursor);
+    };
+    animateCursor();
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursorRing.style.width = '55px';
+        cursorRing.style.height = '55px';
+        cursorRing.style.opacity = '0.5';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursorRing.style.width = '40px';
+        cursorRing.style.height = '40px';
+        cursorRing.style.opacity = '1';
+      });
+    });
+  } else {
+    cursorRing?.remove();
+    cursorDot?.remove();
+  }
+</script>
