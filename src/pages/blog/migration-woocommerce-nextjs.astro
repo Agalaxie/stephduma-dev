@@ -3,11 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 
 const publishDate = '2026-04-02';
 const title = 'Pourquoi migrer de WooCommerce vers Next.js en 2026';
-const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi migrer vers un e-commerce headless Next.js, les etapes cles, les pieges a eviter et les gains reels en performance et conversions.';
+const description = 'WooCommerce ralentit votre business ? Découvrez pourquoi migrer vers un e-commerce headless Next.js, les étapes clés, les pièges à éviter et les gains réels en performance et conversions.';
 ---
 
 <Layout
-  title={`${title} — Stephane Duma`}
+  title={`${title} — Stéphane Duma`}
   description={description}
   canonical="https://stephduma.dev/blog/migration-woocommerce-nextjs"
   keywords="migration woocommerce nextjs, remplacer woocommerce, e-commerce headless, refonte woocommerce, woocommerce lent, alternative woocommerce, next.js e-commerce"
@@ -38,7 +38,7 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
       <div class="reveal flex items-center gap-6 text-sm text-[#A0A0A0] mb-8">
         <div class="flex items-center gap-3">
           <div class="w-8 h-8 rounded-full bg-[#1A1A1A] flex items-center justify-center" style="font-family:'Playfair Display',serif; font-size:11px; font-weight:700; color:#fff;">SD</div>
-          <span class="text-[#6B6B6B]">Stephane Duma</span>
+          <span class="text-[#6B6B6B]">Stéphane Duma</span>
         </div>
         <span>&middot;</span>
         <time datetime={publishDate}>2 avril 2026</time>
@@ -47,7 +47,7 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
       </div>
 
       <p class="reveal text-[#6B6B6B] text-lg leading-relaxed border-l-2 border-[#1A1A1A] pl-6">
-        Votre boutique WooCommerce rame, vos conversions stagnent et chaque mise a jour vous stresse ? Vous n'etes pas seul. Voici pourquoi le passage a un e-commerce headless Next.js change la donne — et comment le faire sans tout casser.
+        Votre boutique WooCommerce rame, vos conversions stagnent et chaque mise à jour vous stresse ? Vous n'êtes pas seul. Voici pourquoi le passage à un e-commerce headless Next.js change la donne — et comment le faire sans tout casser.
       </p>
     </div>
   </section>
@@ -64,9 +64,9 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
             { id: 'limites-woocommerce', label: '1. Les limites de WooCommerce en 2026' },
             { id: 'pourquoi-nextjs', label: '2. Pourquoi Next.js pour l\'e-commerce' },
             { id: 'headless-commerce', label: '3. Le concept de headless commerce' },
-            { id: 'comparatif', label: '4. Comparatif chiffre : WooCommerce vs Next.js' },
-            { id: 'etapes-migration', label: '5. Les etapes d\'une migration reussie' },
-            { id: 'pieges', label: '6. Les pieges a eviter' },
+            { id: 'comparatif', label: '4. Comparatif chiffré : WooCommerce vs Next.js' },
+            { id: 'etapes-migration', label: '5. Les étapes d\'une migration réussie' },
+            { id: 'pieges', label: '6. Les pièges à éviter' },
             { id: 'pour-qui', label: '7. Pour qui cette migration a du sens' },
             { id: 'conclusion', label: 'Conclusion' },
           ].map(item => (
@@ -84,15 +84,15 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
         </h2>
 
         <p class="text-[#6B6B6B] leading-relaxed mb-4">
-          WooCommerce a rendu l'e-commerce accessible a des millions de commercants. C'est un fait. Mais apres avoir livre <strong class="text-[#1A1A1A]">plus de 150 sites WordPress</strong> en 8 ans, je constate les memes problemes qui reviennent systematiquement chez les boutiques qui grandissent :
+          WooCommerce a rendu l'e-commerce accessible à des millions de commerçants. C'est un fait. Mais après avoir livré <strong class="text-[#1A1A1A]">plus de 150 sites WordPress</strong> en 8 ans, je constate les mêmes problèmes qui reviennent systématiquement chez les boutiques qui grandissent :
         </p>
 
         <div class="space-y-3 mb-6">
           {[
-            { title: 'Performance degradee', desc: 'Chaque plugin ajoute du poids. Une boutique WooCommerce typique charge 30+ plugins, 2-4 MB de JavaScript, et met 4-6 secondes a s\'afficher. Google penalise les sites lents depuis les Core Web Vitals.' },
-            { title: 'Securite fragile', desc: 'WordPress represente 90% des CMS pirates. Les failles viennent souvent de plugins tiers non maintenus. Chaque extension est un point d\'entree potentiel.' },
-            { title: 'Scalabilite limitee', desc: 'Au-dela de 500 produits ou 1000 visiteurs simultanes, WooCommerce montre ses limites. Les requetes MySQL s\'accumulent, le cache devient complexe a gerer.' },
-            { title: 'Experience developpeur', desc: 'Le melange PHP/HTML/CSS dans les templates, le systeme de hooks complexe, et l\'absence de typage rendent la maintenance penible et les evolutions couteuses.' },
+            { title: 'Performance dégradée', desc: 'Chaque plugin ajoute du poids. Une boutique WooCommerce typique charge 30+ plugins, 2-4 MB de JavaScript, et met 4-6 secondes à s\'afficher. Google pénalise les sites lents depuis les Core Web Vitals.' },
+            { title: 'Sécurité fragile', desc: 'WordPress représente 90% des CMS piratés. Les failles viennent souvent de plugins tiers non maintenus. Chaque extension est un point d\'entrée potentiel.' },
+            { title: 'Scalabilité limitée', desc: 'Au-delà de 500 produits ou 1000 visiteurs simultanés, WooCommerce montre ses limites. Les requêtes MySQL s\'accumulent, le cache devient complexe à gérer.' },
+            { title: 'Expérience développeur', desc: 'Le mélange PHP/HTML/CSS dans les templates, le système de hooks complexe, et l\'absence de typage rendent la maintenance pénible et les évolutions coûteuses.' },
           ].map(item => (
             <div class="flex items-start gap-3 p-4 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA]">
               <span class="w-1.5 h-1.5 rounded-full bg-[#DC2626] mt-2 flex-shrink-0"></span>
@@ -116,15 +116,15 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
         </h2>
 
         <p class="text-[#6B6B6B] leading-relaxed mb-6">
-          Next.js n'est pas un CMS e-commerce. C'est un <strong class="text-[#1A1A1A]">framework React</strong> qui vous donne un controle total sur chaque aspect de votre boutique. Voici ce que ca change concretement :
+          Next.js n'est pas un CMS e-commerce. C'est un <strong class="text-[#1A1A1A]">framework React</strong> qui vous donne un contrôle total sur chaque aspect de votre boutique. Voici ce que ça change concrètement :
         </p>
 
         <div class="grid md:grid-cols-2 gap-4 mb-6">
           {[
-            { title: 'Vitesse extreme', desc: 'Pages pre-generees en HTML statique, images optimisees automatiquement, zero JavaScript inutile. Temps de chargement < 1 seconde.' },
-            { title: 'SEO natif', desc: 'Server-Side Rendering, metadata dynamiques, sitemap automatique, structured data. Google voit votre contenu immediatement.' },
-            { title: 'UX sur mesure', desc: 'Pas de contrainte de template. Chaque interaction, animation et transition est pensee pour convertir. Panier en temps reel, filtres instantanes.' },
-            { title: 'Scalabilite infinie', desc: 'Deploye sur Vercel, votre site scale automatiquement. 100 ou 100 000 visiteurs simultanes, meme performance.' },
+            { title: 'Vitesse extrême', desc: 'Pages pré-générées en HTML statique, images optimisées automatiquement, zéro JavaScript inutile. Temps de chargement < 1 seconde.' },
+            { title: 'SEO natif', desc: 'Server-Side Rendering, metadata dynamiques, sitemap automatique, structured data. Google voit votre contenu immédiatement.' },
+            { title: 'UX sur mesure', desc: 'Pas de contrainte de template. Chaque interaction, animation et transition est pensée pour convertir. Panier en temps réel, filtres instantanés.' },
+            { title: 'Scalabilité infinie', desc: 'Déployé sur Vercel, votre site scale automatiquement. 100 ou 100 000 visiteurs simultanés, même performance.' },
           ].map(item => (
             <div class="p-5 rounded-xl border border-[#E5E5E5] bg-white">
               <h3 class="text-sm font-bold text-[#1A1A1A] mb-2">{item.title}</h3>
@@ -134,7 +134,7 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
         </div>
 
         <p class="text-[#6B6B6B] leading-relaxed">
-          Les plus grandes marques e-commerce (Nike, Zara, Decathlon) utilisent deja des architectures similaires. Ce n'est plus une technologie experimentale — c'est le standard vers lequel le marche converge.
+          Les plus grandes marques e-commerce (Nike, Zara, Decathlon) utilisent déjà des architectures similaires. Ce n'est plus une technologie expérimentale — c'est le standard vers lequel le marché converge.
         </p>
       </section>
 
@@ -145,7 +145,7 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
         </h2>
 
         <p class="text-[#6B6B6B] leading-relaxed mb-6">
-          Le "headless commerce" separe le <strong class="text-[#1A1A1A]">front-end</strong> (ce que voit le client) du <strong class="text-[#1A1A1A]">back-end</strong> (gestion des produits, commandes, paiements). Les deux communiquent via des APIs.
+          Le "headless commerce" sépare le <strong class="text-[#1A1A1A]">front-end</strong> (ce que voit le client) du <strong class="text-[#1A1A1A]">back-end</strong> (gestion des produits, commandes, paiements). Les deux communiquent via des APIs.
         </p>
 
         <!-- Architecture diagram -->
@@ -181,28 +181,28 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
         </div>
 
         <p class="text-[#6B6B6B] leading-relaxed mb-4">
-          <strong class="text-[#1A1A1A]">L'avantage cle :</strong> vous pouvez changer votre frontend sans toucher a votre catalogue produits, et inversement. Vous n'etes plus prisonnier d'un ecosysteme monolithique.
+          <strong class="text-[#1A1A1A]">L'avantage clé :</strong> vous pouvez changer votre frontend sans toucher à votre catalogue produits, et inversement. Vous n'êtes plus prisonnier d'un écosystème monolithique.
         </p>
 
         <p class="text-[#6B6B6B] leading-relaxed">
-          Cote backend e-commerce, plusieurs options s'offrent a vous : <strong class="text-[#1A1A1A]">Shopify</strong> (le plus mature), <strong class="text-[#1A1A1A]">Snipcart</strong> (le plus simple a integrer), ou une solution <strong class="text-[#1A1A1A]">custom avec Stripe + Supabase</strong> pour un controle total.
+          Côté backend e-commerce, plusieurs options s'offrent à vous : <strong class="text-[#1A1A1A]">Shopify</strong> (le plus mature), <strong class="text-[#1A1A1A]">Snipcart</strong> (le plus simple à intégrer), ou une solution <strong class="text-[#1A1A1A]">custom avec Stripe + Supabase</strong> pour un contrôle total.
         </p>
       </section>
 
       <!-- SECTION 4 : Comparatif -->
       <section class="reveal mb-14" id="comparatif">
         <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
-          4. Comparatif chiffre : WooCommerce vs Next.js
+          4. Comparatif chiffré : WooCommerce vs Next.js
         </h2>
 
         <p class="text-[#6B6B6B] leading-relaxed mb-6">
-          Les chiffres parlent d'eux-memes. Voici un comparatif base sur des projets reels que j'ai livres :
+          Les chiffres parlent d'eux-memes. Voici un comparatif basé sur des projets réels que j'ai livrés :
         </p>
 
         <!-- Comparison table -->
         <div class="rounded-2xl border border-[#E5E5E5] overflow-hidden mb-6">
           <div class="grid grid-cols-3 bg-[#F7F7F7] text-xs font-bold uppercase tracking-wider text-[#6B6B6B] p-4">
-            <div>Metrique</div>
+            <div>Métrique</div>
             <div class="text-center">WooCommerce</div>
             <div class="text-center">Next.js</div>
           </div>
@@ -211,9 +211,9 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
             { metric: 'Score Lighthouse', woo: '40-65', next: '95-100' },
             { metric: 'Poids page (JS)', woo: '2-4 MB', next: '< 200 KB' },
             { metric: 'Taux de rebond moyen', woo: '45-60%', next: '20-35%' },
-            { metric: 'Cout hebergement/mois', woo: '30-100 EUR', next: '0-20 EUR' },
-            { metric: 'Mise a jour securite', woo: 'Manuelle', next: 'Automatique' },
-            { metric: 'Scaling', woo: 'Serveur deedie', next: 'Automatique (edge)' },
+            { metric: 'Coût hébergement/mois', woo: '30-100 EUR', next: '0-20 EUR' },
+            { metric: 'Mise à jour sécurité', woo: 'Manuelle', next: 'Automatique' },
+            { metric: 'Scaling', woo: 'Serveur dédié', next: 'Automatique (edge)' },
           ].map((row, i) => (
             <div class={`grid grid-cols-3 p-4 text-sm ${i % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'} border-t border-[#E5E5E5]`}>
               <div class="text-[#1A1A1A] font-medium">{row.metric}</div>
@@ -224,18 +224,18 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
         </div>
 
         <p class="text-[#6B6B6B] leading-relaxed">
-          Ces gains ne sont pas theoriques. Sur un projet recent de migration (catalogue de 200 produits), le client a vu son <strong class="text-[#1A1A1A]">taux de conversion augmenter de 23%</strong> dans le mois suivant la mise en ligne, principalement grace a la vitesse de chargement.
+          Ces gains ne sont pas théoriques. Sur un projet recent de migration (catalogue de 200 produits), le client a vu son <strong class="text-[#1A1A1A]">taux de conversion augmenter de 23%</strong> dans le mois suivant la mise en ligne, principalement grâce à la vitesse de chargement.
         </p>
       </section>
 
       <!-- SECTION 5 : Etapes -->
       <section class="reveal mb-14" id="etapes-migration">
         <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
-          5. Les etapes d'une migration reussie
+          5. Les étapes d'une migration réussie
         </h2>
 
         <p class="text-[#6B6B6B] leading-relaxed mb-6">
-          Une migration ne se fait pas en un week-end. Voici la methode que j'utilise pour garantir zero perte de trafic et zero interruption de vente :
+          Une migration ne se fait pas en un week-end. Voici la méthode que j'utilise pour garantir zéro perte de trafic et zéro interruption de vente :
         </p>
 
         <div class="space-y-0 mb-6">
@@ -243,32 +243,32 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
             {
               num: '01',
               title: 'Audit de l\'existant',
-              desc: 'Inventaire complet : pages, produits, categories, URLs, redirections, plugins critiques. On identifie ce qui doit etre migre et ce qui peut etre abandonne.'
+              desc: 'Inventaire complet : pages, produits, catégories, URLs, redirections, plugins critiques. On identifie ce qui doit être migré et ce qui peut être abandonné.'
             },
             {
               num: '02',
               title: 'Choix du backend e-commerce',
-              desc: 'Shopify Storefront API si vous voulez un back-office solide. Snipcart si vous avez peu de produits. Stripe + Supabase si vous voulez un controle total. Le choix depend de votre volume et vos besoins.'
+              desc: 'Shopify Storefront API si vous voulez un back-office solide. Snipcart si vous avez peu de produits. Stripe + Supabase si vous voulez un contrôle total. Le choix dépend de votre volume et vos besoins.'
             },
             {
               num: '03',
-              title: 'Migration des donnees',
-              desc: 'Export des produits, clients, commandes. Scripts de migration sur mesure pour mapper les donnees vers le nouveau format. Verification manuelle des elements critiques (prix, stock, variantes).'
+              title: 'Migration des données',
+              desc: 'Export des produits, clients, commandes. Scripts de migration sur mesure pour mapper les données vers le nouveau format. Vérification manuelle des éléments critiques (prix, stock, variantes).'
             },
             {
               num: '04',
-              title: 'Developpement du nouveau front',
-              desc: 'Construction du site Next.js avec le meme catalogue, les memes URLs (pour le SEO), et une UX repensee pour la conversion. Tests sur un environnement de staging.'
+              title: 'Développement du nouveau front',
+              desc: 'Construction du site Next.js avec le même catalogue, les mêmes URLs (pour le SEO), et une UX repensée pour la conversion. Tests sur un environnement de staging.'
             },
             {
               num: '05',
               title: 'Plan de redirections SEO',
-              desc: 'Mapping complet des anciennes URLs vers les nouvelles. Redirections 301 pour chaque page, chaque produit, chaque categorie. C\'est LA etape critique pour ne pas perdre votre referencement.'
+              desc: 'Mapping complet des anciennes URLs vers les nouvelles. Redirections 301 pour chaque page, chaque produit, chaque catégorie. C\'est LA étape critique pour ne pas perdre votre référencement.'
             },
             {
               num: '06',
               title: 'Bascule et monitoring',
-              desc: 'Mise en production pendant une periode de faible trafic. Monitoring 24h des erreurs 404, des conversions et des performances. Ajustements en temps reel si necessaire.'
+              desc: 'Mise en production pendant une période de faible trafic. Monitoring 24h des erreurs 404, des conversions et des performances. Ajustements en temps réel si nécessaire.'
             },
           ].map(step => (
             <div class="flex items-start py-8 border-b border-[#E5E5E5] last:border-0 gap-6">
@@ -285,34 +285,34 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
       <!-- SECTION 6 : Pieges -->
       <section class="reveal mb-14" id="pieges">
         <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
-          6. Les pieges a eviter
+          6. Les pièges à éviter
         </h2>
 
         <p class="text-[#6B6B6B] leading-relaxed mb-6">
-          J'ai vu des migrations echouer. Voici les erreurs les plus courantes et comment les eviter :
+          J'ai vu des migrations échouer. Voici les erreurs les plus courantes et comment les éviter :
         </p>
 
         <div class="space-y-3 mb-6">
           {[
             {
               piege: 'Oublier les redirections 301',
-              consequence: 'Vous perdez tout votre SEO accumule. Google derefenrence vos pages, votre trafic chute.',
+              consequence: 'Vous perdez tout votre SEO accumulé. Google déréférence vos pages, votre trafic chute.',
               solution: 'Mapper CHAQUE URL avant la migration. Tester chaque redirection. Monitorer les 404 post-migration.'
             },
             {
               piege: 'Migrer pendant un pic de vente',
-              consequence: 'Si quelque chose se passe mal, vous perdez des commandes. La pression empeche de debugger sereinement.',
-              solution: 'Planifier la bascule en periode creuse. Avoir un rollback plan pret.'
+              consequence: 'Si quelque chose se passe mal, vous perdez des commandes. La pression empêche de debugger sereinement.',
+              solution: 'Planifier la bascule en période creuse. Avoir un rollback plan prêt.'
             },
             {
-              piege: 'Reproduire WooCommerce a l\'identique',
-              consequence: 'Vous transportez les defauts de l\'ancien site dans le nouveau. Aucun gain UX.',
-              solution: 'Profiter de la migration pour repenser le parcours client. Analyser les donnees de conversion avant de designer.'
+              piege: 'Reproduire WooCommerce à l\'identique',
+              consequence: 'Vous transportez les défauts de l\'ancien site dans le nouveau. Aucun gain UX.',
+              solution: 'Profiter de la migration pour repenser le parcours client. Analyser les données de conversion avant de designer.'
             },
             {
-              piege: 'Negliger le back-office',
-              consequence: 'L\'equipe commerciale ne peut plus gerer les commandes efficacement.',
-              solution: 'Choisir un backend e-commerce avec un bon admin (Shopify) ou construire un dashboard adapte.'
+              piege: 'Négliger le back-office',
+              consequence: 'L\'équipe commerciale ne peut plus gérer les commandes efficacement.',
+              solution: 'Choisir un backend e-commerce avec un bon admin (Shopify) ou construire un dashboard adapté.'
             },
           ].map(item => (
             <div class="rounded-xl border border-[#E5E5E5] overflow-hidden">
@@ -343,7 +343,7 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
         </h2>
 
         <p class="text-[#6B6B6B] leading-relaxed mb-6">
-          La migration n'est pas pour tout le monde. Soyons honnetes :
+          La migration n'est pas pour tout le monde. Soyons honnêtes :
         </p>
 
         <div class="grid md:grid-cols-2 gap-4 mb-6">
@@ -354,8 +354,8 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
               <li class="flex items-start gap-2"><span class="text-[#22C55E]">&#10003;</span> Vous avez 50+ produits et du trafic</li>
               <li class="flex items-start gap-2"><span class="text-[#22C55E]">&#10003;</span> Votre taux de conversion stagne</li>
               <li class="flex items-start gap-2"><span class="text-[#22C55E]">&#10003;</span> Vous avez besoin d'une UX unique</li>
-              <li class="flex items-start gap-2"><span class="text-[#22C55E]">&#10003;</span> Les mises a jour vous stressent</li>
-              <li class="flex items-start gap-2"><span class="text-[#22C55E]">&#10003;</span> Vous prevoyez une forte croissance</li>
+              <li class="flex items-start gap-2"><span class="text-[#22C55E]">&#10003;</span> Les mises à jour vous stressent</li>
+              <li class="flex items-start gap-2"><span class="text-[#22C55E]">&#10003;</span> Vous prévoyez une forte croissance</li>
             </ul>
           </div>
 
@@ -363,17 +363,17 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
             <div class="text-xs text-[#DC2626] uppercase tracking-wider font-medium mb-4">Restez sur WooCommerce si...</div>
             <ul class="text-sm text-[#6B6B6B] space-y-2">
               <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Vous avez moins de 20 produits</li>
-              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Votre budget est tres limite</li>
+              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Votre budget est très limité</li>
               <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Votre site fonctionne bien tel quel</li>
-              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Vous dependez de plugins WP specifiques</li>
-              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Pas d'equipe technique en interne</li>
-              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Un <a href="/creation-site-wordpress" class="underline hover:text-[#1A1A1A] transition-colors">theme WordPress optimise</a> suffirait</li>
+              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Vous dépendez de plugins WP spécifiques</li>
+              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Pas d'équipe technique en interne</li>
+              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Un <a href="/creation-site-wordpress" class="underline hover:text-[#1A1A1A] transition-colors">thème WordPress optimisé</a> suffirait</li>
             </ul>
           </div>
         </div>
 
         <p class="text-[#6B6B6B] leading-relaxed">
-          L'honnetete est importante. Si un <a href="/creation-site-wordpress" class="text-[#1A1A1A] underline hover:no-underline">theme WordPress sur mesure</a> repond a vos besoins, je vous le dirai. La migration vers Next.js n'a de sens que si elle apporte un gain reel et mesurable.
+          L'honnêteté est importante. Si un <a href="/creation-site-wordpress" class="text-[#1A1A1A] underline hover:no-underline">thème WordPress sur mesure</a> répond à vos besoins, je vous le dirai. La migration vers Next.js n'a de sens que si elle apporte un gain réel et mesurable.
         </p>
       </section>
 
@@ -384,22 +384,22 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
         </h2>
 
         <p class="text-[#6B6B6B] leading-relaxed mb-4">
-          La migration de WooCommerce vers Next.js n'est pas une mode — c'est une evolution naturelle pour les e-commercants qui veulent <strong class="text-[#1A1A1A]">des performances superieures, un SEO au top, et une experience client memorable</strong>.
+          La migration de WooCommerce vers Next.js n'est pas une mode — c'est une évolution naturelle pour les e-commerçants qui veulent <strong class="text-[#1A1A1A]">des performances supérieures, un SEO au top, et une expérience client mémorable</strong>.
         </p>
 
         <p class="text-[#6B6B6B] leading-relaxed mb-4">
-          Le processus demande de la rigueur (surtout sur les redirections SEO), mais les gains sont reels et mesurables : des pages qui chargent en moins d'une seconde, des couts d'hebergement reduits, et une architecture qui scale sans effort.
+          Le processus demande de la rigueur (surtout sur les redirections SEO), mais les gains sont réels et mesurables : des pages qui chargent en moins d'une seconde, des coûts d'hébergement réduits, et une architecture qui scale sans effort.
         </p>
 
         <p class="text-[#6B6B6B] leading-relaxed">
-          Si vous envisagez cette migration, <a href="/#contact" class="text-[#1A1A1A] underline hover:no-underline">parlons-en</a>. J'ai l'experience des deux mondes — <a href="/creation-site-wordpress" class="text-[#1A1A1A] underline hover:no-underline">WordPress/WooCommerce</a> et <a href="/developpeur-react-nextjs" class="text-[#1A1A1A] underline hover:no-underline">React/Next.js</a> — et je peux vous donner un avis honnete sur ce qui convient le mieux a votre situation.
+          Si vous envisagez cette migration, <a href="/#contact" class="text-[#1A1A1A] underline hover:no-underline">parlons-en</a>. J'ai l'expérience des deux mondes — <a href="/creation-site-wordpress" class="text-[#1A1A1A] underline hover:no-underline">WordPress/WooCommerce</a> et <a href="/developpeur-react-nextjs" class="text-[#1A1A1A] underline hover:no-underline">React/Next.js</a> — et je peux vous donner un avis honnête sur ce qui convient le mieux à votre situation.
         </p>
       </section>
 
       <!-- CTA BOX -->
       <div class="reveal rounded-2xl bg-[#141414] p-8 md:p-10 text-center">
         <h3 class="text-2xl font-bold text-white mb-3" style="font-family:'Playfair Display',serif;">Votre WooCommerce vous freine ?</h3>
-        <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto">Je realise un audit gratuit de votre boutique et vous dis honnement si la migration vaut le coup.</p>
+        <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto">Je réalise un audit gratuit de votre boutique et vous dis honnêtement si la migration vaut le coup.</p>
         <a href="/#contact" class="inline-flex items-center gap-3 px-7 py-3.5 bg-white text-[#141414] rounded-full text-sm font-medium hover:bg-gray-200 transition-all duration-300 hover:gap-5 group">
           Demander un audit gratuit
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-hover:rotate-45 transition-transform duration-300"><path d="M7 17L17 7M7 7h10v10"/></svg>
@@ -411,10 +411,10 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
         <div class="flex items-start gap-4">
           <div class="w-12 h-12 rounded-full bg-[#1A1A1A] flex items-center justify-center flex-shrink-0" style="font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:#fff;">SD</div>
           <div>
-            <div class="text-sm font-bold text-[#1A1A1A]">Stephane Duma</div>
-            <div class="text-xs text-[#6B6B6B] mb-2">Developpeur Freelance React & Next.js — Perpignan</div>
+            <div class="text-sm font-bold text-[#1A1A1A]">Stéphane Duma</div>
+            <div class="text-xs text-[#6B6B6B] mb-2">Développeur Freelance React & Next.js — Perpignan</div>
             <p class="text-sm text-[#6B6B6B] leading-relaxed">
-              +10 ans d'experience, 250+ projets livres. Expert React, Next.js & WordPress. J'aide les entreprises a construire des experiences web performantes.
+              +10 ans d'expérience, 250+ projets livrés. Expert React, Next.js & WordPress. J'aide les entreprises à construire des expériences web performantes.
             </p>
           </div>
         </div>
@@ -426,17 +426,17 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
   <!-- RELATED -->
   <section class="py-16 px-6 md:px-12 bg-[#F7F7F7] border-t border-[#E5E5E5]">
     <div class="max-w-3xl mx-auto">
-      <div class="reveal text-sm font-bold text-[#1A1A1A] uppercase tracking-wider mb-6">Services lies</div>
+      <div class="reveal text-sm font-bold text-[#1A1A1A] uppercase tracking-wider mb-6">Services liés</div>
       <div class="grid md:grid-cols-2 gap-4">
         <a href="/developpeur-react-nextjs" class="reveal group rounded-2xl border border-[#E5E5E5] bg-white p-6 hover:border-[#ccc] hover:shadow-lg transition-all duration-300">
           <div class="text-xs text-[#A0A0A0] uppercase tracking-wider mb-2">Service</div>
-          <div class="text-lg font-bold text-[#1A1A1A] group-hover:text-[#333] transition-colors">Developpement React & Next.js</div>
+          <div class="text-lg font-bold text-[#1A1A1A] group-hover:text-[#333] transition-colors">Développement React & Next.js</div>
           <div class="text-sm text-[#6B6B6B] mt-1">Applications web performantes et SEO-friendly</div>
         </a>
         <a href="/creation-site-wordpress" class="reveal group rounded-2xl border border-[#E5E5E5] bg-white p-6 hover:border-[#ccc] hover:shadow-lg transition-all duration-300">
           <div class="text-xs text-[#A0A0A0] uppercase tracking-wider mb-2">Service</div>
-          <div class="text-lg font-bold text-[#1A1A1A] group-hover:text-[#333] transition-colors">Creation Site WordPress</div>
-          <div class="text-sm text-[#6B6B6B] mt-1">Themes sur mesure, WooCommerce, maintenance</div>
+          <div class="text-lg font-bold text-[#1A1A1A] group-hover:text-[#333] transition-colors">Création Site WordPress</div>
+          <div class="text-sm text-[#6B6B6B] mt-1">Thèmes sur mesure, WooCommerce, maintenance</div>
         </a>
       </div>
     </div>
@@ -452,13 +452,13 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
     "dateModified": publishDate,
     "author": {
       "@type": "Person",
-      "name": "Stephane Duma",
+      "name": "Stéphane Duma",
       "url": "https://stephduma.dev",
-      "jobTitle": "Developpeur Frontend Freelance"
+      "jobTitle": "Développeur Frontend Freelance"
     },
     "publisher": {
       "@type": "ProfessionalService",
-      "name": "Stephane Duma — Developpeur Freelance",
+      "name": "Stéphane Duma — Développeur Freelance",
       "url": "https://stephduma.dev"
     },
     "mainEntityOfPage": "https://stephduma.dev/blog/migration-woocommerce-nextjs",
@@ -472,10 +472,10 @@ const description = 'WooCommerce ralentit votre business ? Decouvrez pourquoi mi
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "Pourquoi migrer de WooCommerce vers Next.js ?", "acceptedAnswer": { "@type": "Answer", "text": "Pour des performances superieures (chargement < 1s vs 3-6s), un meilleur SEO natif, des couts d'hebergement reduits, et une architecture qui scale automatiquement." } },
-      { "@type": "Question", "name": "Combien coute une migration WooCommerce vers Next.js ?", "acceptedAnswer": { "@type": "Answer", "text": "Entre 5 000 et 15 000 EUR selon le nombre de produits, la complexite du catalogue et les fonctionnalites e-commerce requises. Un audit prealable permet de chiffrer precisement." } },
-      { "@type": "Question", "name": "Est-ce que je perds mon SEO en migrant ?", "acceptedAnswer": { "@type": "Answer", "text": "Non, si la migration est faite correctement avec un plan de redirections 301 complet. Le SEO est generalement ameliore grace aux meilleures performances et au balisage structure." } },
-      { "@type": "Question", "name": "Combien de temps prend la migration ?", "acceptedAnswer": { "@type": "Answer", "text": "4 a 8 semaines en moyenne, incluant l'audit, la migration des donnees, le developpement du nouveau front, les tests et la mise en production." } }
+      { "@type": "Question", "name": "Pourquoi migrer de WooCommerce vers Next.js ?", "acceptedAnswer": { "@type": "Answer", "text": "Pour des performances supérieures (chargement < 1s vs 3-6s), un meilleur SEO natif, des coûts d'hébergement réduits, et une architecture qui scale automatiquement." } },
+      { "@type": "Question", "name": "Combien coûte une migration WooCommerce vers Next.js ?", "acceptedAnswer": { "@type": "Answer", "text": "Entre 5 000 et 15 000 EUR selon le nombre de produits, la complexité du catalogue et les fonctionnalités e-commerce requises. Un audit préalable permet de chiffrer précisément." } },
+      { "@type": "Question", "name": "Est-ce que je perds mon SEO en migrant ?", "acceptedAnswer": { "@type": "Answer", "text": "Non, si la migration est faite correctement avec un plan de redirections 301 complet. Le SEO est généralement amélioré grâce aux meilleures performances et au balisage structuré." } },
+      { "@type": "Question", "name": "Combien de temps prend la migration ?", "acceptedAnswer": { "@type": "Answer", "text": "4 à 8 semaines en moyenne, incluant l'audit, la migration des données, le développement du nouveau front, les tests et la mise en production." } }
     ]
   })} />
 
