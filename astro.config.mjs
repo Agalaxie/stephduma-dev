@@ -16,7 +16,4 @@ export default defineConfig({
     lastmod: new Date(),
     priority: 0.7,
   })],
-  redirects: {
-    '/sitemap.xml': '/sitemap-index.xml'
-  }
 });
