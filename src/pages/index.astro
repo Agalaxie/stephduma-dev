@@ -980,8 +980,8 @@ import '../styles/global.css';
 
       const animate = () => {
         requestAnimationFrame(animate);
-        autoRotY += isMobile ? 0.008 : 0.003;
-        autoRotX += isMobile ? 0.002 : 0;
+        autoRotY += isMobile ? 0.003 : 0.003;
+        autoRotX += isMobile ? 0.0008 : 0;
         sphere.rotation.y = autoRotY + targetRotY * 0.3;
         sphere.rotation.x = autoRotX + targetRotX * 0.3;
         sphere2.rotation.y = autoRotY * 0.7 + targetRotY * 0.2;
