@@ -974,15 +974,17 @@ import '../styles/global.css';
       }, { passive: true });
 
       const isMobile = window.matchMedia('(max-width: 767px)').matches;
-      const baseSpeed = isMobile ? 0.006 : 0.002;
-      const baseSpeed2 = isMobile ? 0.004 : 0.001;
+      let autoRotY = 0;
+      let autoRotX = 0;
 
       const animate = () => {
         requestAnimationFrame(animate);
-        sphere.rotation.y += (targetRotY - sphere.rotation.y) * 0.02 + baseSpeed;
-        sphere.rotation.x += (targetRotX - sphere.rotation.x) * 0.02 + (isMobile ? 0.001 : 0);
-        sphere2.rotation.y += (targetRotY - sphere2.rotation.y) * 0.015 + baseSpeed2;
-        sphere2.rotation.x += (targetRotX - sphere2.rotation.x) * 0.015;
+        autoRotY += isMobile ? 0.008 : 0.003;
+        autoRotX += isMobile ? 0.002 : 0;
+        sphere.rotation.y = autoRotY + targetRotY * 0.3;
+        sphere.rotation.x = autoRotX + targetRotX * 0.3;
+        sphere2.rotation.y = autoRotY * 0.7 + targetRotY * 0.2;
+        sphere2.rotation.x = (Math.PI / 4) + autoRotX * 0.5 + targetRotX * 0.2;
         renderer.render(scene, camera);
       };
       animate();
