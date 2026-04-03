@@ -929,7 +929,8 @@ import '../styles/global.css';
       camera.position.z = 4;
 
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      renderer.setSize(450, 450);
+      const globeSize = Math.min(globeContainer.clientWidth, globeContainer.clientHeight) || 450;
+      renderer.setSize(globeSize, globeSize);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       globeContainer.appendChild(renderer.domElement);
 
