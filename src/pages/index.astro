@@ -965,6 +965,12 @@ import '../styles/global.css';
         targetRotY = ((e.clientX - rect.left) / rect.width - 0.5) * 1.5;
         targetRotX = ((e.clientY - rect.top) / rect.height - 0.5) * -1;
       });
+      heroSection?.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const rect = heroSection.getBoundingClientRect();
+        targetRotY = ((touch.clientX - rect.left) / rect.width - 0.5) * 1.5;
+        targetRotX = ((touch.clientY - rect.top) / rect.height - 0.5) * -1;
+      }, { passive: true });
 
       const animate = () => {
         requestAnimationFrame(animate);
