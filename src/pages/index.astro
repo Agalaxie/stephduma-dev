@@ -394,7 +394,7 @@ import '../styles/global.css';
         ].map(service => (
           <a href={service.href} class={`reveal rounded-2xl transition-all duration-300 group flex flex-col justify-between min-h-[240px] p-8 md:p-10 ${service.dark ? 'bg-[#141414] text-white hover:bg-[#1a1a1a]' : 'border border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#ccc] hover:shadow-lg'}`}>
             <div class="flex items-start justify-between">
-              <h3 class="text-xl font-bold">{service.title}</h3>
+              <h3 class={`text-xl font-bold ${service.dark ? 'text-white' : ''}`}>{service.title}</h3>
               <div class={`w-10 h-10 rounded-full border flex items-center justify-center flex-shrink-0 group-hover:translate-x-1 transition-transform duration-300 ${service.dark ? 'bg-white/10 border-white/20' : 'border-[#E5E5E5]'}`}>
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class={service.dark ? 'text-white/70' : 'text-[#6B6B6B]'}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </div>
@@ -509,11 +509,11 @@ import '../styles/global.css';
         </div>
       </div>
 
-      <!-- PROJECT 2 : Campagne Présidentielle 2022 -->
+      <!-- PROJECT 2 : Campagne Présidentielle 2022 — TEMPORAIREMENT MASQUÉ (en attente d'autorisation) -->
+      <!--
       <div class="reveal mb-6">
         <div class="rounded-2xl border border-[#E5E5E5] hover:border-[#ccc] hover:shadow-xl transition-all duration-500 bg-[#FAFAF8] overflow-hidden">
           <div class="p-8 md:p-10">
-            <!-- Header -->
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
               <div class="flex items-center gap-4">
                 <div class="w-11 h-11 rounded-xl bg-[#DC2626]/10 border border-[#DC2626]/20 flex items-center justify-center text-xl">&#127963;</div>
@@ -525,16 +525,13 @@ import '../styles/global.css';
                 <span class="text-[10px] font-medium px-3 py-1.5 rounded-full border border-[#E5E5E5] text-[#6B6B6B] uppercase tracking-wider">Haute visibilité</span>
               </div>
             </div>
-            <!-- Title -->
             <h3 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-3">Dispositifs Digitaux — Campagne Présidentielle 2022</h3>
             <p class="text-[#6B6B6B] text-base leading-relaxed mb-8 max-w-3xl">Déploiement et stabilisation des plateformes web de campagne dans un contexte de délais critiques et de forte visibilité médiatique.</p>
-            <!-- Meta -->
             <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm mb-8">
               <div><span class="text-[#A0A0A0] text-xs uppercase tracking-wider">Client</span><div class="text-[#1A1A1A] font-medium mt-0.5">Candidats majeurs</div></div>
               <div><span class="text-[#A0A0A0] text-xs uppercase tracking-wider">Rôle</span><div class="text-[#1A1A1A] font-medium mt-0.5">Lead Dev WordPress / Intégrateur</div></div>
               <div><span class="text-[#A0A0A0] text-xs uppercase tracking-wider">Année</span><div class="text-[#1A1A1A] font-medium mt-0.5">2022</div></div>
             </div>
-            <!-- Stats -->
             <div class="grid grid-cols-3 gap-4 mb-8">
               <div class="text-center p-4 rounded-xl bg-white border border-[#E5E5E5]">
                 <div class="serif-italic text-3xl md:text-4xl text-[#1A1A1A]">2+</div>
@@ -549,7 +546,6 @@ import '../styles/global.css';
                 <div class="text-xs text-[#6B6B6B] mt-1">Downtime pics média</div>
               </div>
             </div>
-            <!-- Achievements -->
             <div class="grid md:grid-cols-2 gap-3">
               {[
                 { label: 'Intégration Pixel Perfect & Responsive', detail: 'Ajustements UX/UI en cycles courts lors des pics d\'audience' },
@@ -566,7 +562,6 @@ import '../styles/global.css';
                 </div>
               ))}
             </div>
-            <!-- Tech -->
             <div class="flex flex-wrap gap-2 mt-6">
               {['WordPress', 'Fluent Forms', 'Google Maps API', 'CSS3 Custom'].map(tech => (
                 <span class="text-[11px] text-[#6B6B6B] px-3 py-1.5 rounded-full border border-[#E5E5E5] bg-[#F7F7F7]">{tech}</span>
@@ -575,6 +570,7 @@ import '../styles/global.css';
           </div>
         </div>
       </div>
+      -->
 
       <!-- PROJECT 3 : Malt Freelance -->
       <div class="reveal mb-6">
