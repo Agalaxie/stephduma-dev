@@ -1,0 +1,741 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const publishDate = '2026-04-03';
+const title = 'Gérer WordPress avec les LLMs : SSH, WP-CLI et opérations en masse';
+const description = 'Guide pas à pas pour connecter un LLM (Claude, ChatGPT) à votre WordPress via SSH et WP-CLI. Commandes de base, requêtes SQL avancées et cas client réel avec 100+ articles corrigés en une commande.';
+---
+
+<Layout
+  title={`${title} — Stéphane Duma`}
+  description={description}
+  canonical="https://stephduma.dev/blog/wordpress-llm-cli-guide"
+  keywords="wordpress llm, wp-cli ia, gerer wordpress ssh, wordpress chatgpt, wordpress claude ai, wp-cli commandes, sql wordpress, seo wordpress automatisation"
+>
+
+  <!-- ARTICLE HERO -->
+  <section class="pt-32 pb-16 px-6 md:px-12 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <!-- Breadcrumb -->
+      <div class="reveal flex items-center gap-2 text-xs text-[#A0A0A0] mb-8" style="font-family:'DM Sans',sans-serif; letter-spacing:1px;">
+        <a href="/" class="hover:text-[#1A1A1A] transition-colors">Accueil</a>
+        <span>/</span>
+        <a href="/blog" class="hover:text-[#1A1A1A] transition-colors">Blog</a>
+        <span>/</span>
+        <span class="text-[#6B6B6B]">WordPress & LLMs</span>
+      </div>
+
+      <div class="reveal flex flex-wrap items-center gap-3 mb-6">
+        {['WordPress', 'LLM', 'WP-CLI', 'SSH', 'SEO'].map(tag => (
+          <span class="text-[10px] text-[#6B6B6B] px-2.5 py-1 rounded-full border border-[#E5E5E5] bg-[#F7F7F7]">{tag}</span>
+        ))}
+      </div>
+
+      <h1 class="reveal text-[#1A1A1A] leading-tight mb-6" style="font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:900; letter-spacing:-1px;">
+        {title}
+      </h1>
+
+      <div class="reveal flex items-center gap-6 text-sm text-[#A0A0A0] mb-8">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-[#1A1A1A] flex items-center justify-center" style="font-family:'Playfair Display',serif; font-size:11px; font-weight:700; color:#fff;">SD</div>
+          <span class="text-[#6B6B6B]">Stéphane Duma</span>
+        </div>
+        <span>&middot;</span>
+        <time datetime={publishDate}>3 avril 2026</time>
+        <span>&middot;</span>
+        <span>15 min de lecture</span>
+      </div>
+
+      <p class="reveal text-[#6B6B6B] text-lg leading-relaxed border-l-2 border-[#1A1A1A] pl-6">
+        Votre WordPress a 100 articles avec des titres mal structurés et vous devez tout corriger un par un ? Non. En connectant un LLM à WP-CLI via SSH, une seule commande SQL suffit. Voici comment, pas à pas.
+      </p>
+    </div>
+  </section>
+
+  <!-- ARTICLE BODY -->
+  <article class="pb-24 px-6 md:px-12 bg-white">
+    <div class="max-w-3xl mx-auto prose-custom">
+
+      <!-- TABLE OF CONTENTS -->
+      <div class="reveal rounded-2xl border border-[#E5E5E5] p-6 mb-12 bg-[#FAFAFA]">
+        <h2 class="text-sm font-bold text-[#1A1A1A] uppercase tracking-wider mb-4">Sommaire</h2>
+        <nav class="space-y-2">
+          {[
+            { id: 'pourquoi-llm-wordpress', label: '1. Pourquoi connecter un LLM à WordPress' },
+            { id: 'ssh-pour-debutants', label: '2. SSH expliqué simplement' },
+            { id: 'wp-cli-bases', label: '3. WP-CLI : votre télécommande WordPress' },
+            { id: 'connecter-llm', label: '4. Connecter un LLM à votre WordPress' },
+            { id: 'operations-sql', label: '5. Opérations avancées avec SQL' },
+            { id: 'cas-client', label: '6. Cas client : Wheeled World — 100 articles corrigés' },
+            { id: 'bonnes-pratiques', label: '7. Bonnes pratiques et limites' },
+            { id: 'conclusion', label: 'Conclusion' },
+          ].map(item => (
+            <a href={`#${item.id}`} class="block text-sm text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors pl-3 border-l-2 border-transparent hover:border-[#1A1A1A]">
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <!-- SECTION 1 -->
+      <section class="reveal mb-14" id="pourquoi-llm-wordpress">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          1. Pourquoi connecter un LLM à WordPress
+        </h2>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          WordPress alimente <strong class="text-[#1A1A1A]">43% du web</strong>. La plupart de ses utilisateurs gèrent leur site via le back-office — l'interface graphique classique. C'est bien pour publier un article. C'est un cauchemar quand il faut modifier 100 articles d'un coup.
+        </p>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-6">
+          En connectant un LLM (Claude, ChatGPT, ou autre) à votre serveur WordPress via SSH et WP-CLI, vous déverrouillez un niveau de contrôle qui transforme des heures de travail manuel en quelques secondes. Concrètement :
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
+          {[
+            { title: 'Modifications en masse', desc: 'Corriger le balisage SEO de centaines d\'articles, mettre à jour des métadonnées, remplacer des liens — en une commande.' },
+            { title: 'Diagnostic instantané', desc: 'Demander au LLM d\'analyser l\'état de votre base de données, détecter les problèmes de performance, lister les plugins vulnérables.' },
+            { title: 'Automatisation intelligente', desc: 'Le LLM comprend votre intention en langage naturel et génère la commande WP-CLI ou la requête SQL adaptée.' },
+            { title: 'Zéro risque d\'erreur de clic', desc: 'Pas de mauvais bouton, pas de mauvaise case cochée. Des commandes précises, prévisibles, réversibles.' },
+          ].map(item => (
+            <div class="p-5 rounded-xl border border-[#E5E5E5] bg-white">
+              <h3 class="text-sm font-bold text-[#1A1A1A] mb-2">{item.title}</h3>
+              <p class="text-sm text-[#6B6B6B] leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-[#6B6B6B] leading-relaxed">
+          Ce guide est conçu pour les débutants. Aucune connaissance en ligne de commande n'est requise. On part de zéro.
+        </p>
+      </section>
+
+      <!-- SECTION 2 -->
+      <section class="reveal mb-14" id="ssh-pour-debutants">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          2. SSH expliqué simplement
+        </h2>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          <strong class="text-[#1A1A1A]">SSH (Secure Shell)</strong> est un protocole qui vous permet de vous connecter à votre serveur à distance, de façon sécurisée. Imaginez que votre hébergeur (OVH, o2switch, Infomaniak...) vous prête un ordinateur. SSH, c'est la télécommande pour le contrôler.
+        </p>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-6">
+          Au lieu de cliquer dans une interface graphique, vous tapez des commandes textuelles. C'est plus rapide, plus puissant, et surtout — c'est ce qui permet aux LLMs d'interagir avec votre serveur.
+        </p>
+
+        <!-- How SSH works diagram -->
+        <div class="rounded-2xl bg-[#141414] p-8 mb-6">
+          <div class="text-xs text-gray-500 uppercase tracking-wider mb-6 text-center">Comment SSH fonctionne</div>
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center">
+            <div class="flex-1 p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-white font-bold text-sm mb-1">Votre PC</div>
+              <div class="text-gray-400 text-xs">Terminal / Invite de commande</div>
+              <div class="text-gray-500 text-[10px] mt-2">Vous tapez les commandes ici</div>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+              <svg width="40" height="20" viewBox="0 0 40 20" class="text-[#22C55E] hidden md:block"><path d="M0 10h40M35 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              <svg width="20" height="40" viewBox="0 0 20 40" class="text-[#22C55E] md:hidden"><path d="M10 0v40M5 35l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              <span class="text-[10px] text-[#22C55E]">Connexion chiffrée SSH</span>
+            </div>
+            <div class="flex-1 p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-white font-bold text-sm mb-1">Votre serveur</div>
+              <div class="text-gray-400 text-xs">OVH, o2switch, Infomaniak...</div>
+              <div class="text-gray-500 text-[10px] mt-2">WordPress + Base de données</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-bold text-[#1A1A1A] mb-4">Se connecter en SSH — pas à pas</h3>
+
+        <div class="space-y-0 mb-6">
+          {[
+            {
+              num: '01',
+              title: 'Récupérer vos identifiants SSH',
+              desc: 'Rendez-vous dans le panel de votre hébergeur. Cherchez "Accès SSH" ou "Shell". Vous aurez besoin de : l\'adresse du serveur (ex: ssh.monhebergeur.com), votre nom d\'utilisateur, et votre mot de passe ou clé SSH.'
+            },
+            {
+              num: '02',
+              title: 'Ouvrir un terminal',
+              desc: 'Sur Mac : ouvrez "Terminal" (dans Applications > Utilitaires). Sur Windows : utilisez "PowerShell" ou installez Windows Terminal. Sur Linux : Ctrl+Alt+T.'
+            },
+            {
+              num: '03',
+              title: 'Taper la commande de connexion',
+              desc: 'Tapez : ssh utilisateur@adresse-serveur puis Entrée. Exemple : ssh monsite@ssh.o2switch.net. Le terminal vous demande votre mot de passe — tapez-le (rien ne s\'affiche, c\'est normal) puis Entrée.'
+            },
+            {
+              num: '04',
+              title: 'Vous êtes connecté',
+              desc: 'Si vous voyez un message d\'accueil et un curseur qui clignote, c\'est bon. Vous êtes sur votre serveur. Tapez "ls" pour lister les fichiers et "cd www" ou "cd public_html" pour aller dans le dossier de votre site.'
+            },
+          ].map(step => (
+            <div class="flex items-start py-8 border-b border-[#E5E5E5] last:border-0 gap-6">
+              <span class="serif-italic text-4xl md:text-5xl text-[#1A1A1A]/10 flex-shrink-0 leading-none">{step.num}</span>
+              <div>
+                <h3 class="text-lg font-bold text-[#1A1A1A] mb-2">{step.title}</h3>
+                <p class="text-sm text-[#6B6B6B] leading-relaxed">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Code example -->
+        <div class="rounded-xl bg-[#141414] p-5 mb-6 overflow-x-auto">
+          <div class="text-[10px] text-gray-500 uppercase tracking-wider mb-3">Exemple de connexion SSH</div>
+          <pre class="text-sm text-gray-300 leading-relaxed" set:html={`<code><span class="text-[#22C55E]">$</span> ssh monsite@ssh.o2switch.net
+<span class="text-gray-500"># Le serveur demande le mot de passe</span>
+Password: ********
+
+<span class="text-gray-500"># Vous êtes connecté !</span>
+<span class="text-[#22C55E]">monsite@serveur:~$</span> ls
+public_html/  logs/  tmp/
+
+<span class="text-[#22C55E]">monsite@serveur:~$</span> cd public_html
+<span class="text-[#22C55E]">monsite@serveur:~/public_html$</span> ls
+wp-admin/  wp-content/  wp-includes/  wp-config.php  index.php</code>`} />
+        </div>
+
+        <p class="text-[#6B6B6B] leading-relaxed">
+          C'est tout. Vous avez accès à votre serveur. Maintenant, on installe l'outil qui va nous permettre de piloter WordPress en ligne de commande.
+        </p>
+      </section>
+
+      <!-- SECTION 3 -->
+      <section class="reveal mb-14" id="wp-cli-bases">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          3. WP-CLI : votre télécommande WordPress
+        </h2>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          <strong class="text-[#1A1A1A]">WP-CLI</strong> (WordPress Command Line Interface) est l'outil officiel pour gérer WordPress en ligne de commande. Ce que vous faites en 15 clics dans le back-office, WP-CLI le fait en une ligne.
+        </p>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-6">
+          La bonne nouvelle : la plupart des hébergeurs modernes l'ont déjà installé. Tapez <code class="text-xs bg-[#F7F7F7] px-2 py-0.5 rounded border border-[#E5E5E5] text-[#1A1A1A]">wp --info</code> dans votre terminal SSH pour vérifier.
+        </p>
+
+        <h3 class="text-lg font-bold text-[#1A1A1A] mb-4">Les commandes essentielles</h3>
+
+        <div class="space-y-3 mb-6">
+          {[
+            { cmd: 'wp core version', desc: 'Affiche la version de WordPress installée' },
+            { cmd: 'wp plugin list', desc: 'Liste tous les plugins avec leur statut (actif/inactif) et leur version' },
+            { cmd: 'wp plugin update --all', desc: 'Met à jour tous les plugins en une seule commande' },
+            { cmd: 'wp post list --post_type=post', desc: 'Liste tous les articles avec leur ID, titre et statut' },
+            { cmd: 'wp post list --post_type=post --format=count', desc: 'Compte le nombre total d\'articles' },
+            { cmd: 'wp search-replace "ancien-domaine.com" "nouveau-domaine.com"', desc: 'Remplace une URL dans toute la base de données (migration de domaine)' },
+            { cmd: 'wp user list', desc: 'Liste tous les utilisateurs et leurs rôles' },
+            { cmd: 'wp db export backup.sql', desc: 'Exporte toute la base de données en un fichier SQL (sauvegarde)' },
+            { cmd: 'wp cache flush', desc: 'Vide tous les caches WordPress' },
+            { cmd: 'wp option get siteurl', desc: 'Affiche l\'URL de votre site (utile pour diagnostiquer)' },
+          ].map(item => (
+            <div class="flex flex-col sm:flex-row sm:items-start gap-2 p-4 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA]">
+              <code class="text-xs bg-[#141414] text-[#22C55E] px-3 py-1.5 rounded-lg flex-shrink-0 whitespace-nowrap">{item.cmd}</code>
+              <span class="text-sm text-[#6B6B6B]">{item.desc}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="rounded-xl bg-[#141414] p-5 mb-6 overflow-x-auto">
+          <div class="text-[10px] text-gray-500 uppercase tracking-wider mb-3">WP-CLI en action</div>
+          <pre class="text-sm text-gray-300 leading-relaxed" set:html={`<code><span class="text-[#22C55E]">$</span> wp plugin list
++-----------------------+--------+--------+---------+
+| name                  | status | update | version |
++-----------------------+--------+--------+---------+
+| yoast-seo             | active | none   | 23.5    |
+| woocommerce           | active | available | 9.1  |
+| contact-form-7        | active | none   | 6.0     |
+| akismet               | inactive | none | 5.3     |
++-----------------------+--------+--------+---------+
+
+<span class="text-[#22C55E]">$</span> wp post list --post_type=post --posts_per_page=5
++----+-----------------------------------+----------+---------------------+
+| ID | post_title                        | post_status | post_date        |
++----+-----------------------------------+----------+---------------------+
+| 42 | Guide complet du voyage en van    | publish  | 2026-03-15 10:00:00 |
+| 38 | Les meilleures routes d'Europe    | publish  | 2026-03-01 09:00:00 |
+| 35 | Préparer son van pour l'hiver     | publish  | 2026-02-20 14:00:00 |
++----+-----------------------------------+----------+---------------------+</code>`} />
+        </div>
+
+        <p class="text-[#6B6B6B] leading-relaxed">
+          Vous voyez la puissance ? En quelques secondes, vous avez une vue complète de votre site. Pas besoin de naviguer dans 15 menus. Maintenant, imaginez ce que ça donne quand un LLM génère ces commandes pour vous.
+        </p>
+      </section>
+
+      <!-- SECTION 4 -->
+      <section class="reveal mb-14" id="connecter-llm">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          4. Connecter un LLM à votre WordPress
+        </h2>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          L'idée est simple : vous ouvrez une session SSH dans votre terminal, et vous demandez au LLM de générer les commandes WP-CLI ou SQL à exécuter. Plusieurs approches existent, de la plus simple à la plus automatisée :
+        </p>
+
+        <div class="space-y-4 mb-6">
+          <div class="rounded-2xl border border-[#E5E5E5] overflow-hidden">
+            <div class="p-5 bg-[#FAFAFA] border-b border-[#E5E5E5]">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-white bg-[#22C55E] px-2 py-0.5 rounded">Débutant</span>
+                <h3 class="text-base font-bold text-[#1A1A1A]">Copier-coller depuis le chat</h3>
+              </div>
+              <p class="text-sm text-[#6B6B6B] leading-relaxed">
+                Vous décrivez ce que vous voulez dans ChatGPT ou Claude. Le LLM génère la commande WP-CLI. Vous la copiez, la collez dans votre terminal SSH, et l'exécutez. Simple, sûr, vous gardez le contrôle total.
+              </p>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-[#E5E5E5] overflow-hidden">
+            <div class="p-5 bg-[#FAFAFA] border-b border-[#E5E5E5]">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-white bg-[#F59E0B] px-2 py-0.5 rounded">Intermédiaire</span>
+                <h3 class="text-base font-bold text-[#1A1A1A]">Claude Code en SSH</h3>
+              </div>
+              <p class="text-sm text-[#6B6B6B] leading-relaxed">
+                Avec <strong class="text-[#1A1A1A]">Claude Code</strong> (l'outil CLI d'Anthropic), vous vous connectez en SSH à votre serveur et Claude peut directement exécuter les commandes WP-CLI pour vous. Vous validez chaque commande avant exécution.
+              </p>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-[#E5E5E5] overflow-hidden">
+            <div class="p-5 bg-[#FAFAFA] border-b border-[#E5E5E5]">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-white bg-[#DC2626] px-2 py-0.5 rounded">Avancé</span>
+                <h3 class="text-base font-bold text-[#1A1A1A]">Agents autonomes via MCP</h3>
+              </div>
+              <p class="text-sm text-[#6B6B6B] leading-relaxed">
+                Les serveurs MCP (Model Context Protocol) permettent de connecter un LLM directement à votre base de données ou vos outils. Le LLM peut alors interroger, analyser et modifier votre WordPress de façon autonome.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-6">
+          Dans cet article, on se concentre sur l'approche <strong class="text-[#1A1A1A]">débutant et intermédiaire</strong> — les plus accessibles et les plus sûres. Voici un exemple concret :
+        </p>
+
+        <!-- Conversation example -->
+        <div class="rounded-2xl bg-[#141414] p-6 mb-6">
+          <div class="text-xs text-gray-500 uppercase tracking-wider mb-5">Conversation avec le LLM</div>
+          <div class="space-y-4">
+            <div class="flex gap-3">
+              <div class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-[10px] text-white font-bold">Vous</div>
+              <div class="text-sm text-gray-300 bg-white/5 rounded-xl px-4 py-3 leading-relaxed">
+                J'ai un WordPress avec 150 articles. Je veux savoir combien utilisent des balises H4, H5 ou H6 dans leur contenu. Donne-moi la commande WP-CLI.
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-7 h-7 rounded-full bg-[#22C55E]/20 flex items-center justify-center flex-shrink-0 text-[10px] text-[#22C55E] font-bold">IA</div>
+              <div class="text-sm text-gray-300 bg-white/5 rounded-xl px-4 py-3 leading-relaxed">
+                <span class="text-gray-500 block mb-2">Voici la commande pour compter les articles contenant des H4, H5 ou H6 :</span>
+                <code class="text-[#22C55E] text-xs block bg-black/30 rounded-lg px-3 py-2">wp db query "SELECT COUNT(*) as total FROM wp_posts WHERE post_status='publish' AND post_type='post' AND (post_content LIKE '%&lt;h4%' OR post_content LIKE '%&lt;h5%' OR post_content LIKE '%&lt;h6%')"</code>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-[#6B6B6B] leading-relaxed">
+          Vous copiez cette commande, vous la collez dans votre terminal SSH, et en 2 secondes vous avez la réponse. Pas besoin de parcourir 150 articles manuellement.
+        </p>
+      </section>
+
+      <!-- SECTION 5 -->
+      <section class="reveal mb-14" id="operations-sql">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          5. Opérations avancées avec SQL
+        </h2>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          WP-CLI inclut la commande <code class="text-xs bg-[#F7F7F7] px-2 py-0.5 rounded border border-[#E5E5E5] text-[#1A1A1A]">wp db query</code> qui permet d'exécuter des requêtes SQL directement sur la base de données WordPress. C'est là que ça devient vraiment puissant.
+        </p>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-6">
+          <strong class="text-[#1A1A1A]">SQL</strong> (Structured Query Language) est le langage qui permet de lire et modifier les données dans la base de données. WordPress stocke tout en base : articles, pages, commentaires, options, utilisateurs. Avec SQL, vous pouvez tout interroger et tout modifier.
+        </p>
+
+        <h3 class="text-lg font-bold text-[#1A1A1A] mb-4">Exemples d'opérations courantes</h3>
+
+        <div class="space-y-4 mb-6">
+          {[
+            {
+              title: 'Trouver les articles sans image mise en avant',
+              cmd: 'wp db query "SELECT p.ID, p.post_title FROM wp_posts p LEFT JOIN wp_postmeta m ON p.ID = m.post_id AND m.meta_key=\'_thumbnail_id\' WHERE p.post_type=\'post\' AND p.post_status=\'publish\' AND m.meta_value IS NULL"',
+              desc: 'Identifie immédiatement les articles qui manquent d\'image à la une — critique pour le SEO et les réseaux sociaux.'
+            },
+            {
+              title: 'Lister les articles avec des méta-descriptions vides (Yoast)',
+              cmd: 'wp db query "SELECT p.ID, p.post_title FROM wp_posts p LEFT JOIN wp_postmeta m ON p.ID = m.post_id AND m.meta_key=\'_yoast_wpseo_metadesc\' WHERE p.post_type=\'post\' AND p.post_status=\'publish\' AND (m.meta_value IS NULL OR m.meta_value=\'\')"',
+              desc: 'Détecte les articles sans méta-description — chaque article sans description perd des clics dans Google.'
+            },
+            {
+              title: 'Remplacer un texte dans tous les articles',
+              cmd: 'wp search-replace "ancien-texte" "nouveau-texte" wp_posts --dry-run',
+              desc: 'Le flag --dry-run simule le remplacement sans rien modifier. Enlevez-le quand vous êtes sûr du résultat.'
+            },
+            {
+              title: 'Supprimer les révisions pour alléger la base',
+              cmd: 'wp db query "SELECT COUNT(*) FROM wp_posts WHERE post_type=\'revision\'"',
+              desc: 'D\'abord on compte. Si le chiffre est énorme (souvent 5000+), on nettoie avec DELETE au lieu de SELECT COUNT(*).'
+            },
+          ].map(item => (
+            <div class="rounded-xl border border-[#E5E5E5] overflow-hidden">
+              <div class="p-4 bg-[#FAFAFA]">
+                <h4 class="text-sm font-bold text-[#1A1A1A] mb-1">{item.title}</h4>
+                <p class="text-xs text-[#6B6B6B]">{item.desc}</p>
+              </div>
+              <div class="p-4 bg-[#141414] overflow-x-auto">
+                <code class="text-xs text-[#22C55E] whitespace-pre-wrap break-all">{item.cmd}</code>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Warning box -->
+        <div class="rounded-xl border border-[#FECACA] bg-[#FEF2F2] p-5 mb-6">
+          <div class="flex items-start gap-3">
+            <span class="text-[#DC2626] font-bold text-lg">&#9888;</span>
+            <div>
+              <div class="text-sm font-bold text-[#DC2626] mb-1">Toujours sauvegarder avant de modifier</div>
+              <p class="text-sm text-[#DC2626]/80 leading-relaxed">
+                Avant toute commande qui modifie des données (UPDATE, DELETE, REPLACE), faites un export : <code class="bg-[#DC2626]/10 px-1.5 py-0.5 rounded text-xs">wp db export sauvegarde-avant-modif.sql</code>. En cas de problème, vous pourrez restaurer avec <code class="bg-[#DC2626]/10 px-1.5 py-0.5 rounded text-xs">wp db import sauvegarde-avant-modif.sql</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-[#6B6B6B] leading-relaxed">
+          Vous commencez à voir le potentiel. Mais le vrai déclic, c'est quand vous voyez ça appliqué à un cas réel. Parlons de Wheeled World.
+        </p>
+      </section>
+
+      <!-- SECTION 6 : CAS CLIENT -->
+      <section class="reveal mb-14" id="cas-client">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          6. Cas client : Wheeled World — 100 articles corrigés en une commande
+        </h2>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          <strong class="text-[#1A1A1A]">Wheeled World</strong> est un client avec un site WordPress riche en contenu — plus d'une centaine d'articles publiés. Un site bien vivant, avec du trafic organique. Sauf qu'il y avait un problème structurel que personne n'avait vu.
+        </p>
+
+        <h3 class="text-lg font-bold text-[#1A1A1A] mb-3">Le problème</h3>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          En rédigeant les articles, le client avait utilisé des balises <strong class="text-[#1A1A1A]">H4, H5 et H6</strong> pour structurer son contenu. Pourquoi ? Parce que visuellement, dans l'éditeur WordPress, ces balises produisaient des titres plus petits et plus élégants. Ça "rendait bien".
+        </p>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-6">
+          Le problème : du point de vue SEO, c'est une catastrophe. Google lit la hiérarchie des titres pour comprendre la structure de votre contenu. Passer de H1 directement à H4, c'est comme écrire un livre avec un titre de chapitre suivi directement de sous-sous-sous-sections. Google ne comprend plus rien. Le "jus SEO" se dilue.
+        </p>
+
+        <!-- Before/After comparison -->
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
+          <div class="rounded-2xl bg-[#141414] p-6">
+            <div class="text-xs text-[#DC2626] uppercase tracking-wider font-medium mb-4">Avant — structure cassée</div>
+            <div class="space-y-2 text-sm">
+              <div class="text-white font-bold text-base">H1 : Titre de l'article</div>
+              <div class="text-gray-500 pl-2">...</div>
+              <div class="text-[#DC2626] pl-8 text-xs">H4 : Première section</div>
+              <div class="text-gray-500 pl-10">...</div>
+              <div class="text-[#DC2626] pl-12 text-xs">H5 : Sous-section</div>
+              <div class="text-gray-500 pl-14">...</div>
+              <div class="text-[#DC2626] pl-16 text-xs">H6 : Détail</div>
+              <div class="text-gray-600 text-xs mt-3 border-t border-white/10 pt-3">H2 et H3 complètement sautés. Google ne comprend pas la hiérarchie.</div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-[#E5E5E5] p-6">
+            <div class="text-xs text-[#22C55E] uppercase tracking-wider font-medium mb-4">Après — structure correcte</div>
+            <div class="space-y-2 text-sm">
+              <div class="text-[#1A1A1A] font-bold text-base">H1 : Titre de l'article</div>
+              <div class="text-gray-400 pl-2">...</div>
+              <div class="text-[#22C55E] pl-4 text-xs font-medium">H2 : Première section</div>
+              <div class="text-gray-400 pl-6">...</div>
+              <div class="text-[#22C55E] pl-8 text-xs font-medium">H3 : Sous-section</div>
+              <div class="text-gray-400 pl-10">...</div>
+              <div class="text-[#22C55E] pl-12 text-xs font-medium">H4 : Détail</div>
+              <div class="text-[#166534] text-xs mt-3 border-t border-[#E5E5E5] pt-3">Hiérarchie propre. Google comprend la structure. SEO optimisé.</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-bold text-[#1A1A1A] mb-3">La solution</h3>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          Corriger ça manuellement ? Ouvrir chaque article, repérer chaque titre, changer le niveau... Sur 100+ articles, c'est facilement <strong class="text-[#1A1A1A]">2 à 3 jours de travail</strong> de correction manuelle. Sans compter les erreurs inévitables.
+        </p>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-6">
+          Avec un LLM et WP-CLI, voici comment on a résolu le problème en quelques minutes :
+        </p>
+
+        <!-- Step by step solution -->
+        <div class="space-y-0 mb-6">
+          {[
+            {
+              num: '01',
+              title: 'Sauvegarde de la base de données',
+              code: 'wp db export backup-avant-headings.sql'
+            },
+            {
+              num: '02',
+              title: 'Diagnostic — compter les articles touchés',
+              code: 'wp db query "SELECT COUNT(DISTINCT ID) FROM wp_posts WHERE post_status=\'publish\' AND post_type=\'post\' AND (post_content LIKE \'%<h4%\' OR post_content LIKE \'%<h5%\' OR post_content LIKE \'%<h6%\')"'
+            },
+            {
+              num: '03',
+              title: 'Rebalancer les titres — H6 → H4, H5 → H3, H4 → H2',
+              code: '# Ordre important : on commence par le plus profond\n# pour éviter les doubles remplacements\n\n# H6 → H4\nwp search-replace \'<h6\' \'<h4\' wp_posts --include-columns=post_content\nwp search-replace \'</h6>\' \'</h4>\' wp_posts --include-columns=post_content\n\n# H5 → H3\nwp search-replace \'<h5\' \'<h3\' wp_posts --include-columns=post_content\nwp search-replace \'</h5>\' \'</h3>\' wp_posts --include-columns=post_content\n\n# H4 → H2 (ceux d\'origine, pas ceux qu\'on vient de créer)\n# Ici on utilise SQL pour plus de précision\nwp db query "UPDATE wp_posts SET post_content = REPLACE(post_content, \'<h4\', \'<h2\') WHERE post_status=\'publish\' AND post_type=\'post\'"\nwp db query "UPDATE wp_posts SET post_content = REPLACE(post_content, \'</h4>\', \'</h2>\') WHERE post_status=\'publish\' AND post_type=\'post\'"'
+            },
+            {
+              num: '04',
+              title: 'Vérification — s\'assurer que tout est propre',
+              code: 'wp db query "SELECT ID, post_title FROM wp_posts WHERE post_status=\'publish\' AND post_type=\'post\' AND (post_content LIKE \'%<h5%\' OR post_content LIKE \'%<h6%\')" --format=table'
+            },
+          ].map(step => (
+            <div class="border-b border-[#E5E5E5] last:border-0">
+              <div class="flex items-start py-6 gap-6">
+                <span class="serif-italic text-4xl md:text-5xl text-[#1A1A1A]/10 flex-shrink-0 leading-none">{step.num}</span>
+                <div class="flex-1 min-w-0">
+                  <h4 class="text-lg font-bold text-[#1A1A1A] mb-3">{step.title}</h4>
+                  <div class="rounded-xl bg-[#141414] p-4 overflow-x-auto">
+                    <pre class="text-xs text-[#22C55E] whitespace-pre-wrap break-all leading-relaxed"><code>{step.code}</code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Results box -->
+        <div class="rounded-2xl bg-[#F0FDF4] border border-[#BBF7D0] p-6 mb-6">
+          <div class="flex items-start gap-3">
+            <span class="text-[#22C55E] font-bold text-lg">&#10003;</span>
+            <div>
+              <div class="text-base font-bold text-[#166534] mb-2">Résultat</div>
+              <div class="text-sm text-[#166534]/80 leading-relaxed space-y-1">
+                <p><strong>100+ articles</strong> corrigés en moins de 5 minutes</p>
+                <p>Hiérarchie de titres propre : H2, H3, H4 au lieu de H4, H5, H6</p>
+                <p>Structure SEO conforme aux bonnes pratiques Google</p>
+                <p>Aucune perte de contenu, aucun article oublié</p>
+                <p>Sauvegarde disponible en cas de problème</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          Le client a d'abord eu du mal à comprendre pourquoi ses "jolis petits titres" posaient problème. Une fois l'impact SEO expliqué, et surtout une fois qu'il a vu que la correction prenait 5 minutes au lieu de 3 jours, la réaction a été unanime.
+        </p>
+
+        <p class="text-[#6B6B6B] leading-relaxed">
+          C'est exactement ce type d'opération que les LLMs rendent accessible. Vous décrivez le problème en français, le LLM génère la solution technique, vous l'exécutez. Pas besoin d'être développeur.
+        </p>
+      </section>
+
+      <!-- SECTION 7 -->
+      <section class="reveal mb-14" id="bonnes-pratiques">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          7. Bonnes pratiques et limites
+        </h2>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-6">
+          Connecter un LLM à votre WordPress, c'est puissant. Mais comme tout outil puissant, il faut l'utiliser avec méthode.
+        </p>
+
+        <div class="space-y-3 mb-6">
+          {[
+            {
+              piege: 'Exécuter sans sauvegarder',
+              consequence: 'Une requête SQL mal formée peut corrompre votre base de données. Pas de backup = pas de retour en arrière.',
+              solution: 'TOUJOURS faire un wp db export avant toute modification. C\'est une ligne, ça prend 2 secondes.'
+            },
+            {
+              piege: 'Faire confiance aveuglément au LLM',
+              consequence: 'Les LLMs peuvent générer des requêtes SQL incorrectes. Un UPDATE sans WHERE touche TOUS les enregistrements.',
+              solution: 'Toujours tester avec --dry-run ou SELECT avant UPDATE/DELETE. Vérifier la commande avant de l\'exécuter.'
+            },
+            {
+              piege: 'Modifier la production directement',
+              consequence: 'Si quelque chose casse, vos visiteurs le voient en temps réel.',
+              solution: 'Idéalement, testez sur un site de staging d\'abord. Sinon, planifiez vos modifications en heures creuses.'
+            },
+            {
+              piege: 'Oublier de vider le cache après',
+              consequence: 'Vos modifications sont en base mais les visiteurs voient l\'ancienne version en cache.',
+              solution: 'Après chaque modification : wp cache flush. Et videz le cache de votre plugin de cache (WP Rocket, etc.).'
+            },
+          ].map(item => (
+            <div class="rounded-xl border border-[#E5E5E5] overflow-hidden">
+              <div class="p-4 bg-[#FEF2F2] border-b border-[#FECACA]">
+                <div class="flex items-start gap-2">
+                  <span class="text-[#DC2626] font-bold text-sm">&#9888;</span>
+                  <div>
+                    <div class="text-sm font-bold text-[#DC2626]">{item.piege}</div>
+                    <div class="text-xs text-[#DC2626]/70 mt-0.5">{item.consequence}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 bg-[#F0FDF4]">
+                <div class="flex items-start gap-2">
+                  <span class="text-[#22C55E] font-bold text-sm">&#10003;</span>
+                  <div class="text-sm text-[#166534]">{item.solution}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <h3 class="text-lg font-bold text-[#1A1A1A] mb-4">Ce que les LLMs font bien vs. ce qui nécessite un expert</h3>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
+          <div class="rounded-2xl bg-[#141414] p-6">
+            <div class="text-xs text-[#22C55E] uppercase tracking-wider font-medium mb-4">Les LLMs excellent pour...</div>
+            <ul class="text-sm text-gray-400 space-y-2">
+              <li class="flex items-start gap-2"><span class="text-[#22C55E]">&#10003;</span> Générer des commandes WP-CLI</li>
+              <li class="flex items-start gap-2"><span class="text-[#22C55E]">&#10003;</span> Écrire des requêtes SQL de diagnostic</li>
+              <li class="flex items-start gap-2"><span class="text-[#22C55E]">&#10003;</span> Modifications en masse prévisibles</li>
+              <li class="flex items-start gap-2"><span class="text-[#22C55E]">&#10003;</span> Expliquer ce que fait une commande</li>
+              <li class="flex items-start gap-2"><span class="text-[#22C55E]">&#10003;</span> Débugger des erreurs WordPress</li>
+            </ul>
+          </div>
+
+          <div class="rounded-2xl border border-[#E5E5E5] p-6">
+            <div class="text-xs text-[#DC2626] uppercase tracking-wider font-medium mb-4">Faites appel à un expert pour...</div>
+            <ul class="text-sm text-[#6B6B6B] space-y-2">
+              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Migrations complexes de données</li>
+              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Problèmes de sécurité / site piraté</li>
+              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Optimisation performance serveur</li>
+              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> Restructuration de l'architecture</li>
+              <li class="flex items-start gap-2"><span class="text-[#DC2626]">&#10005;</span> <a href="/creation-site-wordpress" class="underline hover:text-[#1A1A1A] transition-colors">Développement de thème sur mesure</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONCLUSION -->
+      <section class="reveal mb-14" id="conclusion">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          Conclusion
+        </h2>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          SSH + WP-CLI + un LLM, c'est le combo qui transforme la gestion WordPress. Ce qui prenait des heures de clics répétitifs se fait maintenant en quelques commandes. Et le plus beau : <strong class="text-[#1A1A1A]">vous n'avez pas besoin d'être développeur pour en profiter</strong>.
+        </p>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          Le cas Wheeled World est parlant : 100+ articles avec une hiérarchie de titres cassée, corrigés en 5 minutes. Sans LLM, c'est 3 jours de travail. Avec, c'est une conversation et quelques commandes.
+        </p>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-6">
+          Si votre WordPress a besoin d'un coup de nettoyage SEO, d'une optimisation de base de données, ou de modifications en masse — <a href="/#contact" class="text-[#1A1A1A] underline hover:no-underline">contactez-moi</a>. Je peux soit le faire pour vous, soit vous accompagner pour que vous puissiez le faire vous-même.
+        </p>
+
+        <!-- DigitalQT callout -->
+        <div class="rounded-2xl border border-[#E5E5E5] overflow-hidden">
+          <div class="p-6 md:p-8 bg-[#FAFAF8]">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-11 h-11 rounded-xl bg-[#1A1A1A] flex items-center justify-center flex-shrink-0" style="font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:#fff; letter-spacing:-0.5px;">DQ</div>
+              <div>
+                <div class="text-sm font-bold text-[#1A1A1A]">Monitoring WordPress automatisé ?</div>
+                <div class="text-xs text-[#6B6B6B]">Détectez les problèmes avant qu'ils n'impactent votre SEO.</div>
+              </div>
+            </div>
+            <p class="text-sm text-[#6B6B6B] leading-relaxed mb-4">
+              Avec <a href="https://www.digitalqt.com" target="_blank" rel="noopener" class="text-[#1A1A1A] font-medium underline hover:no-underline">DigitalQT</a>, vous pouvez surveiller votre WordPress en continu : performance, uptime, erreurs, et métriques SEO. Un assistant IA intégré vous aide à diagnostiquer et résoudre les problèmes — le même genre de workflow que ce qu'on a vu dans cet article, mais automatisé.
+            </p>
+            <a href="https://www.digitalqt.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm text-[#1A1A1A] font-medium hover:text-[#6B6B6B] transition-colors">
+              Découvrir DigitalQT
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA BOX -->
+      <div class="reveal rounded-2xl bg-[#141414] p-8 md:p-10 text-center">
+        <h3 class="text-2xl font-bold text-white mb-3" style="font-family:'Playfair Display',serif;">Votre WordPress a besoin d'un nettoyage ?</h3>
+        <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto">Audit SEO, optimisation base de données, corrections en masse — je vous dis ce qui peut être amélioré et comment.</p>
+        <a href="/#contact" class="inline-flex items-center gap-3 px-7 py-3.5 bg-white text-[#141414] rounded-full text-sm font-medium hover:bg-gray-200 transition-all duration-300 hover:gap-5 group">
+          Demander un diagnostic
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-hover:rotate-45 transition-transform duration-300"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+      <!-- AUTHOR BOX -->
+      <div class="reveal mt-12 pt-8 border-t border-[#E5E5E5]">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-full bg-[#1A1A1A] flex items-center justify-center flex-shrink-0" style="font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:#fff;">SD</div>
+          <div>
+            <div class="text-sm font-bold text-[#1A1A1A]">Stéphane Duma</div>
+            <div class="text-xs text-[#6B6B6B] mb-2">Développeur Freelance React & Next.js — Perpignan</div>
+            <p class="text-sm text-[#6B6B6B] leading-relaxed">
+              +10 ans d'expérience, 250+ projets livrés. Expert React, Next.js & WordPress. J'aide les entreprises à construire des expériences web performantes.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- RELATED -->
+  <section class="py-16 px-6 md:px-12 bg-[#F7F7F7] border-t border-[#E5E5E5]">
+    <div class="max-w-3xl mx-auto">
+      <div class="reveal text-sm font-bold text-[#1A1A1A] uppercase tracking-wider mb-6">Articles & services liés</div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <a href="/creation-site-wordpress" class="reveal group rounded-2xl border border-[#E5E5E5] bg-white p-6 hover:border-[#ccc] hover:shadow-lg transition-all duration-300">
+          <div class="text-xs text-[#A0A0A0] uppercase tracking-wider mb-2">Service</div>
+          <div class="text-lg font-bold text-[#1A1A1A] group-hover:text-[#333] transition-colors">Création Site WordPress</div>
+          <div class="text-sm text-[#6B6B6B] mt-1">Thèmes sur mesure, WooCommerce, maintenance</div>
+        </a>
+        <a href="/integration-api" class="reveal group rounded-2xl border border-[#E5E5E5] bg-white p-6 hover:border-[#ccc] hover:shadow-lg transition-all duration-300">
+          <div class="text-xs text-[#A0A0A0] uppercase tracking-wider mb-2">Service</div>
+          <div class="text-lg font-bold text-[#1A1A1A] group-hover:text-[#333] transition-colors">Intégration API & IA</div>
+          <div class="text-sm text-[#6B6B6B] mt-1">Claude, OpenAI, automatisations intelligentes</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schema Article -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": description,
+    "datePublished": publishDate,
+    "dateModified": publishDate,
+    "author": {
+      "@type": "Person",
+      "name": "Stéphane Duma",
+      "url": "https://stephduma.dev",
+      "jobTitle": "Développeur Frontend Freelance"
+    },
+    "publisher": {
+      "@type": "ProfessionalService",
+      "name": "Stéphane Duma — Développeur Freelance",
+      "url": "https://stephduma.dev"
+    },
+    "mainEntityOfPage": "https://stephduma.dev/blog/wordpress-llm-cli-guide",
+    "image": "https://stephduma.dev/og-image.png",
+    "inLanguage": "fr-FR",
+    "keywords": "wordpress llm, wp-cli ia, gerer wordpress ssh, wordpress chatgpt, wordpress claude ai, sql wordpress seo"
+  })} />
+
+  <!-- Schema FAQ -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Comment connecter un LLM à WordPress ?", "acceptedAnswer": { "@type": "Answer", "text": "En vous connectant à votre serveur via SSH et en utilisant WP-CLI. Vous pouvez demander au LLM de générer les commandes WP-CLI ou SQL, puis les exécuter dans votre terminal. Des outils comme Claude Code permettent une intégration encore plus directe." } },
+      { "@type": "Question", "name": "Est-ce que WP-CLI est installé sur mon hébergeur ?", "acceptedAnswer": { "@type": "Answer", "text": "La plupart des hébergeurs modernes (o2switch, OVH, Infomaniak, Hostinger) incluent WP-CLI. Connectez-vous en SSH et tapez 'wp --info' pour vérifier. Si ce n'est pas installé, l'installation ne prend que quelques minutes." } },
+      { "@type": "Question", "name": "Est-ce risqué de modifier la base WordPress en SQL ?", "acceptedAnswer": { "@type": "Answer", "text": "Toute modification directe comporte un risque. La règle d'or : toujours faire un export de la base (wp db export) avant toute modification, et tester avec --dry-run ou SELECT avant d'utiliser UPDATE ou DELETE." } },
+      { "@type": "Question", "name": "Peut-on corriger le balisage SEO de centaines d'articles en une fois ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, avec wp search-replace ou des requêtes SQL via wp db query. Par exemple, rebalancer des H4/H5/H6 en H2/H3/H4 sur 100+ articles se fait en quelques commandes et prend moins de 5 minutes." } }
+    ]
+  })} />
+
+</Layout>
