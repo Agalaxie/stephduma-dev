@@ -158,7 +158,7 @@ import '../styles/global.css';
     <div class="max-w-6xl mx-auto w-full relative z-10 flex-1 flex flex-col justify-center pt-20 pb-8">
 
       <!-- 3D Wireframe Globe (Three.js) — desktop: absolute top-right, mobile: centered below text -->
-      <div id="globe-container" class="md:absolute md:top-[10%] md:right-[-8%] md:w-[30vw] md:h-[30vw] md:max-w-[450px] md:max-h-[450px] w-[85vw] h-[85vw] max-w-[400px] max-h-[400px] mx-auto md:mx-0 z-0 pointer-events-none order-2 md:order-none -mt-2 md:mt-0 flex items-center justify-center" style="opacity:0.18;"></div>
+      <div id="globe-container" class="md:absolute md:top-[10%] md:right-[-8%] md:w-[30vw] md:h-[30vw] md:max-w-[450px] md:max-h-[450px] w-[85vw] h-[85vw] max-w-[400px] max-h-[400px] mx-auto md:mx-0 z-0 pointer-events-none order-2 md:order-none -mt-2 md:mt-0" style="opacity:0.18;"></div>
       <div id="hero-content" class="order-1 md:order-none">
         <div class="inline-flex items-center gap-2 mb-8 md:mb-10" id="badge">
           <span class="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse"></span>
@@ -929,9 +929,10 @@ import '../styles/global.css';
       camera.position.z = 4;
 
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      const globeSize = Math.min(globeContainer.clientWidth, globeContainer.clientHeight) || 450;
+      const globeSize = globeContainer.clientWidth || 450;
       renderer.setSize(globeSize, globeSize);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      renderer.domElement.style.cssText = 'width:100%!important;height:100%!important;display:block;';
       globeContainer.appendChild(renderer.domElement);
 
       const material = new THREE.MeshBasicMaterial({
