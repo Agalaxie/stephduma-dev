@@ -157,15 +157,15 @@ import '../styles/global.css';
 
     <div class="max-w-6xl mx-auto w-full relative z-10 flex-1 flex flex-col justify-center pt-20 pb-8">
 
-      <!-- 3D Wireframe Globe (Three.js) -->
-      <div id="globe-container" class="absolute top-[10%] right-[-8%] w-[55vw] h-[55vw] md:w-[30vw] md:h-[30vw] max-w-[450px] max-h-[450px] z-0 pointer-events-none" style="opacity:0.18;"></div>
-      <div id="hero-content">
-        <div class="inline-flex items-center gap-2 mb-10" id="badge">
+      <!-- 3D Wireframe Globe (Three.js) — desktop: absolute top-right, mobile: centered below text -->
+      <div id="globe-container" class="md:absolute md:top-[10%] md:right-[-8%] md:w-[30vw] md:h-[30vw] md:max-w-[450px] md:max-h-[450px] w-[65vw] h-[65vw] max-w-[320px] max-h-[320px] mx-auto md:mx-0 z-0 pointer-events-none order-2 md:order-none -mt-4 md:mt-0" style="opacity:0.18;"></div>
+      <div id="hero-content" class="order-1 md:order-none">
+        <div class="inline-flex items-center gap-2 mb-8 md:mb-10" id="badge">
           <span class="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse"></span>
           <span class="text-[#6B6B6B] font-medium" style="font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase;">DISPONIBLE POUR PROJETS</span>
         </div>
         <div>
-          <h1 class="hero-title text-[#1A1A1A] leading-[0.88]" style="font-family:'Playfair Display',serif; font-size:clamp(3.2rem,12vw,9.5rem); font-weight:900; letter-spacing:-3px;">
+          <h1 class="hero-title text-[#1A1A1A] leading-[0.88]" style="font-family:'Playfair Display',serif; font-size:clamp(3.8rem,14vw,9.5rem); font-weight:900; letter-spacing:-3px;">
             <span class="block">Développeur</span>
             <span class="inline-flex items-end gap-6">
               <span>Frontend</span>
@@ -175,7 +175,7 @@ import '../styles/global.css';
             </span>
           </h1>
         </div>
-        <p class="md:hidden text-sm text-[#6B6B6B] leading-relaxed mt-6" style="font-family:'DM Sans',sans-serif; max-width:260px;">
+        <p class="md:hidden text-sm text-[#6B6B6B] leading-relaxed mt-5" style="font-family:'DM Sans',sans-serif; max-width:280px;">
           Créateur d'expériences web qui font la différence
         </p>
       </div>
