@@ -232,7 +232,7 @@ wp-admin/  wp-content/  wp-includes/  wp-config.php  index.php</code>`} />
             { cmd: 'wp option get siteurl', desc: 'Affiche l\'URL de votre site (utile pour diagnostiquer)' },
           ].map(item => (
             <div class="flex flex-col sm:flex-row sm:items-start gap-2 p-4 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA]">
-              <code class="text-xs bg-[#141414] text-[#22C55E] px-3 py-1.5 rounded-lg flex-shrink-0 whitespace-nowrap">{item.cmd}</code>
+              <code class="text-xs bg-[#141414] text-[#22C55E] px-3 py-1.5 rounded-lg flex-shrink-0 sm:whitespace-nowrap overflow-x-auto max-w-full block">{item.cmd}</code>
               <span class="text-sm text-[#6B6B6B]">{item.desc}</span>
             </div>
           ))}
@@ -331,7 +331,7 @@ wp-admin/  wp-content/  wp-includes/  wp-config.php  index.php</code>`} />
               <div class="w-7 h-7 rounded-full bg-[#22C55E]/20 flex items-center justify-center flex-shrink-0 text-[10px] text-[#22C55E] font-bold">IA</div>
               <div class="text-sm text-gray-300 bg-white/5 rounded-xl px-4 py-3 leading-relaxed">
                 <span class="text-gray-500 block mb-2">Voici la commande pour compter les articles contenant des H4, H5 ou H6 :</span>
-                <code class="text-[#22C55E] text-xs block bg-black/30 rounded-lg px-3 py-2">wp db query "SELECT COUNT(*) as total FROM wp_posts WHERE post_status='publish' AND post_type='post' AND (post_content LIKE '%&lt;h4%' OR post_content LIKE '%&lt;h5%' OR post_content LIKE '%&lt;h6%')"</code>
+                <code class="text-[#22C55E] text-xs block bg-black/30 rounded-lg px-3 py-2 overflow-x-auto break-all">wp db query "SELECT COUNT(*) as total FROM wp_posts WHERE post_status='publish' AND post_type='post' AND (post_content LIKE '%&lt;h4%' OR post_content LIKE '%&lt;h5%' OR post_content LIKE '%&lt;h6%')"</code>
               </div>
             </div>
           </div>
