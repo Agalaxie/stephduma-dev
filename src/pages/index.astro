@@ -972,11 +972,15 @@ import '../styles/global.css';
         targetRotX = ((touch.clientY - rect.top) / rect.height - 0.5) * -1;
       }, { passive: true });
 
+      const isMobile = window.matchMedia('(max-width: 767px)').matches;
+      const baseSpeed = isMobile ? 0.004 : 0.002;
+      const baseSpeed2 = isMobile ? 0.002 : 0.001;
+
       const animate = () => {
         requestAnimationFrame(animate);
-        sphere.rotation.y += (targetRotY - sphere.rotation.y) * 0.02 + 0.002;
-        sphere.rotation.x += (targetRotX - sphere.rotation.x) * 0.02;
-        sphere2.rotation.y += (targetRotY - sphere2.rotation.y) * 0.015 + 0.001;
+        sphere.rotation.y += (targetRotY - sphere.rotation.y) * 0.02 + baseSpeed;
+        sphere.rotation.x += (targetRotX - sphere.rotation.x) * 0.02 + (isMobile ? 0.001 : 0);
+        sphere2.rotation.y += (targetRotY - sphere2.rotation.y) * 0.015 + baseSpeed2;
         sphere2.rotation.x += (targetRotX - sphere2.rotation.x) * 0.015;
         renderer.render(scene, camera);
       };
