@@ -394,12 +394,12 @@ import '../styles/global.css';
         ].map(service => (
           <a href={service.href} class={`reveal rounded-2xl transition-all duration-300 group flex flex-col justify-between min-h-[240px] p-8 md:p-10 ${service.dark ? 'bg-[#141414] text-white hover:bg-[#1a1a1a]' : 'border border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#ccc] hover:shadow-lg'}`}>
             <div class="flex items-start justify-between">
-              <h3 class={`text-xl font-bold ${service.dark ? 'text-white' : ''}`}>{service.title}</h3>
+              <h3 class={`text-2xl md:text-xl font-bold ${service.dark ? 'text-white' : ''}`}>{service.title}</h3>
               <div class={`w-10 h-10 rounded-full border flex items-center justify-center flex-shrink-0 group-hover:translate-x-1 transition-transform duration-300 ${service.dark ? 'bg-white/10 border-white/20' : 'border-[#E5E5E5]'}`}>
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class={service.dark ? 'text-white/70' : 'text-[#6B6B6B]'}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </div>
             </div>
-            <p class={`text-sm leading-relaxed mt-6 ${service.dark ? 'text-gray-400' : 'text-[#6B6B6B]'}`}>{service.desc}</p>
+            <p class={`text-base md:text-sm leading-relaxed mt-6 ${service.dark ? 'text-gray-400' : 'text-[#6B6B6B]'}`}>{service.desc}</p>
           </a>
         ))}
       </div>
