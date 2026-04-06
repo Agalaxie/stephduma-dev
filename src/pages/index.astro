@@ -821,51 +821,7 @@ import '../styles/global.css';
 </html>
 
 <script>
-  import gsap from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Navbar scroll — add shadow on scroll
-  const navbar = document.getElementById('navbar');
-  ScrollTrigger.create({
-    start: 'top -80',
-    onUpdate: (self) => {
-      if (self.progress > 0) {
-        navbar?.classList.add('shadow-sm', 'py-3');
-        navbar?.classList.remove('py-5');
-        (navbar as HTMLElement).style.background = '#ffffff';
-      } else {
-        navbar?.classList.remove('shadow-sm', 'py-3');
-        navbar?.classList.add('py-5');
-        (navbar as HTMLElement).style.background = '#f0f0ee';
-      }
-    }
-  });
-
-  // Hero entrance animation
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-  tl.from('#badge', { y: 20, opacity: 0, duration: 0.6 })
-    .from('.hero-title > span', { y: '100%', opacity: 0, duration: 0.8, stagger: 0.1 }, '-=0.2')
-    .from('#hero-sub', { y: 30, opacity: 0, duration: 0.7 }, '-=0.4')
-    .from('#hero-stats', { y: 20, opacity: 0, duration: 0.5 }, '-=0.3');
-
-  // Scroll reveal
-  gsap.utils.toArray('.reveal').forEach((el: any) => {
-    gsap.from(el, {
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        once: true,
-      }
-    });
-  });
-
-  // Mobile menu
+  // Mobile menu — immediate (lightweight)
   const menuBtn = document.getElementById('menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   menuBtn?.addEventListener('click', () => {
@@ -875,13 +831,47 @@ import '../styles/global.css';
     link.addEventListener('click', () => mobileMenu?.classList.add('hidden'));
   });
 
-  // Custom cursor
+  // Testimonial slider — immediate (lightweight)
+  const slides = document.querySelectorAll('.testimonial-slide');
+  const dots = document.querySelectorAll('.testimonial-dot');
+  let currentSlide = 0;
+  const totalSlides = slides.length;
+
+  function showSlide(index: number) {
+    slides.forEach((s, i) => {
+      (s as HTMLElement).classList.toggle('hidden', i !== index);
+    });
+    dots.forEach((d, i) => {
+      const span = d.querySelector('span')!;
+      span.classList.toggle('bg-[#1A1A1A]', i === index);
+      span.classList.toggle('w-6', i === index);
+      span.classList.toggle('bg-[#ccc]', i !== index);
+      span.classList.toggle('w-2', i !== index);
+    });
+    currentSlide = index;
+  }
+
+  document.getElementById('next-testimonial')?.addEventListener('click', () => {
+    showSlide((currentSlide + 1) % totalSlides);
+  });
+  document.getElementById('prev-testimonial')?.addEventListener('click', () => {
+    showSlide((currentSlide - 1 + totalSlides) % totalSlides);
+  });
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      showSlide(Number((dot as HTMLElement).dataset.index));
+    });
+  });
+  setInterval(() => showSlide((currentSlide + 1) % totalSlides), 6000);
+
+  // Custom cursor — immediate (no heavy imports)
   const cursorRing = document.getElementById('cursor-ring');
   const cursorDot = document.getElementById('cursor-dot');
-  let mouseX = 0, mouseY = 0;
-  let ringX = 0, ringY = 0;
 
   if (window.matchMedia('(pointer: fine)').matches && cursorRing && cursorDot) {
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
     document.body.style.cursor = 'none';
     document.querySelectorAll('a, button').forEach(el => {
       (el as HTMLElement).style.cursor = 'none';
@@ -920,110 +910,131 @@ import '../styles/global.css';
     cursorDot?.remove();
   }
 
-  // Three.js wireframe globe — lazy loaded
-  const globeContainer = document.getElementById('globe-container');
-  if (globeContainer) {
-    import('three').then((THREE) => {
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
-      camera.position.z = 4;
+  // Defer heavy libraries — GSAP + Three.js after first paint
+  const initHeavy = () => {
+    // GSAP animations
+    import('gsap').then(({ default: gsap }) => {
+      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+        gsap.registerPlugin(ScrollTrigger);
 
-      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      const globeSize = globeContainer.clientWidth || 450;
-      renderer.setSize(globeSize, globeSize);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-      renderer.domElement.style.cssText = 'width:100%!important;height:100%!important;display:block;';
-      globeContainer.appendChild(renderer.domElement);
+        // Navbar scroll
+        const navbar = document.getElementById('navbar');
+        ScrollTrigger.create({
+          start: 'top -80',
+          onUpdate: (self) => {
+            if (self.progress > 0) {
+              navbar?.classList.add('shadow-sm', 'py-3');
+              navbar?.classList.remove('py-5');
+              (navbar as HTMLElement).style.background = '#ffffff';
+            } else {
+              navbar?.classList.remove('shadow-sm', 'py-3');
+              navbar?.classList.add('py-5');
+              (navbar as HTMLElement).style.background = '#f0f0ee';
+            }
+          }
+        });
 
-      const material = new THREE.MeshBasicMaterial({
-        color: 0x555555,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.6,
+        // Hero entrance animation
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        tl.from('#badge', { y: 20, opacity: 0, duration: 0.6 })
+          .from('.hero-title > span', { y: '100%', opacity: 0, duration: 0.8, stagger: 0.1 }, '-=0.2')
+          .from('#hero-sub', { y: 30, opacity: 0, duration: 0.7 }, '-=0.4')
+          .from('#hero-stats', { y: 20, opacity: 0, duration: 0.5 }, '-=0.3');
+
+        // Scroll reveal
+        gsap.utils.toArray('.reveal').forEach((el: any) => {
+          gsap.from(el, {
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              once: true,
+            }
+          });
+        });
       });
-
-      const geometry = new THREE.IcosahedronGeometry(1.5, 4);
-      const sphere = new THREE.Mesh(geometry, material);
-      scene.add(sphere);
-
-      const material2 = new THREE.MeshBasicMaterial({
-        color: 0x888888,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.25,
-      });
-      const geometry2 = new THREE.IcosahedronGeometry(1.52, 2);
-      const sphere2 = new THREE.Mesh(geometry2, material2);
-      sphere2.rotation.x = Math.PI / 4;
-      sphere2.rotation.z = Math.PI / 6;
-      scene.add(sphere2);
-
-      let targetRotX = 0;
-      let targetRotY = 0;
-
-      const heroSection = globeContainer.closest('section');
-      heroSection?.addEventListener('mousemove', (e) => {
-        const rect = heroSection.getBoundingClientRect();
-        targetRotY = ((e.clientX - rect.left) / rect.width - 0.5) * 1.5;
-        targetRotX = ((e.clientY - rect.top) / rect.height - 0.5) * -1;
-      });
-      heroSection?.addEventListener('touchmove', (e) => {
-        const touch = e.touches[0];
-        const rect = heroSection.getBoundingClientRect();
-        targetRotY = ((touch.clientX - rect.left) / rect.width - 0.5) * 1.5;
-        targetRotX = ((touch.clientY - rect.top) / rect.height - 0.5) * -1;
-      }, { passive: true });
-
-      const isMobile = window.matchMedia('(max-width: 767px)').matches;
-      let autoRotY = 0;
-      let autoRotX = 0;
-
-      const animate = () => {
-        requestAnimationFrame(animate);
-        autoRotY += isMobile ? 0.003 : 0.003;
-        autoRotX += isMobile ? 0.0008 : 0;
-        sphere.rotation.y = autoRotY + targetRotY * 0.3;
-        sphere.rotation.x = autoRotX + targetRotX * 0.3;
-        sphere2.rotation.y = autoRotY * 0.7 + targetRotY * 0.2;
-        sphere2.rotation.x = (Math.PI / 4) + autoRotX * 0.5 + targetRotX * 0.2;
-        renderer.render(scene, camera);
-      };
-      animate();
     });
+
+    // Three.js wireframe globe
+    const globeContainer = document.getElementById('globe-container');
+    if (globeContainer) {
+      import('three').then((THREE) => {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+        camera.position.z = 4;
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        const globeSize = globeContainer.clientWidth || 450;
+        renderer.setSize(globeSize, globeSize);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+        renderer.domElement.style.cssText = 'width:100%!important;height:100%!important;display:block;';
+        globeContainer.appendChild(renderer.domElement);
+
+        const material = new THREE.MeshBasicMaterial({
+          color: 0x555555,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.6,
+        });
+
+        const geometry = new THREE.IcosahedronGeometry(1.5, 4);
+        const sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
+
+        const material2 = new THREE.MeshBasicMaterial({
+          color: 0x888888,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.25,
+        });
+        const geometry2 = new THREE.IcosahedronGeometry(1.52, 2);
+        const sphere2 = new THREE.Mesh(geometry2, material2);
+        sphere2.rotation.x = Math.PI / 4;
+        sphere2.rotation.z = Math.PI / 6;
+        scene.add(sphere2);
+
+        let targetRotX = 0;
+        let targetRotY = 0;
+
+        const heroSection = globeContainer.closest('section');
+        heroSection?.addEventListener('mousemove', (e) => {
+          const rect = heroSection.getBoundingClientRect();
+          targetRotY = ((e.clientX - rect.left) / rect.width - 0.5) * 1.5;
+          targetRotX = ((e.clientY - rect.top) / rect.height - 0.5) * -1;
+        });
+        heroSection?.addEventListener('touchmove', (e) => {
+          const touch = e.touches[0];
+          const rect = heroSection.getBoundingClientRect();
+          targetRotY = ((touch.clientX - rect.left) / rect.width - 0.5) * 1.5;
+          targetRotX = ((touch.clientY - rect.top) / rect.height - 0.5) * -1;
+        }, { passive: true });
+
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        let autoRotY = 0;
+        let autoRotX = 0;
+
+        const animate = () => {
+          requestAnimationFrame(animate);
+          autoRotY += isMobile ? 0.003 : 0.003;
+          autoRotX += isMobile ? 0.0008 : 0;
+          sphere.rotation.y = autoRotY + targetRotY * 0.3;
+          sphere.rotation.x = autoRotX + targetRotX * 0.3;
+          sphere2.rotation.y = autoRotY * 0.7 + targetRotY * 0.2;
+          sphere2.rotation.x = (Math.PI / 4) + autoRotX * 0.5 + targetRotX * 0.2;
+          renderer.render(scene, camera);
+        };
+        animate();
+      });
+    }
+  };
+
+  // Use requestIdleCallback to defer heavy work, fallback to setTimeout
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(initHeavy);
+  } else {
+    setTimeout(initHeavy, 200);
   }
-
-  // Testimonial slider
-  const slides = document.querySelectorAll('.testimonial-slide');
-  const dots = document.querySelectorAll('.testimonial-dot');
-  let currentSlide = 0;
-  const totalSlides = slides.length;
-
-  function showSlide(index: number) {
-    slides.forEach((s, i) => {
-      (s as HTMLElement).classList.toggle('hidden', i !== index);
-    });
-    dots.forEach((d, i) => {
-      const span = d.querySelector('span')!;
-      span.classList.toggle('bg-[#1A1A1A]', i === index);
-      span.classList.toggle('w-6', i === index);
-      span.classList.toggle('bg-[#ccc]', i !== index);
-      span.classList.toggle('w-2', i !== index);
-    });
-    currentSlide = index;
-  }
-
-  document.getElementById('next-testimonial')?.addEventListener('click', () => {
-    showSlide((currentSlide + 1) % totalSlides);
-  });
-  document.getElementById('prev-testimonial')?.addEventListener('click', () => {
-    showSlide((currentSlide - 1 + totalSlides) % totalSlides);
-  });
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      showSlide(Number((dot as HTMLElement).dataset.index));
-    });
-  });
-
-  // Auto-advance every 6s
-  setInterval(() => showSlide((currentSlide + 1) % totalSlides), 6000);
 </script>
