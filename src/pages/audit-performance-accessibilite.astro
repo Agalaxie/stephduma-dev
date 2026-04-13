@@ -96,49 +96,70 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- PROOF: MY OWN SITE -->
-  <section class="py-24 px-6 md:px-12 bg-white border-t border-[#E5E5E5]">
-    <div class="max-w-6xl mx-auto">
-      <div class="reveal mb-16">
-        <span class="section-label mb-6 inline-block">La preuve par l'exemple</span>
-        <h2 class="text-4xl md:text-[3.75rem] font-normal tracking-[-1px] text-[#1A1A1A]" style="line-height:1.1;">
-          Mon propre site :<br/>
-          <span class="serif-italic text-[#22C55E]">100 / 100 / 100 / 100</span>
+  <section class="relative py-32 px-6 md:px-12 bg-[#0A0A0A] overflow-hidden border-t border-[#1A1A1A]">
+    <!-- Ambient green glow -->
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full" style="background: radial-gradient(circle, rgba(34,197,94,0.12) 0%, rgba(34,197,94,0.04) 30%, transparent 60%);"></div>
+      <!-- Grid pattern -->
+      <div class="absolute inset-0 opacity-[0.04]" style="background-image: linear-gradient(#22C55E 1px, transparent 1px), linear-gradient(90deg, #22C55E 1px, transparent 1px); background-size: 60px 60px;"></div>
+    </div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="reveal mb-20 text-center">
+        <span class="section-label--dark mb-6 inline-block" style="display:inline-flex; border:1px solid #22C55E40; border-radius:100px; padding:6px 16px; font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:#22C55E;">La preuve par l'exemple</span>
+        <h2 class="text-4xl md:text-[4.5rem] font-normal tracking-[-2px] text-white mb-6" style="line-height:1; font-family:'Playfair Display',serif;">
+          Mon site.<br/>
+          <span class="serif-italic bg-gradient-to-r from-[#22C55E] via-[#4ADE80] to-[#22C55E] bg-clip-text text-transparent">Quatre fois cent.</span>
         </h2>
-        <p class="text-[#6B6B6B] mt-6 max-w-2xl leading-relaxed">
-          Je ne promets rien que je ne tienne sur mon propre site. Voici le rapport PageSpeed Insights de <a href="https://pagespeed.web.dev/analysis/https-stephduma-dev/cv3mcglb4j?hl=fr&form_factor=mobile" target="_blank" rel="noopener" class="underline hover:text-[#1A1A1A] transition-colors">stephduma.dev</a>, sur mobile — le test le plus exigeant de Google.
+        <p class="text-gray-400 max-w-xl mx-auto leading-relaxed">
+          Je ne promets rien que je ne tienne sur mon propre site. Rapport <a href="https://pagespeed.web.dev/analysis/https-stephduma-dev/cv3mcglb4j?hl=fr&form_factor=mobile" target="_blank" rel="noopener" class="text-[#22C55E] underline underline-offset-4 hover:text-[#4ADE80] transition-colors">PageSpeed Insights</a> officiel, sur mobile — le test le plus exigeant de Google.
         </p>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-16">
         {[
-          { label: 'Performances', score: 100 },
-          { label: 'Accessibilité', score: 100 },
-          { label: 'Bonnes pratiques', score: 100 },
-          { label: 'SEO', score: 100 },
+          { label: 'Performances', score: 100, delay: 0 },
+          { label: 'Accessibilité', score: 100, delay: 150 },
+          { label: 'Bonnes pratiques', score: 100, delay: 300 },
+          { label: 'SEO', score: 100, delay: 450 },
         ].map(s => (
-          <div class="reveal rounded-2xl border border-[#E5E5E5] bg-white p-6 md:p-8 flex flex-col items-center text-center hover:border-[#22C55E]/40 hover:shadow-lg transition-all duration-500">
-            <div class="relative w-28 h-28 md:w-36 md:h-36 mb-4">
-              <svg viewBox="0 0 120 120" class="w-full h-full">
-                <circle cx="60" cy="60" r="54" fill="none" stroke="#E5F7EB" stroke-width="6"/>
-                <circle cx="60" cy="60" r="54" fill="none" stroke="#22C55E" stroke-width="6" stroke-dasharray="339.3" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+          <div class="reveal flex flex-col items-center text-center group">
+            <div class="relative w-40 h-40 md:w-48 md:h-48 mb-6">
+              <!-- Outer glow halo -->
+              <div class="absolute inset-0 rounded-full blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" style="background: radial-gradient(circle, rgba(34,197,94,0.5) 0%, transparent 70%);"></div>
+
+              <svg viewBox="0 0 120 120" class="relative w-full h-full -rotate-90 drop-shadow-[0_0_20px_rgba(34,197,94,0.4)]">
+                <defs>
+                  <linearGradient id={`grad-${s.label}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#4ADE80"/>
+                    <stop offset="50%" stop-color="#22C55E"/>
+                    <stop offset="100%" stop-color="#16A34A"/>
+                  </linearGradient>
+                </defs>
+                <!-- Track -->
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#1A1A1A" stroke-width="4"/>
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.06"/>
+                <!-- Progress -->
+                <circle class="score-arc" cx="60" cy="60" r="52" fill="none" stroke={`url(#grad-${s.label})`} stroke-width="5" stroke-dasharray="326.73" stroke-dashoffset="326.73" stroke-linecap="round" style={`animation-delay: ${s.delay}ms;`}/>
               </svg>
+
               <div class="absolute inset-0 flex items-center justify-center">
-                <span class="text-3xl md:text-4xl font-bold text-[#22C55E]" style="font-family:'Playfair Display',serif;">{s.score}</span>
+                <span class="score-count text-5xl md:text-6xl font-bold text-white tabular-nums" style={`font-family:'Playfair Display',serif; animation-delay: ${s.delay}ms;`} data-target="100">0</span>
               </div>
             </div>
-            <div class="text-sm font-medium text-[#1A1A1A]">{s.label}</div>
+            <div class="text-xs md:text-sm uppercase tracking-[2px] text-gray-500 group-hover:text-[#22C55E] transition-colors duration-500">{s.label}</div>
           </div>
         ))}
       </div>
 
-      <div class="reveal flex flex-wrap items-center gap-3 text-xs text-[#A0A0A0]" style="font-family:'DM Sans',sans-serif; letter-spacing:0.5px;">
-        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#E5E5E5]">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#22C55E]"></span>
+      <div class="reveal flex flex-wrap items-center justify-center gap-3 text-xs text-gray-500" style="font-family:'DM Sans',sans-serif; letter-spacing:0.5px;">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#1F1F1F] bg-[#111]">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse"></span>
           PageSpeed Insights
         </span>
-        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#E5E5E5]">Mobile</span>
-        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#E5E5E5]">Rapport du 13 avr. 2026</span>
-        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#E5E5E5]">Lighthouse officiel Google</span>
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#1F1F1F] bg-[#111]">Mobile</span>
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#1F1F1F] bg-[#111]">13 avril 2026</span>
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#1F1F1F] bg-[#111]">Lighthouse officiel Google</span>
       </div>
     </div>
   </section>
@@ -427,4 +448,61 @@ import Layout from '../layouts/Layout.astro';
   .score-fill {
     animation: score-fill-animate 2s ease-out forwards;
   }
+  @keyframes score-arc-fill {
+    from { stroke-dashoffset: 326.73; }
+    to { stroke-dashoffset: 0; }
+  }
+  .score-arc {
+    animation-name: none;
+    animation-duration: 1.8s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: forwards;
+  }
+  .scores-in-view .score-arc {
+    animation-name: score-arc-fill;
+  }
+  .score-count {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .scores-in-view .score-count {
+    opacity: 1;
+  }
 </style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const section = entry.target as HTMLElement;
+      section.classList.add('scores-in-view');
+      const counters = section.querySelectorAll<HTMLElement>('.score-count');
+      counters.forEach((el) => {
+        const target = parseInt(el.dataset.target || '100', 10);
+        const delay = parseInt((el.style.animationDelay || '0ms').replace('ms', ''), 10);
+        setTimeout(() => {
+          const duration = 1600;
+          const start = performance.now();
+          const tick = (now: number) => {
+            const p = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = String(Math.round(eased * target));
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }, delay);
+      });
+      observer.unobserve(section);
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.reveal').forEach((el) => {
+    if (el.querySelector('.score-count')) {
+      const parent = el.closest('section');
+      if (parent && !parent.dataset.scoresObserved) {
+        parent.dataset.scoresObserved = 'true';
+        observer.observe(parent);
+      }
+    }
+  });
+</script>
