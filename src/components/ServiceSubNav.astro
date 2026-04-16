@@ -1,0 +1,51 @@
+---
+interface Props {
+  active: string;
+  variant?: 'light' | 'dark';
+}
+
+const { active, variant = 'light' } = Astro.props;
+
+const services = [
+  { label: 'React & Next.js', href: '/developpeur-react-nextjs' },
+  { label: 'WordPress', href: '/creation-site-wordpress' },
+  { label: 'Intégrations & APIs', href: '/integration-api' },
+  { label: 'Performance & Accessibilité', href: '/audit-performance-accessibilite' },
+];
+
+const isDark = variant === 'dark';
+---
+
+<nav class="reveal -mx-6 md:mx-0 mb-10" aria-label="Navigation services">
+  <ul class="flex gap-2 px-6 md:px-0 overflow-x-auto no-scrollbar">
+    {services.map(service => {
+      const isActive = service.href === active;
+      const base = 'inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-xs font-medium transition-all duration-300';
+      let cls;
+      if (isActive) {
+        cls = isDark
+          ? 'bg-white text-[#141414] border border-white'
+          : 'bg-[#1A1A1A] text-white border border-[#1A1A1A]';
+      } else {
+        cls = isDark
+          ? 'border border-white/15 text-gray-400 hover:border-white/40 hover:text-white'
+          : 'border border-[#E5E5E5] text-[#6B6B6B] hover:border-[#1A1A1A] hover:text-[#1A1A1A]';
+      }
+      return (
+        <li>
+          <a href={service.href} class={`${base} ${cls}`} aria-current={isActive ? 'page' : undefined}>
+            {isActive && (
+              <span class={`w-1.5 h-1.5 rounded-full ${isDark ? 'bg-[#22C55E]' : 'bg-white'}`}></span>
+            )}
+            {service.label}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+</style>

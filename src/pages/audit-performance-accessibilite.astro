@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ServiceSubNav from '../components/ServiceSubNav.astro';
 ---
 
 <Layout
@@ -26,9 +27,7 @@ import Layout from '../layouts/Layout.astro';
           <span class="text-[#1A1A1A]">Performance & Accessibilité</span>
         </div>
 
-        <div class="reveal">
-          <span class="section-label mb-8 inline-block">Performance & A11y</span>
-        </div>
+        <ServiceSubNav active="/audit-performance-accessibilite" variant="light" />
 
         <h1 class="reveal text-[#1A1A1A] leading-[0.92] mb-8" style="font-family:'Playfair Display',serif; font-size:clamp(2.8rem,8vw,7rem); font-weight:900; letter-spacing:-2px;">
           Des sites rapides,<br/>

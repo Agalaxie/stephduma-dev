@@ -358,48 +358,31 @@ import '../styles/global.css';
     </div>
   </section>
 
-  <!-- SERVICES — white bg, 2x2 grid -->
+  <!-- SERVICES — editorial list, no details -->
   <section id="services" class="py-24 px-6 md:px-12 bg-white border-t border-[#E5E5E5]">
     <div class="max-w-6xl mx-auto">
       <div class="reveal mb-16">
         <span class="section-label mb-6 inline-block">Services</span>
         <h2 class="text-4xl md:text-[3.75rem] font-normal tracking-[-1px] text-[#1A1A1A]">Ce que j'apporte</h2>
       </div>
-      <div class="grid md:grid-cols-2 gap-4">
+      <div class="border-t border-[#E5E5E5]">
         {[
-          {
-            title: 'Sites React & Next.js',
-            desc: 'Applications web performantes, SSR, SSG, SEO optimisé. Du MVP à la production, avec une architecture solide et maintenable.',
-            dark: false,
-            href: '/developpeur-react-nextjs'
-          },
-          {
-            title: 'Thèmes WordPress',
-            desc: 'Thèmes sur mesure, performants et maintenables. WooCommerce, ACF, Gutenberg. Pas de page builders, du vrai code.',
-            dark: false,
-            href: '/creation-site-wordpress'
-          },
-          {
-            title: 'Intégrations & APIs',
-            desc: 'Connexion de vos outils : Supabase, Stripe, CRMs, outils IA. Je fais parler vos systèmes entre eux.',
-            dark: true,
-            href: '/integration-api'
-          },
-          {
-            title: 'Performance & Accessibilité',
-            desc: 'Audits Core Web Vitals, optimisation images, lazy loading, accessibilité RGAA. Des sites rapides, pour tout le monde.',
-            dark: false,
-            href: '/audit-performance-accessibilite'
-          },
-        ].map(service => (
-          <a href={service.href} class={`reveal rounded-2xl transition-all duration-300 group flex flex-col justify-between min-h-[240px] p-8 md:p-10 ${service.dark ? 'bg-[#141414] text-white hover:bg-[#1a1a1a]' : 'border border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#ccc] hover:shadow-lg'}`}>
-            <div class="flex items-start justify-between">
-              <h3 class={`text-2xl md:text-xl font-bold ${service.dark ? 'text-white' : ''}`}>{service.title}</h3>
-              <div class={`w-10 h-10 rounded-full border flex items-center justify-center flex-shrink-0 group-hover:translate-x-1 transition-transform duration-300 ${service.dark ? 'bg-white/10 border-white/20' : 'border-[#E5E5E5]'}`}>
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class={service.dark ? 'text-white/70' : 'text-[#6B6B6B]'}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          { title: 'Sites React & Next.js', href: '/developpeur-react-nextjs' },
+          { title: 'Thèmes WordPress', href: '/creation-site-wordpress' },
+          { title: 'Intégrations & APIs', href: '/integration-api' },
+          { title: 'Performance & Accessibilité', href: '/audit-performance-accessibilite' },
+        ].map((service, i) => (
+          <a href={service.href} class="service-row reveal group flex items-center justify-between gap-6 py-8 md:py-10 border-b border-[#E5E5E5] transition-colors duration-300 hover:bg-[#fafafa]">
+            <div class="flex items-baseline gap-6 md:gap-10 min-w-0">
+              <span class="serif-italic text-sm md:text-base text-[#9B9B9B] flex-shrink-0 w-8">0{i + 1}</span>
+              <h3 class="text-2xl md:text-5xl font-normal tracking-[-1px] text-[#1A1A1A] truncate transition-transform duration-300 group-hover:translate-x-2">{service.title}</h3>
+            </div>
+            <div class="flex items-center gap-3 md:gap-5 flex-shrink-0">
+              <span class="hidden md:inline text-sm text-[#6B6B6B] opacity-0 group-hover:opacity-100 transition-opacity duration-300">Découvrir</span>
+              <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#E5E5E5] flex items-center justify-center group-hover:bg-[#1A1A1A] group-hover:border-[#1A1A1A] transition-all duration-300">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="text-[#6B6B6B] group-hover:text-white transition-colors duration-300"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </div>
             </div>
-            <p class={`text-base md:text-sm leading-relaxed mt-6 ${service.dark ? 'text-gray-400' : 'text-[#6B6B6B]'}`}>{service.desc}</p>
           </a>
         ))}
       </div>
