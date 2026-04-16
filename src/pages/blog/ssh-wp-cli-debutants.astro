@@ -1,0 +1,189 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const publishDate = '2026-04-16';
+const title = 'SSH et WP-CLI pour les nuls : prendre le contrôle de WordPress sans être développeur';
+const description = 'Guide pas à pas pour se connecter à son WordPress en SSH et utiliser WP-CLI. Identifiants, terminal, premières commandes — tout ce qu\'il faut pour commencer, même sans être développeur.';
+---
+
+<Layout
+  title={`${title} — Stéphane Duma`}
+  description={description}
+  canonical="https://stephduma.dev/blog/ssh-wp-cli-debutants/"
+  keywords="ssh wordpress, wp-cli debutant, connexion ssh wordpress, terminal wordpress, commandes wp-cli, wordpress ligne de commande"
+>
+
+  <section class="pt-32 pb-16 px-6 md:px-12 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <div class="reveal flex items-center gap-2 text-xs text-[#A0A0A0] mb-8" style="font-family:'DM Sans',sans-serif; letter-spacing:1px;">
+        <a href="/" class="hover:text-[#1A1A1A] transition-colors">Accueil</a>
+        <span>/</span>
+        <a href="/blog" class="hover:text-[#1A1A1A] transition-colors">Blog</a>
+        <span>/</span>
+        <span class="text-[#6B6B6B]">SSH & WP-CLI pour débutants</span>
+      </div>
+
+      <div class="reveal flex flex-wrap items-center gap-3 mb-6">
+        {['WordPress', 'SSH', 'WP-CLI', 'Débutant'].map(tag => (
+          <span class="text-[10px] text-[#6B6B6B] px-2.5 py-1 rounded-full border border-[#E5E5E5] bg-[#F7F7F7]">{tag}</span>
+        ))}
+      </div>
+
+      <h1 class="reveal text-[#1A1A1A] leading-tight mb-6" style="font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:900; letter-spacing:-1px;">
+        {title}
+      </h1>
+
+      <div class="reveal flex items-center gap-6 text-sm text-[#A0A0A0] mb-8">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-[#1A1A1A] flex items-center justify-center" style="font-family:'Playfair Display',serif; font-size:11px; font-weight:700; color:#fff;">SD</div>
+          <span class="text-[#6B6B6B]">Stéphane Duma</span>
+        </div>
+        <span>&middot;</span>
+        <time datetime={publishDate}>16 avril 2026</time>
+        <span>&middot;</span>
+        <span>4 min de lecture</span>
+      </div>
+
+      <p class="reveal text-[#6B6B6B] text-lg leading-relaxed border-l-2 border-[#1A1A1A] pl-6">
+        Vous en avez marre de cliquer partout dans WordPress pour des tâches répétitives ? SSH + WP-CLI, c'est la télécommande officielle de WordPress. En 4 minutes de lecture, vous saurez vous connecter à votre site et lancer vos premières commandes.
+      </p>
+    </div>
+  </section>
+
+  <article class="pb-24 px-6 md:px-12 bg-white">
+    <div class="max-w-3xl mx-auto">
+
+      <section class="reveal mb-14">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          SSH, c'est quoi (vraiment) ?
+        </h2>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          <strong class="text-[#1A1A1A]">SSH (Secure Shell)</strong> est un protocole qui vous permet de piloter votre serveur à distance, de façon sécurisée. Votre hébergeur (OVH, o2switch, Infomaniak…) vous prête un ordinateur — SSH, c'est la télécommande.
+        </p>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-6">
+          Au lieu de cliquer dans une interface graphique, vous tapez des commandes textuelles. C'est plus rapide, plus puissant, et c'est ce qui débloque WP-CLI.
+        </p>
+
+        <div class="rounded-2xl bg-[#141414] p-8 mb-6">
+          <div class="text-xs text-gray-500 uppercase tracking-wider mb-6 text-center">Comment SSH fonctionne</div>
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center">
+            <div class="flex-1 p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-white font-bold text-sm mb-1">Votre PC</div>
+              <div class="text-gray-400 text-xs">Terminal</div>
+            </div>
+            <span class="text-[10px] text-[#22C55E]">Connexion chiffrée SSH &rarr;</span>
+            <div class="flex-1 p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-white font-bold text-sm mb-1">Votre serveur</div>
+              <div class="text-gray-400 text-xs">WordPress + base de données</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal mb-14">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          Se connecter en 4 étapes
+        </h2>
+
+        <div class="space-y-0 mb-6">
+          {[
+            { num: '01', title: 'Récupérer vos identifiants SSH', desc: 'Panel de votre hébergeur → cherchez "Accès SSH" ou "Shell". Il vous faut : l\'adresse serveur (ex : ssh.monhebergeur.com), votre nom d\'utilisateur, et votre mot de passe ou clé SSH.' },
+            { num: '02', title: 'Ouvrir un terminal', desc: 'Mac : Terminal (Applications > Utilitaires). Windows : PowerShell ou Windows Terminal. Linux : Ctrl+Alt+T.' },
+            { num: '03', title: 'Taper la commande de connexion', desc: 'ssh utilisateur@adresse-serveur puis Entrée. Le mot de passe ne s\'affichera pas pendant la frappe — c\'est normal.' },
+            { num: '04', title: 'Vous êtes sur votre serveur', desc: 'Un message d\'accueil apparaît. Tapez "ls" pour lister les fichiers, puis "cd www" ou "cd public_html" pour aller dans le dossier de votre site.' },
+          ].map(step => (
+            <div class="flex items-start py-8 border-b border-[#E5E5E5] last:border-0 gap-6">
+              <span class="serif-italic text-4xl md:text-5xl text-[#1A1A1A]/10 flex-shrink-0 leading-none">{step.num}</span>
+              <div>
+                <h3 class="text-lg font-bold text-[#1A1A1A] mb-2">{step.title}</h3>
+                <p class="text-sm text-[#6B6B6B] leading-relaxed">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="rounded-xl bg-[#141414] p-5 mb-6 overflow-x-auto">
+          <div class="text-[10px] text-gray-500 uppercase tracking-wider mb-3">Exemple de connexion</div>
+          <pre class="text-sm text-gray-300 leading-relaxed" set:html={`<code><span class="text-[#22C55E]">$</span> ssh monsite@ssh.o2switch.net
+Password: ********
+<span class="text-[#22C55E]">monsite@serveur:~$</span> cd public_html
+<span class="text-[#22C55E]">monsite@serveur:~/public_html$</span> ls
+wp-admin/  wp-content/  wp-includes/  wp-config.php</code>`} />
+        </div>
+      </section>
+
+      <section class="reveal mb-14">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          WP-CLI : vos premières commandes
+        </h2>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          <strong class="text-[#1A1A1A]">WP-CLI</strong> est l'outil officiel pour gérer WordPress en ligne de commande. Ce que vous faites en 15 clics, WP-CLI le fait en une ligne. La plupart des hébergeurs l'ont déjà installé — vérifiez avec <code class="text-xs bg-[#F7F7F7] px-2 py-0.5 rounded border border-[#E5E5E5] text-[#1A1A1A]">wp --info</code>.
+        </p>
+
+        <div class="space-y-3 mb-6">
+          {[
+            { cmd: 'wp core version', desc: 'Version de WordPress installée' },
+            { cmd: 'wp plugin list', desc: 'Tous les plugins, leur statut, leur version' },
+            { cmd: 'wp plugin update --all', desc: 'Met à jour tous les plugins en une commande' },
+            { cmd: 'wp post list --post_type=post', desc: 'Liste des articles avec ID, titre, statut' },
+            { cmd: 'wp db export backup.sql', desc: 'Sauvegarde complète de la base en un fichier' },
+            { cmd: 'wp cache flush', desc: 'Vide tous les caches WordPress' },
+          ].map(item => (
+            <div class="flex flex-col sm:flex-row sm:items-start gap-2 p-4 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA]">
+              <code class="text-xs bg-[#141414] text-[#22C55E] px-3 py-1.5 rounded-lg flex-shrink-0 sm:whitespace-nowrap overflow-x-auto max-w-full block">{item.cmd}</code>
+              <span class="text-sm text-[#6B6B6B]">{item.desc}</span>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-[#6B6B6B] leading-relaxed">
+          En quelques secondes, vous avez une vue complète de votre site, sans ouvrir WordPress. Imaginez la même chose quand c'est un LLM qui génère les commandes pour vous.
+        </p>
+      </section>
+
+      <section class="reveal mb-14">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          Et maintenant ?
+        </h2>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          Vous savez vous connecter et lancer des commandes de base. Les suites possibles :
+        </p>
+
+        <ul class="space-y-2 text-[#6B6B6B] mb-6 list-disc pl-6">
+          <li><a href="/blog/chatgpt-claude-wordpress-workflows" class="underline text-[#1A1A1A] hover:no-underline">Connecter ChatGPT ou Claude à votre WordPress</a> pour qu'ils génèrent les commandes à votre place.</li>
+          <li><a href="/blog/requetes-sql-wordpress-seo" class="underline text-[#1A1A1A] hover:no-underline">10 requêtes SQL pour auditer votre SEO WordPress</a>.</li>
+          <li><a href="/blog/wordpress-llm-cli-guide" class="underline text-[#1A1A1A] hover:no-underline">Lire le guide complet WordPress + LLMs</a> (15 min).</li>
+        </ul>
+      </section>
+
+      <div class="reveal rounded-2xl bg-[#141414] p-8 md:p-10 text-center">
+        <h3 class="text-2xl font-bold text-white mb-3" style="font-family:'Playfair Display',serif;">Besoin d'un coup de main sur votre WordPress ?</h3>
+        <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto">Audit SSH, nettoyage base, corrections en masse — je peux le faire pour vous ou vous accompagner.</p>
+        <a href="/#contact" class="inline-flex items-center gap-3 px-7 py-3.5 bg-white text-[#141414] rounded-full text-sm font-medium hover:bg-gray-200 transition-all duration-300 hover:gap-5 group">
+          Me contacter
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-hover:rotate-45 transition-transform duration-300"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": description,
+    "datePublished": publishDate,
+    "dateModified": publishDate,
+    "author": { "@type": "Person", "name": "Stéphane Duma", "url": "https://stephduma.dev" },
+    "publisher": { "@type": "ProfessionalService", "name": "Stéphane Duma — Développeur Freelance", "url": "https://stephduma.dev" },
+    "mainEntityOfPage": "https://stephduma.dev/blog/ssh-wp-cli-debutants",
+    "image": "https://stephduma.dev/og-image.png",
+    "inLanguage": "fr-FR"
+  })} />
+
+</Layout>

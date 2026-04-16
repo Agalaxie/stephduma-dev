@@ -1,0 +1,177 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const publishDate = '2026-04-16';
+const title = '10 requêtes SQL pour auditer et corriger votre SEO WordPress';
+const description = 'Playbook de 10 requêtes SQL prêtes à copier pour détecter les articles sans image à la une, les méta-descriptions vides, les révisions à nettoyer et corriger le balisage en masse.';
+---
+
+<Layout
+  title={`${title} — Stéphane Duma`}
+  description={description}
+  canonical="https://stephduma.dev/blog/requetes-sql-wordpress-seo/"
+  keywords="requete sql wordpress, audit seo wp-cli, wp db query, sql wordpress seo, corriger balisage wordpress, nettoyer revisions wordpress"
+>
+
+  <section class="pt-32 pb-16 px-6 md:px-12 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <div class="reveal flex items-center gap-2 text-xs text-[#A0A0A0] mb-8" style="font-family:'DM Sans',sans-serif; letter-spacing:1px;">
+        <a href="/" class="hover:text-[#1A1A1A] transition-colors">Accueil</a>
+        <span>/</span>
+        <a href="/blog" class="hover:text-[#1A1A1A] transition-colors">Blog</a>
+        <span>/</span>
+        <span class="text-[#6B6B6B]">SQL pour SEO WordPress</span>
+      </div>
+
+      <div class="reveal flex flex-wrap items-center gap-3 mb-6">
+        {['WordPress', 'SQL', 'SEO', 'WP-CLI', 'Playbook'].map(tag => (
+          <span class="text-[10px] text-[#6B6B6B] px-2.5 py-1 rounded-full border border-[#E5E5E5] bg-[#F7F7F7]">{tag}</span>
+        ))}
+      </div>
+
+      <h1 class="reveal text-[#1A1A1A] leading-tight mb-6" style="font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:900; letter-spacing:-1px;">
+        {title}
+      </h1>
+
+      <div class="reveal flex items-center gap-6 text-sm text-[#A0A0A0] mb-8">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-[#1A1A1A] flex items-center justify-center" style="font-family:'Playfair Display',serif; font-size:11px; font-weight:700; color:#fff;">SD</div>
+          <span class="text-[#6B6B6B]">Stéphane Duma</span>
+        </div>
+        <span>&middot;</span>
+        <time datetime={publishDate}>16 avril 2026</time>
+        <span>&middot;</span>
+        <span>5 min de lecture</span>
+      </div>
+
+      <p class="reveal text-[#6B6B6B] text-lg leading-relaxed border-l-2 border-[#1A1A1A] pl-6">
+        10 requêtes SQL à garder sous le coude pour diagnostiquer et corriger votre WordPress. Copier, coller dans votre terminal SSH, appuyer sur Entrée. Gagnez des heures d'audit manuel.
+      </p>
+    </div>
+  </section>
+
+  <article class="pb-24 px-6 md:px-12 bg-white">
+    <div class="max-w-3xl mx-auto">
+
+      <section class="reveal mb-14">
+        <div class="rounded-xl border border-[#FECACA] bg-[#FEF2F2] p-5 mb-6">
+          <div class="flex items-start gap-3">
+            <span class="text-[#DC2626] font-bold text-lg">&#9888;</span>
+            <div>
+              <div class="text-sm font-bold text-[#DC2626] mb-1">Toujours sauvegarder avant toute modification</div>
+              <p class="text-sm text-[#DC2626]/80 leading-relaxed">
+                Avant tout UPDATE, DELETE ou REPLACE : <code class="bg-[#DC2626]/10 px-1.5 py-0.5 rounded text-xs">wp db export backup.sql</code>. Pour les SELECT (lecture), aucun risque — vous ne modifiez rien.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-[#6B6B6B] leading-relaxed mb-2">
+          Prérequis : accès SSH à votre serveur et WP-CLI disponible.
+        </p>
+        <p class="text-[#6B6B6B] leading-relaxed">
+          Pas encore ? Commencez par <a href="/blog/ssh-wp-cli-debutants" class="underline text-[#1A1A1A] hover:no-underline">le guide SSH + WP-CLI pour débutants</a>.
+        </p>
+      </section>
+
+      <section class="reveal mb-14">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-8" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          Diagnostic SEO (lecture seule)
+        </h2>
+
+        <div class="space-y-4">
+          {[
+            { n: '01', title: 'Articles sans image à la une', desc: 'Critique pour le SEO et les partages réseaux sociaux.', cmd: 'wp db query "SELECT p.ID, p.post_title FROM wp_posts p LEFT JOIN wp_postmeta m ON p.ID = m.post_id AND m.meta_key=\'_thumbnail_id\' WHERE p.post_type=\'post\' AND p.post_status=\'publish\' AND m.meta_value IS NULL"' },
+            { n: '02', title: 'Méta-descriptions vides (Yoast SEO)', desc: 'Chaque article sans méta-description perd des clics dans Google.', cmd: 'wp db query "SELECT p.ID, p.post_title FROM wp_posts p LEFT JOIN wp_postmeta m ON p.ID = m.post_id AND m.meta_key=\'_yoast_wpseo_metadesc\' WHERE p.post_type=\'post\' AND p.post_status=\'publish\' AND (m.meta_value IS NULL OR m.meta_value=\'\')"' },
+            { n: '03', title: 'Articles avec balisage cassé (H4/H5/H6)', desc: 'Hiérarchie de titres incorrecte = Google perdu.', cmd: 'wp db query "SELECT COUNT(*) FROM wp_posts WHERE post_status=\'publish\' AND post_type=\'post\' AND (post_content LIKE \'%<h4%\' OR post_content LIKE \'%<h5%\' OR post_content LIKE \'%<h6%\')"' },
+            { n: '04', title: 'Articles trop courts (< 300 mots)', desc: 'Contenu fin = risque de pénalité SEO.', cmd: 'wp db query "SELECT ID, post_title, CHAR_LENGTH(post_content) AS taille FROM wp_posts WHERE post_status=\'publish\' AND post_type=\'post\' AND CHAR_LENGTH(post_content) < 1500 ORDER BY taille ASC"' },
+            { n: '05', title: 'Articles avec titre trop long (> 60 caractères)', desc: 'Google tronque les titres SERP au-delà de ~60 caractères.', cmd: 'wp db query "SELECT ID, post_title, CHAR_LENGTH(post_title) AS len FROM wp_posts WHERE post_status=\'publish\' AND post_type=\'post\' AND CHAR_LENGTH(post_title) > 60 ORDER BY len DESC"' },
+          ].map(item => (
+            <div class="rounded-xl border border-[#E5E5E5] overflow-hidden">
+              <div class="p-4 bg-[#FAFAFA]">
+                <div class="flex items-start gap-3">
+                  <span class="serif-italic text-xl text-[#1A1A1A]/30 flex-shrink-0 leading-none">{item.n}</span>
+                  <div>
+                    <h3 class="text-sm font-bold text-[#1A1A1A] mb-1">{item.title}</h3>
+                    <p class="text-xs text-[#6B6B6B]">{item.desc}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 bg-[#141414] overflow-x-auto">
+                <code class="text-xs text-[#22C55E] whitespace-pre-wrap break-all">{item.cmd}</code>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="reveal mb-14">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-8" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          Corrections en masse (écriture — backup obligatoire)
+        </h2>
+
+        <div class="space-y-4">
+          {[
+            { n: '06', title: 'Remplacer un texte partout (dry-run)', desc: 'Le flag --dry-run simule sans modifier. Enlevez-le une fois le résultat vérifié.', cmd: 'wp search-replace "ancien-texte" "nouveau-texte" wp_posts --dry-run' },
+            { n: '07', title: 'Rebalancer les H4 en H2', desc: 'Correction globale du balisage en une commande.', cmd: 'wp db query "UPDATE wp_posts SET post_content = REPLACE(post_content, \'<h4\', \'<h2\') WHERE post_status=\'publish\' AND post_type=\'post\'"' },
+            { n: '08', title: 'Nettoyer les révisions anciennes', desc: 'Peut alléger la base de plusieurs MB. Comptez d\'abord avec SELECT COUNT(*).', cmd: 'wp db query "DELETE FROM wp_posts WHERE post_type=\'revision\'"' },
+            { n: '09', title: 'Supprimer les commentaires spam', desc: 'Vide tous les commentaires marqués spam.', cmd: 'wp comment delete $(wp comment list --status=spam --format=ids)' },
+            { n: '10', title: 'Forcer le status "publish" sur brouillons validés', desc: 'Attention : à n\'utiliser que si vous savez que ces brouillons sont prêts.', cmd: 'wp db query "UPDATE wp_posts SET post_status=\'publish\' WHERE post_status=\'draft\' AND ID IN (123, 456, 789)"' },
+          ].map(item => (
+            <div class="rounded-xl border border-[#E5E5E5] overflow-hidden">
+              <div class="p-4 bg-[#FAFAFA]">
+                <div class="flex items-start gap-3">
+                  <span class="serif-italic text-xl text-[#1A1A1A]/30 flex-shrink-0 leading-none">{item.n}</span>
+                  <div>
+                    <h3 class="text-sm font-bold text-[#1A1A1A] mb-1">{item.title}</h3>
+                    <p class="text-xs text-[#6B6B6B]">{item.desc}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 bg-[#141414] overflow-x-auto">
+                <code class="text-xs text-[#22C55E] whitespace-pre-wrap break-all">{item.cmd}</code>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="reveal mb-14">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          Demandez au LLM de les adapter
+        </h2>
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          Ces requêtes couvrent les cas les plus fréquents. Pour tout ce qui est spécifique à votre base (plugins custom, taxonomies, post types), demandez simplement à ChatGPT ou Claude d'adapter la requête à votre cas.
+        </p>
+        <p class="text-[#6B6B6B] leading-relaxed">
+          Voir aussi : <a href="/blog/chatgpt-claude-wordpress-workflows" class="underline text-[#1A1A1A] hover:no-underline">les 3 workflows LLM → WordPress</a> et <a href="/blog/wordpress-llm-cli-guide" class="underline text-[#1A1A1A] hover:no-underline">le guide complet</a>.
+        </p>
+      </section>
+
+      <div class="reveal rounded-2xl bg-[#141414] p-8 md:p-10 text-center">
+        <h3 class="text-2xl font-bold text-white mb-3" style="font-family:'Playfair Display',serif;">Audit SEO complet de votre WordPress ?</h3>
+        <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto">Je passe ces requêtes (et d'autres) sur votre site et je vous livre un rapport avec priorisation.</p>
+        <a href="/#contact" class="inline-flex items-center gap-3 px-7 py-3.5 bg-white text-[#141414] rounded-full text-sm font-medium hover:bg-gray-200 transition-all duration-300 hover:gap-5 group">
+          Demander un audit
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-hover:rotate-45 transition-transform duration-300"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": description,
+    "datePublished": publishDate,
+    "dateModified": publishDate,
+    "author": { "@type": "Person", "name": "Stéphane Duma", "url": "https://stephduma.dev" },
+    "publisher": { "@type": "ProfessionalService", "name": "Stéphane Duma — Développeur Freelance", "url": "https://stephduma.dev" },
+    "mainEntityOfPage": "https://stephduma.dev/blog/requetes-sql-wordpress-seo",
+    "image": "https://stephduma.dev/og-image.png",
+    "inLanguage": "fr-FR"
+  })} />
+
+</Layout>

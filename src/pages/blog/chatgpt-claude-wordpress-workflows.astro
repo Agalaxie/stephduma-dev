@@ -1,0 +1,179 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const publishDate = '2026-04-16';
+const title = 'Faire parler ChatGPT (ou Claude) à votre WordPress : 3 workflows qui fonctionnent';
+const description = 'Trois façons concrètes de connecter un LLM à votre WordPress : du simple copier-coller au pilotage autonome via MCP. Comparatif, cas d\'usage et limites pour choisir l\'approche adaptée.';
+---
+
+<Layout
+  title={`${title} — Stéphane Duma`}
+  description={description}
+  canonical="https://stephduma.dev/blog/chatgpt-claude-wordpress-workflows/"
+  keywords="wordpress chatgpt, wordpress claude ai, llm wordpress, claude code wp-cli, mcp wordpress, ia wordpress"
+>
+
+  <section class="pt-32 pb-16 px-6 md:px-12 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <div class="reveal flex items-center gap-2 text-xs text-[#A0A0A0] mb-8" style="font-family:'DM Sans',sans-serif; letter-spacing:1px;">
+        <a href="/" class="hover:text-[#1A1A1A] transition-colors">Accueil</a>
+        <span>/</span>
+        <a href="/blog" class="hover:text-[#1A1A1A] transition-colors">Blog</a>
+        <span>/</span>
+        <span class="text-[#6B6B6B]">ChatGPT & Claude + WordPress</span>
+      </div>
+
+      <div class="reveal flex flex-wrap items-center gap-3 mb-6">
+        {['WordPress', 'LLM', 'ChatGPT', 'Claude', 'MCP'].map(tag => (
+          <span class="text-[10px] text-[#6B6B6B] px-2.5 py-1 rounded-full border border-[#E5E5E5] bg-[#F7F7F7]">{tag}</span>
+        ))}
+      </div>
+
+      <h1 class="reveal text-[#1A1A1A] leading-tight mb-6" style="font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:900; letter-spacing:-1px;">
+        {title}
+      </h1>
+
+      <div class="reveal flex items-center gap-6 text-sm text-[#A0A0A0] mb-8">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-[#1A1A1A] flex items-center justify-center" style="font-family:'Playfair Display',serif; font-size:11px; font-weight:700; color:#fff;">SD</div>
+          <span class="text-[#6B6B6B]">Stéphane Duma</span>
+        </div>
+        <span>&middot;</span>
+        <time datetime={publishDate}>16 avril 2026</time>
+        <span>&middot;</span>
+        <span>3 min de lecture</span>
+      </div>
+
+      <p class="reveal text-[#6B6B6B] text-lg leading-relaxed border-l-2 border-[#1A1A1A] pl-6">
+        Vous voulez piloter votre WordPress avec une IA, mais vous ne savez pas par où commencer ? Voici les trois workflows possibles — du plus simple au plus autonome — et comment choisir celui adapté à vos compétences.
+      </p>
+    </div>
+  </section>
+
+  <article class="pb-24 px-6 md:px-12 bg-white">
+    <div class="max-w-3xl mx-auto">
+
+      <section class="reveal mb-14">
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          L'idée générale : vous ouvrez une session SSH sur votre serveur, et vous laissez un LLM générer (ou exécuter) les commandes WP-CLI et SQL à votre place. Trois niveaux d'automatisation existent.
+        </p>
+        <p class="text-[#6B6B6B] leading-relaxed">
+          Pas encore à l'aise avec SSH ? <a href="/blog/ssh-wp-cli-debutants" class="underline text-[#1A1A1A] hover:no-underline">Lisez d'abord le guide SSH + WP-CLI pour débutants</a>.
+        </p>
+      </section>
+
+      <section class="reveal mb-14">
+        <div class="rounded-2xl border border-[#E5E5E5] overflow-hidden mb-6">
+          <div class="p-6 bg-[#FAFAFA]">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-xs font-bold text-white bg-[#22C55E] px-2 py-0.5 rounded">Débutant</span>
+              <h2 class="text-xl font-bold text-[#1A1A1A]" style="font-family:'Playfair Display',serif;">1. Copier-coller depuis le chat</h2>
+            </div>
+            <p class="text-sm text-[#6B6B6B] leading-relaxed mb-4">
+              Vous décrivez ce que vous voulez dans ChatGPT ou Claude.ai. Le LLM génère la commande WP-CLI ou SQL. Vous la copiez dans votre terminal SSH et l'exécutez.
+            </p>
+            <div class="space-y-1 text-xs text-[#6B6B6B]">
+              <div><strong class="text-[#1A1A1A]">Pour qui :</strong> non-développeurs, première approche.</div>
+              <div><strong class="text-[#1A1A1A]">Avantage :</strong> zéro setup, contrôle total, aucun risque d'exécution inattendue.</div>
+              <div><strong class="text-[#1A1A1A]">Limite :</strong> copier-coller manuel pour chaque commande.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-2xl bg-[#141414] p-6 mb-6">
+          <div class="text-xs text-gray-500 uppercase tracking-wider mb-5">Exemple de conversation</div>
+          <div class="space-y-4">
+            <div class="flex gap-3">
+              <div class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-[10px] text-white font-bold">Vous</div>
+              <div class="text-sm text-gray-300 bg-white/5 rounded-xl px-4 py-3 leading-relaxed">
+                J'ai un WordPress avec 150 articles. Combien utilisent des H4, H5 ou H6 ? Donne-moi la commande WP-CLI.
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-7 h-7 rounded-full bg-[#22C55E]/20 flex items-center justify-center flex-shrink-0 text-[10px] text-[#22C55E] font-bold">IA</div>
+              <div class="text-sm text-gray-300 bg-white/5 rounded-xl px-4 py-3 leading-relaxed">
+                <span class="text-gray-500 block mb-2">Voici la commande :</span>
+                <code class="text-[#22C55E] text-xs block bg-black/30 rounded-lg px-3 py-2 overflow-x-auto break-all">wp db query "SELECT COUNT(*) FROM wp_posts WHERE post_status='publish' AND (post_content LIKE '%&lt;h4%' OR post_content LIKE '%&lt;h5%' OR post_content LIKE '%&lt;h6%')"</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal mb-14">
+        <div class="rounded-2xl border border-[#E5E5E5] overflow-hidden mb-6">
+          <div class="p-6 bg-[#FAFAFA]">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-xs font-bold text-white bg-[#F59E0B] px-2 py-0.5 rounded">Intermédiaire</span>
+              <h2 class="text-xl font-bold text-[#1A1A1A]" style="font-family:'Playfair Display',serif;">2. Claude Code en SSH</h2>
+            </div>
+            <p class="text-sm text-[#6B6B6B] leading-relaxed mb-4">
+              Avec <strong class="text-[#1A1A1A]">Claude Code</strong> (le CLI officiel d'Anthropic), vous lancez Claude directement dans votre session SSH. Il peut exécuter les commandes WP-CLI pour vous — en vous demandant confirmation à chaque étape.
+            </p>
+            <div class="space-y-1 text-xs text-[#6B6B6B]">
+              <div><strong class="text-[#1A1A1A]">Pour qui :</strong> à l'aise avec la ligne de commande, opérations répétitives.</div>
+              <div><strong class="text-[#1A1A1A]">Avantage :</strong> plus rapide, Claude voit le résultat et enchaîne.</div>
+              <div><strong class="text-[#1A1A1A]">Limite :</strong> nécessite un compte Anthropic + configuration.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal mb-14">
+        <div class="rounded-2xl border border-[#E5E5E5] overflow-hidden mb-6">
+          <div class="p-6 bg-[#FAFAFA]">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-xs font-bold text-white bg-[#DC2626] px-2 py-0.5 rounded">Avancé</span>
+              <h2 class="text-xl font-bold text-[#1A1A1A]" style="font-family:'Playfair Display',serif;">3. Agents autonomes via MCP</h2>
+            </div>
+            <p class="text-sm text-[#6B6B6B] leading-relaxed mb-4">
+              Les serveurs <strong class="text-[#1A1A1A]">MCP (Model Context Protocol)</strong> connectent un LLM directement à votre base de données ou à vos outils. Le LLM peut interroger, analyser et modifier votre WordPress de façon autonome — sans copier-coller.
+            </p>
+            <div class="space-y-1 text-xs text-[#6B6B6B]">
+              <div><strong class="text-[#1A1A1A]">Pour qui :</strong> développeurs, automatisations récurrentes.</div>
+              <div><strong class="text-[#1A1A1A]">Avantage :</strong> LLM accède aux données en temps réel.</div>
+              <div><strong class="text-[#1A1A1A]">Limite :</strong> sécurité critique — un mauvais prompt peut tout casser.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal mb-14">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-6" style="font-family:'Playfair Display',serif; letter-spacing:-0.5px;">
+          Par lequel commencer ?
+        </h2>
+        <p class="text-[#6B6B6B] leading-relaxed mb-4">
+          Commencez par le <strong class="text-[#1A1A1A]">niveau 1</strong>, même si vous êtes développeur. Vous apprendrez à reconnaître les commandes correctes et à détecter celles qui sont risquées. Passez au niveau 2 quand vous maîtrisez les commandes courantes, et au niveau 3 uniquement pour des environnements où vous avez des sauvegardes automatiques et du staging.
+        </p>
+        <p class="text-[#6B6B6B] leading-relaxed">
+          Pour aller plus loin : <a href="/blog/requetes-sql-wordpress-seo" class="underline text-[#1A1A1A] hover:no-underline">10 requêtes SQL à demander à votre LLM</a>, ou <a href="/blog/wordpress-llm-cli-guide" class="underline text-[#1A1A1A] hover:no-underline">le guide complet</a>.
+        </p>
+      </section>
+
+      <div class="reveal rounded-2xl bg-[#141414] p-8 md:p-10 text-center">
+        <h3 class="text-2xl font-bold text-white mb-3" style="font-family:'Playfair Display',serif;">Automatiser votre WordPress avec un LLM ?</h3>
+        <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto">Je mets en place le workflow adapté à votre équipe et à vos besoins.</p>
+        <a href="/#contact" class="inline-flex items-center gap-3 px-7 py-3.5 bg-white text-[#141414] rounded-full text-sm font-medium hover:bg-gray-200 transition-all duration-300 hover:gap-5 group">
+          Me contacter
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-hover:rotate-45 transition-transform duration-300"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": description,
+    "datePublished": publishDate,
+    "dateModified": publishDate,
+    "author": { "@type": "Person", "name": "Stéphane Duma", "url": "https://stephduma.dev" },
+    "publisher": { "@type": "ProfessionalService", "name": "Stéphane Duma — Développeur Freelance", "url": "https://stephduma.dev" },
+    "mainEntityOfPage": "https://stephduma.dev/blog/chatgpt-claude-wordpress-workflows",
+    "image": "https://stephduma.dev/og-image.png",
+    "inLanguage": "fr-FR"
+  })} />
+
+</Layout>
