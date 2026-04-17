@@ -37,6 +37,9 @@ const { title, description, canonical, ogImage = 'https://stephduma.dev/og-image
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preload" href="/fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/playfair-900.woff2" as="font" type="font/woff2" crossorigin />
+  {import.meta.env.PROD && (
+    <script defer src="https://umami-red-theta.vercel.app/script.js" data-website-id="6392b2fb-b0fa-4601-95af-d1674768ef51"></script>
+  )}
 </head>
 <body class="overflow-x-hidden">
 

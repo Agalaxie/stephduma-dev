@@ -27,6 +27,9 @@ import '../styles/global.css';
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#1A1A1A" />
+  {import.meta.env.PROD && (
+    <script defer src="https://umami-red-theta.vercel.app/script.js" data-website-id="6392b2fb-b0fa-4601-95af-d1674768ef51"></script>
+  )}
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
