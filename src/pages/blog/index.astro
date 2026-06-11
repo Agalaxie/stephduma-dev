@@ -3,6 +3,14 @@ import Layout from '../../layouts/Layout.astro';
 
 const articles = [
   {
+    title: "Refonte d'un e-commerce : de WordPress/WooCommerce à Next.js 15",
+    slug: 'refonte-ecommerce-wordpress-nextjs',
+    excerpt: "Retour d'expérience chiffré sur la migration d'une boutique de 11 ans vers Next.js 15 : Core Web Vitals au vert, 200+ redirections 301, SEO préservé et chiffre d'affaires multiplié.",
+    date: '11 juin 2026',
+    readTime: '7 min',
+    tags: ['Next.js', 'Performance', 'SEO', 'Retour d\'expérience'],
+  },
+  {
     title: '10 requêtes SQL pour auditer et corriger votre SEO WordPress',
     slug: 'requetes-sql-wordpress-seo',
     excerpt: 'Playbook de 10 requêtes SQL prêtes à copier : articles sans image à la une, méta-descriptions vides, balisage cassé, nettoyage des révisions et corrections en masse.',
@@ -72,7 +80,7 @@ const articles = [
     <div class="max-w-4xl mx-auto">
       <div class="border-t border-[#E5E5E5]">
         {articles.map(article => (
-          <a href={`/blog/${article.slug}`} class="reveal group block py-10 border-b border-[#E5E5E5] hover:pl-2 transition-all duration-300">
+          <a href={`/blog/${article.slug}/`} class="reveal group block py-10 border-b border-[#E5E5E5] hover:pl-2 transition-all duration-300">
             <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
               <div class="flex-1">
                 <div class="flex flex-wrap items-center gap-3 mb-4">
