@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# outils de session (brainstorming visuel, screenshots playwright)
+.superpowers/
+.playwright-mcp/
