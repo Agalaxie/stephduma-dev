@@ -1,17 +1,12 @@
 ---
+import { services } from '../data/services';
+
 interface Props {
   active: string;
   variant?: 'light' | 'dark';
 }
 
 const { active, variant = 'light' } = Astro.props;
-
-const services = [
-  { label: 'React & Next.js', href: '/developpeur-react-nextjs' },
-  { label: 'WordPress', href: '/creation-site-wordpress' },
-  { label: 'Intégrations & APIs', href: '/integration-api' },
-  { label: 'Performance & Accessibilité', href: '/audit-performance-accessibilite' },
-];
 
 const isDark = variant === 'dark';
 ---
