@@ -41,6 +41,9 @@ import ServiceSubNav from '../components/ServiceSubNav.astro';
     <!-- Geometric accent -->
     <div class="absolute top-[10%] right-[12%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(26,26,26,0.03) 0%, transparent 70%);"></div>
 
+    <!-- Constellation de composants (Three.js) -->
+    <div id="constellation-container" class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true"></div>
+
     <div class="max-w-6xl mx-auto w-full relative z-10">
       <div class="max-w-4xl">
         <!-- Breadcrumb -->
@@ -453,3 +456,79 @@ import ServiceSubNav from '../components/ServiceSubNav.astro';
   .code-float { animation: code-float 8s ease-in-out infinite; }
   .code-float-reverse { animation: code-float-reverse 10s ease-in-out infinite; }
 </style>
+
+<script>
+  // Constellation de composants (Three.js) — réseau de nœuds reliés, rotation lente + parallax
+  const initConstellation = () => {
+    const container = document.getElementById('constellation-container');
+    if (!container || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    import('three').then((THREE) => {
+      let w = container.clientWidth;
+      let h = container.clientHeight;
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(50, w / h, 0.1, 100);
+      camera.position.z = 4;
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      renderer.domElement.style.cssText = 'width:100%!important;height:100%!important;display:block;';
+      container.appendChild(renderer.domElement);
+
+      const group = new THREE.Group();
+      group.position.x = (w / h) * 1.1;
+      scene.add(group);
+
+      const N = 90;
+      const pts: any[] = [];
+      for (let i = 0; i < N; i++) {
+        pts.push(new THREE.Vector3().randomDirection().multiplyScalar(0.6 + Math.pow(Math.random(), 0.5) * 1.1));
+      }
+      const pGeo = new THREE.BufferGeometry().setFromPoints(pts);
+      group.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x2a2a2a, size: 0.045, transparent: true, opacity: 0.7 })));
+
+      const linePos: number[] = [];
+      for (let i = 0; i < N; i++) {
+        for (let j = i + 1; j < N; j++) {
+          if (pts[i].distanceTo(pts[j]) < 0.62) {
+            linePos.push(pts[i].x, pts[i].y, pts[i].z, pts[j].x, pts[j].y, pts[j].z);
+          }
+        }
+      }
+      const lGeo = new THREE.BufferGeometry();
+      lGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePos, 3));
+      group.add(new THREE.LineSegments(lGeo, new THREE.LineBasicMaterial({ color: 0x555555, transparent: true, opacity: 0.22 })));
+
+      const mouse = { x: 0, y: 0 };
+      const heroSection = container.closest('section');
+      heroSection?.addEventListener('mousemove', (e: MouseEvent) => {
+        const rect = heroSection.getBoundingClientRect();
+        mouse.x = (e.clientX - rect.left) / rect.width - 0.5;
+        mouse.y = (e.clientY - rect.top) / rect.height - 0.5;
+      });
+      heroSection?.addEventListener('mouseleave', () => { mouse.x = 0; mouse.y = 0; });
+
+      window.addEventListener('resize', () => {
+        w = container.clientWidth;
+        h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+        group.position.x = (w / h) * 1.1;
+      });
+
+      const animate = () => {
+        requestAnimationFrame(animate);
+        group.rotation.y += 0.0018 + mouse.x * 0.003;
+        group.rotation.x = mouse.y * 0.4;
+        renderer.render(scene, camera);
+      };
+      animate();
+    });
+  };
+  if ('requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(initConstellation);
+  } else {
+    setTimeout(initConstellation, 200);
+  }
+</script>

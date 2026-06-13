@@ -13,8 +13,8 @@ import ServiceSubNav from '../components/ServiceSubNav.astro';
   <!-- HERO -->
   <section class="relative min-h-screen flex items-center px-6 md:px-12 overflow-hidden pt-24" style="background: radial-gradient(ellipse 80% 60% at 50% 40%, #f0f0ee 0%, #eaeae8 60%, #e5e5e3 100%);">
 
-    <!-- 3D Wireframe Globe (Three.js) — same style as homepage -->
-    <div id="audit-globe-container" class="md:absolute md:top-[12%] md:right-[-8%] md:w-[30vw] md:h-[30vw] md:max-w-[450px] md:max-h-[450px] w-[70vw] h-[70vw] max-w-[320px] max-h-[320px] mx-auto md:mx-0 z-0 pointer-events-none" style="opacity:0.18;" aria-hidden="true"></div>
+    <!-- Onde de monitoring (Three.js) — pouls de performance traversant le hero -->
+    <div id="pulse-container" class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true"></div>
 
     <div class="max-w-6xl mx-auto w-full relative z-10">
       <div class="max-w-4xl">
@@ -466,72 +466,78 @@ import ServiceSubNav from '../components/ServiceSubNav.astro';
     }
   });
 
-  // 3D Wireframe Globe (same as homepage)
-  const initGlobe = () => {
-    const globeContainer = document.getElementById('audit-globe-container');
-    if (!globeContainer) return;
+  // Onde de monitoring (Three.js) — pouls type ECG traversant le hero
+  const initPulse = () => {
+    const container = document.getElementById('pulse-container');
+    if (!container || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     import('three').then((THREE) => {
+      let w = container.clientWidth;
+      let h = container.clientHeight;
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+      const camera = new THREE.PerspectiveCamera(50, w / h, 0.1, 100);
       camera.position.z = 4;
 
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      const globeSize = globeContainer.clientWidth || 450;
-      renderer.setSize(globeSize, globeSize);
+      renderer.setSize(w, h);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.domElement.style.cssText = 'width:100%!important;height:100%!important;display:block;';
-      globeContainer.appendChild(renderer.domElement);
+      container.appendChild(renderer.domElement);
 
-      const material = new THREE.MeshBasicMaterial({
-        color: 0x555555,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.6,
-      });
-      const geometry = new THREE.IcosahedronGeometry(1.5, 4);
-      const sphere = new THREE.Mesh(geometry, material);
-      scene.add(sphere);
+      let W = (w / h) * 5.4;
+      const N = 260;
+      const mkLine = (color: number, opacity: number) => {
+        const pos = new Float32Array(N * 3);
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        const line = new THREE.Line(geo, new THREE.LineBasicMaterial({ color, transparent: true, opacity }));
+        scene.add(line);
+        return geo;
+      };
+      const main = mkLine(0x16a34a, 0.55);
+      const echo = mkLine(0x2a2a2a, 0.18);
 
-      const material2 = new THREE.MeshBasicMaterial({
-        color: 0x888888,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.25,
-      });
-      const geometry2 = new THREE.IcosahedronGeometry(1.52, 2);
-      const sphere2 = new THREE.Mesh(geometry2, material2);
-      sphere2.rotation.x = Math.PI / 4;
-      sphere2.rotation.z = Math.PI / 6;
-      scene.add(sphere2);
+      // forme de pouls type ECG : pic net + rebond
+      const pulseShape = (u: number) => {
+        const p = ((u % 1) + 1) % 1;
+        if (p < 0.04) return Math.sin(p / 0.04 * Math.PI) * 1.4;
+        if (p < 0.10) return -Math.sin((p - 0.04) / 0.06 * Math.PI) * 0.45;
+        return 0;
+      };
 
-      let targetRotX = 0;
-      let targetRotY = 0;
-
-      const heroSection = globeContainer.closest('section');
+      const mouse = { x: 0, y: 0 };
+      const heroSection = container.closest('section');
       heroSection?.addEventListener('mousemove', (e: MouseEvent) => {
         const rect = heroSection.getBoundingClientRect();
-        targetRotY = ((e.clientX - rect.left) / rect.width - 0.5) * 1.5;
-        targetRotX = ((e.clientY - rect.top) / rect.height - 0.5) * -1;
+        mouse.x = (e.clientX - rect.left) / rect.width - 0.5;
+        mouse.y = (e.clientY - rect.top) / rect.height - 0.5;
       });
-      heroSection?.addEventListener('touchmove', (e: TouchEvent) => {
-        const touch = e.touches[0];
-        const rect = heroSection.getBoundingClientRect();
-        targetRotY = ((touch.clientX - rect.left) / rect.width - 0.5) * 1.5;
-        targetRotX = ((touch.clientY - rect.top) / rect.height - 0.5) * -1;
-      }, { passive: true });
+      heroSection?.addEventListener('mouseleave', () => { mouse.x = 0; mouse.y = 0; });
 
-      const isMobile = window.matchMedia('(max-width: 767px)').matches;
-      let autoRotY = 0;
-      let autoRotX = 0;
+      window.addEventListener('resize', () => {
+        w = container.clientWidth;
+        h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+        W = (w / h) * 5.4;
+      });
 
+      let t = 0;
       const animate = () => {
         requestAnimationFrame(animate);
-        autoRotY += 0.003;
-        autoRotX += isMobile ? 0.0008 : 0;
-        sphere.rotation.y = autoRotY + targetRotY * 0.3;
-        sphere.rotation.x = autoRotX + targetRotX * 0.3;
-        sphere2.rotation.y = autoRotY * 0.7 + targetRotY * 0.2;
-        sphere2.rotation.x = (Math.PI / 4) + autoRotX * 0.5 + targetRotX * 0.2;
+        t += 0.0035;
+        const a1 = main.attributes.position.array as Float32Array;
+        const a2 = echo.attributes.position.array as Float32Array;
+        for (let i = 0; i < N; i++) {
+          const x = (i / (N - 1) - 0.5) * W;
+          const u = i / (N - 1);
+          const base = Math.sin(u * 14 + t * 8) * 0.04;
+          const y = pulseShape(u - t * 2) * (0.8 + mouse.y * -0.4) + base;
+          a1[i * 3] = x; a1[i * 3 + 1] = y - 0.7; a1[i * 3 + 2] = 0;
+          a2[i * 3] = x; a2[i * 3 + 1] = y * 0.5 - 0.95; a2[i * 3 + 2] = -0.4;
+        }
+        main.attributes.position.needsUpdate = true;
+        echo.attributes.position.needsUpdate = true;
         renderer.render(scene, camera);
       };
       animate();
@@ -539,8 +545,8 @@ import ServiceSubNav from '../components/ServiceSubNav.astro';
   };
 
   if ('requestIdleCallback' in window) {
-    (window as any).requestIdleCallback(initGlobe);
+    (window as any).requestIdleCallback(initPulse);
   } else {
-    setTimeout(initGlobe, 200);
+    setTimeout(initPulse, 200);
   }
 </script>
