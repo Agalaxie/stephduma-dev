@@ -202,6 +202,30 @@ const llmsTxtSample = `# Atelier Images & Cie
           <em>Ce site même — <strong class="text-[#1A1A1A]">stephduma.dev</strong>, construit sous Astro — en est l'illustration : il passe les vérifications agentiques nativement (arborescence d'accessibilité ✓, CLS à 0,003 ✓), avec un quasi-sans-faute sur les autres catégories. À noter : WebMCP étant classé « non applicable », le maximum atteignable ici est 2/2.</em>
         </p>
 
+        <!-- Capture PageSpeed réelle -->
+        <figure class="mb-6">
+          <div class="rounded-2xl border border-[#E5E5E5] overflow-hidden shadow-sm bg-white">
+            <div class="flex items-center gap-2 px-4 py-3 bg-[#F7F7F7] border-b border-[#E5E5E5]">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#28C840]"></span>
+              <span class="ml-3 text-[11px] text-[#A0A0A0] truncate">pagespeed.web.dev — stephduma.dev (mobile)</span>
+            </div>
+            <img
+              src="/lighthouse-navigation-agentique-stephduma.png"
+              alt="Rapport PageSpeed Insights de stephduma.dev : catégorie Navigation agentique notée 2/2, avec arborescence d'accessibilité bien formée et CLS à 0,003."
+              width="1920"
+              height="945"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-auto block"
+            />
+          </div>
+          <figcaption class="text-xs text-[#A0A0A0] mt-3 text-center">
+            Détail de l'audit « Navigation agentique » de stephduma.dev : 2/2, arborescence d'accessibilité bien formée et CLS à 0,003.
+          </figcaption>
+        </figure>
+
         <p class="text-[#6B6B6B] leading-relaxed">
           La bonne nouvelle, et c'est tout le sujet de cet article : <strong class="text-[#1A1A1A]">ça se corrige en quelques étapes</strong>. Pas besoin de quitter WordPress pour être prêt pour les agents. La démonstration ci-dessous a été menée sur un site réel — <a href="https://atelierimagesetcie.fr" rel="noopener" class="text-[#1A1A1A] underline hover:no-underline">atelierimagesetcie.fr</a> (WordPress + WooCommerce + Avada).
         </p>
